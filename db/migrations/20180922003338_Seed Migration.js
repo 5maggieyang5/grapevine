@@ -24,11 +24,12 @@ exports.up = (knex, Promise) => {
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('posts', function (table) {
+      table.increments('id');
       table.integer('user_id');
       table.integer('food_id');
       table.string('food_picture_url');
       table.text('description');
-      table.string('status'); //active, pending, complete, delisted
+      table.string('status'); //available, pending, complete, delisted
       table.integer('location_id'); //location they set as their location for this post
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
@@ -61,7 +62,8 @@ exports.up = (knex, Promise) => {
     }),
     knex.schema.createTable('messages', function (table) {
       table.increments('id');
-      table.integer('trade_user_id');
+      table.integer('user_id');
+      table.integer('trade_id');
       table.string('content');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
@@ -72,7 +74,7 @@ exports.up = (knex, Promise) => {
       table.text('content');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
-    knex.schema.createTable('potential_gives', function (table) { //edges: from_user has(posts) a food that to_user wants(is on wishlist)
+    knex.schema.createTable('potential_trades', function (table) { //edges: from_user has(posts) a food that to_user wants(is on wishlist)
       table.increments('id');
       table.integer('from_user_id');
       table.integer('to_user_id');
@@ -93,6 +95,6 @@ exports.down = (knex, Promise) => {
     knex.schema.dropTable('locations'),
     knex.schema.dropTable('messages'),
     knex.schema.dropTable('reviews'),
-    knex.schema.dropTable('potential_gives')
+    knex.schema.dropTable('potential_trades')
   ])
 };

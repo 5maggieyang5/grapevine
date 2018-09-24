@@ -26,13 +26,14 @@ exports.up = (knex, Promise) => {
       table.foreign('location_id').references('locations.id');
     }),
     knex.schema.table('messages', function (table) {
-      table.foreign('trade_user_id').references('trade_users.id');
+      table.foreign('user_id').references('users.id');
+      table.foreign('trade_id').references('trades.id');
     }),
     knex.schema.table('reviews', function (table) {
       table.foreign('user_id').references('users.id');
       table.foreign('reviewer_id').references('users.id');
     }),
-    knex.schema.table('potential_gives', function (table) {
+    knex.schema.table('potential_trades', function (table) {
       table.foreign('from_user_id').references('users.id');
       table.foreign('to_user_id').references('users.id');
       table.foreign('food_id').references('foods.id');
@@ -67,13 +68,14 @@ exports.down = (knex, Promise) => {
       table.dropForeign('location_id');
     }),
     knex.schema.table('messages', function (table) {
-      table.dropForeign('trade_user_id');
+      table.dropForeign('user_id');
+      table.dropForeign('trade_id');
     }),
     knex.schema.table('reviews', function (table) {
       table.dropForeign('user_id');
       table.dropForeign('reviewer_id');
     }),
-    knex.schema.table('potential_gives', function (table) {
+    knex.schema.table('potential_trades', function (table) {
       table.dropForeign('from_user_id');
       table.dropForeign('to_user_id');
       table.dropForeign('food_id');
