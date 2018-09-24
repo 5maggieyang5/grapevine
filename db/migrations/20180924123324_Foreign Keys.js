@@ -22,6 +22,7 @@ exports.up = (knex, Promise) => {
       table.foreign('user_id').references('users.id');
       table.foreign('trade_id').references('trades.id');
       table.foreign('offered_food_id').references('foods.id');
+      table.foreign('desired_food_id').references('foods.id');
       table.foreign('location_id').references('locations.id');
     }),
     knex.schema.table('messages', function (table) {
@@ -62,6 +63,7 @@ exports.down = (knex, Promise) => {
       table.dropForeign('user_id');
       table.dropForeign('trade_id');
       table.dropForeign('offered_food_id');
+      table.dropForeign('desired_food_id');
       table.dropForeign('location_id');
     }),
     knex.schema.table('messages', function (table) {

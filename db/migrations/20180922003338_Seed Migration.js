@@ -19,24 +19,22 @@ exports.up = (knex, Promise) => {
       table.string('name');
     }),
     knex.schema.createTable('wishlist_items', function (table) { //user_foods
-      primary key???
       table.integer('user_id');
       table.integer('food_id');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('posts', function (table) {
-      table.increments('id');
       table.integer('user_id');
       table.integer('food_id');
       table.string('food_picture_url');
       table.text('description');
+      table.string('status'); //active, pending, complete, delisted
       table.integer('location_id'); //location they set as their location for this post
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('trades', function (table) { //posts
       table.increments('id');
-      table.integer('post_id');
-      table.string('status'); //active, pending, complete, delisted
+      table.integer('post_id'); // what is the post that sparked this trade?
       table.integer('progress_step'); //step 1, step 2, etc...
       table.date('closing_date');
       table.integer('suggested_location_id');
@@ -44,21 +42,19 @@ exports.up = (knex, Promise) => {
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('trade_users', function (table) { //participants of a trade
-      primary_key???
       table.integer('user_id');
       table.integer('trade_id');
-      table.integer('trade_queue'); //were you first to join?, second? etc.
       table.integer('offered_food_id');
+      table.integer('desired_food_id');
       table.date('availability_start');
       table.date('availability_end');
       table.integer('location_id') //location they set as their location for this trade
-      table.timestamp('created_at', true).defaultTo(knex.fn.now()); //can this replace the trade queue?
     }),
     knex.schema.createTable('locations', function (table) { //will we store addresses in street, city, postal code form?
       table.increments('id');
-      street address
-      city
-      postal code
+      table.string('street_address');
+      table.string('city');
+      table.string('postal_code');
       table.float('latitude');
       table.float('longitude');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
@@ -81,6 +77,7 @@ exports.up = (knex, Promise) => {
       table.integer('from_user_id');
       table.integer('to_user_id');
       table.integer('food_id');
+      table.timestamp('created_at', true).defaultTo(knex.fn.now());
     })
   ])
 };
