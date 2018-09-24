@@ -6,16 +6,21 @@ exports.up = (knex, Promise) => {
     }),
     knex.schema.table('wishlist_items', function (table) {
       table.foreign('user_id').references('users.id');
-      table.foreign('food_id').references('food.id');
+      table.foreign('food_id').references('foods.id');
+    }),
+    knex.schema.table('posts', function (table) {
+      table.foreign('user_id').references('users.id');
+      table.foreign('food_id').references('foods.id');
     }),
     knex.schema.table('trades', function (table) {
+      table.foreign('post_id').references('posts.id');
       table.foreign('suggested_location_id').references('locations.id');
       table.foreign('actual_location_id').references('locations.id');
     }),
     knex.schema.table('trade_users', function (table) {
       table.foreign('user_id').references('users.id');
       table.foreign('trade_id').references('trades.id');
-      table.foreign('offered_food_id').references('food.id');
+      table.foreign('offered_food_id').references('foods.id');
       table.foreign('location_id').references('locations.id');
     }),
     knex.schema.table('messages', function (table) {
@@ -37,7 +42,12 @@ exports.down = (knex, Promise) => {
       table.dropForeign('user_id');
       table.dropForeign('food_id');
     }),
+    knex.schema.table('posts', function (table) {
+      table.dropForeign('user_id');
+      table.dropForeign('food_id');
+    }),
     knex.schema.table('trades', function (table) {
+      table.dropForeign('post_id');
       table.dropForeign('suggested_location_id');
       table.dropForeign('actual_location_id');
     }),

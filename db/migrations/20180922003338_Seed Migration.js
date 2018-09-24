@@ -10,11 +10,11 @@ exports.up = (knex, Promise) => {
       table.string('password');
       table.float('average_rating');
       table.integer('default_location_id');
-      table.???('avatar_image';)
+      table.string('avatar_image_url');
       table.integer('phone_number')
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
-    knex.schema.createTable('food', function (table) { //plural???
+    knex.schema.createTable('foods', function (table) { //plural???
       table.increments('id');
       table.string('name');
     }),
@@ -24,13 +24,20 @@ exports.up = (knex, Promise) => {
       table.integer('food_id');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
+    knex.schema.createTable('posts', function (table) {
+      table.increments('id');
+      table.integer('user_id');
+      table.integer('food_id');
+      table.string('food_picture_url');
+      table.text('description');
+      table.timestamp('created_at', true).defaultTo(knex.fn.now());
+    }),
     knex.schema.createTable('trades', function (table) { //posts
       table.increments('id');
-      table.???('food_picture');
-      table.string/text??('description');
+      table.integer('post_id');
       table.string('status'); //active, pending, complete, delisted
       table.integer('progress_step'); //step 1, step 2, etc...
-      table.date????('closing_date');
+      table.date('closing_date');
       table.integer('suggested_location_id');
       table.integer('actual_location_id');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
@@ -41,15 +48,18 @@ exports.up = (knex, Promise) => {
       table.integer('trade_id');
       table.integer('trade_queue'); //were you first to join?, second? etc.
       table.integer('offered_food_id');
-      table.date???('availability_start');
-      table.date???('availability_end');
+      table.date('availability_start');
+      table.date('availability_end');
       table.integer('location_id') //location they set as their location for this trade
       table.timestamp('created_at', true).defaultTo(knex.fn.now()); //can this replace the trade queue?
     }),
     knex.schema.createTable('locations', function (table) { //will we store addresses in street, city, postal code form?
       table.increments('id');
-      table.float???('latitude');
-      table.float???('longitude');
+      street address
+      city
+      postal code
+      table.float('latitude');
+      table.float('longitude');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('messages', function (table) {
@@ -59,11 +69,10 @@ exports.up = (knex, Promise) => {
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('reviews', function (table) {
-      table.increments('id'); //can users review the same person twice?? migth not ened this key
       table.integer('user_id');
       table.integer('reviewer_id');
       table.integer('rating');
-      table.string/text???('content');
+      table.text('content');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     })
   ])
@@ -72,8 +81,9 @@ exports.up = (knex, Promise) => {
 exports.down = (knex, Promise) => {
   return Promise.all([
     knex.schema.dropTable('users'),
-    knex.schema.dropTable('food'),
+    knex.schema.dropTable('foods'),
     knex.schema.dropTable('wishlist_items'),
+    knex.schema.dropTable('posts'),
     knex.schema.dropTable('trades'),
     knex.schema.dropTable('trade_users'),
     knex.schema.dropTable('locations'),
