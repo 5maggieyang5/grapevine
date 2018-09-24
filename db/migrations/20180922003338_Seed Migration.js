@@ -14,7 +14,7 @@ exports.up = (knex, Promise) => {
       table.integer('phone_number')
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
-    knex.schema.createTable('foods', function (table) { //plural???
+    knex.schema.createTable('foods', function (table) {
       table.increments('id');
       table.string('name');
     }),
@@ -33,7 +33,7 @@ exports.up = (knex, Promise) => {
       table.integer('location_id'); //location they set as their location for this post
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
-    knex.schema.createTable('trades', function (table) { //posts
+    knex.schema.createTable('trades', function (table) {
       table.increments('id');
       table.integer('post_id'); // what is the post that sparked this trade?
       table.integer('progress_step'); //step 1, step 2, etc...
@@ -51,7 +51,7 @@ exports.up = (knex, Promise) => {
       table.date('availability_end');
       table.integer('location_id') //location they set as their location for this trade
     }),
-    knex.schema.createTable('locations', function (table) { //will we store addresses in street, city, postal code form?
+    knex.schema.createTable('locations', function (table) {
       table.increments('id');
       table.string('street_address');
       table.string('city');
