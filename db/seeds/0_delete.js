@@ -4,6 +4,7 @@ exports.seed = function(knex, Promise) {
   .then(()=>{return knex('messages').del()})
   .then(()=>{return knex('trade_users').del()})
   .then(()=>{return knex('trades').del()})
+  .then(()=>{return knex('potential_gives').del()})
   .then(()=>{return knex('wishlist_items').del()})
   .then(()=>{return knex('posts').del()})
   .then(()=>{return knex('users').del()})

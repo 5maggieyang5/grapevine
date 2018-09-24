@@ -30,6 +30,7 @@ exports.up = (knex, Promise) => {
       table.integer('food_id');
       table.string('food_picture_url');
       table.text('description');
+      table.integer('location_id'); //location they set as their location for this post
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('trades', function (table) { //posts
@@ -74,6 +75,12 @@ exports.up = (knex, Promise) => {
       table.integer('rating');
       table.text('content');
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
+    }),
+    knex.schema.createTable('potential_gives', function (table) { //edges: from_user has(posts) a food that to_user wants(is on wishlist)
+      table.increments('id');
+      table.integer('from_user_id');
+      table.integer('to_user_id');
+      table.integer('food_id');
     })
   ])
 };
@@ -88,6 +95,7 @@ exports.down = (knex, Promise) => {
     knex.schema.dropTable('trade_users'),
     knex.schema.dropTable('locations'),
     knex.schema.dropTable('messages'),
-    knex.schema.dropTable('reviews')
+    knex.schema.dropTable('reviews'),
+    knex.schema.dropTable('potential_gives')
   ])
 };
