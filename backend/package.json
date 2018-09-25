@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "knex": "^0.11.10",
+    "faker": "^4.1.0",
     "nodemon": "^1.9.2"
   }
 }
