@@ -55,6 +55,7 @@ exports.up = (knex, Promise) => {
       table.increments('id');
       table.string('street_address');
       table.string('city');
+      table.string('province');
       table.string('postal_code');
       table.float('latitude');
       table.float('longitude');
