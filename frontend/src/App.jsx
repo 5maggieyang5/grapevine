@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom'; // import the react-router-dom components
-import { Home, Login, Register } from './pages' // import our pages
+import { Home, Login, Register, ShowPosts } from './pages' // import our pages
 import SimpleMap  from './Maptst';
 
 
@@ -12,6 +12,8 @@ const Main = () => (
       <Route exact path='/1' component= {Login} />
       <Route exact path='/2' component= {Register} />
       <Route exact path='/3' component= {SimpleMap}/>
+      <Route exact path='/4' component= {ShowPosts}/>
+
     </Switch>
   </main>
 
@@ -30,6 +32,9 @@ const Header = () => (
         </li>
         <li className="nav-item">
         <Link className="nav-link" to="/3">Test Map</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/4">Show Posts</Link>
       </li>
        
       </ul>

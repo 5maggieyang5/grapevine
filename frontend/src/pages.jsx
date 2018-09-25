@@ -21,3 +21,8 @@ export const Login = () => (
   </div>
 )
 
+export const ShowPosts = () => (
+  <div>
+      <h1>Login Routine called.</h1>
+  </div>
+)
