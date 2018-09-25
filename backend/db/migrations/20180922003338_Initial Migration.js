@@ -11,7 +11,7 @@ exports.up = (knex, Promise) => {
       table.float('average_rating');
       table.integer('default_location_id');
       table.string('avatar_image_url');
-      table.integer('phone_number')
+      table.string('phone_number')
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('foods', function (table) {

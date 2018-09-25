@@ -1,7 +1,10 @@
 const faker = require('faker/locale/en_CA');
 
-exports.seed = function(knex, Promise) {
+exports.seed = async function(knex, Promise) {
+  await knex.raw('ALTER SEQUENCE locations_id_seq RESTART');
+
   const promises = [];
+
   for (let i = 0; i < 10; i++) {
     promises.push(
       knex('locations').insert({
