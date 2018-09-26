@@ -7,8 +7,14 @@ module.exports = (knex) => {
   const db = require('../db/dbHelpers')(knex);
 
   router.get("/", async (req, res) => {
-    const posts = await db.getAllPosts();
+    const posts = await db.getPosts(req.query);
     res.json(posts);
+  });
+
+  router.post("/", async (req, res) => {
+    const { userId, foodId, imageUrl, description, locationId } = req.body;
+    await db.createPost(userId, foodId, imageUrl, description, locationId);
+    res.json('success?');
   });
 
   router.get("/:id", async (req, res) => {
