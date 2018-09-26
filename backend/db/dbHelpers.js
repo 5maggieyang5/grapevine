@@ -35,8 +35,14 @@ module.exports = (knex) => {
       return await
       knex.select().from('users')
       .orderBy('created_at', 'desc');
-    }
+    },
 
+    getUser: async (user_id) => {
+      return await
+      knex.select().from('users')
+      .where('id', user_id)
+      .then((result) => {return result[0]});
+    },
 
   };
 }

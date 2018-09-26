@@ -11,5 +11,11 @@ module.exports = (knex) => {
     res.json(users);
   });
 
+  router.get("/:id", async (req, res) => {
+    const userId = req.params.id;
+    const user = await db.getUser(userId);
+    res.json(user);
+  });
+
   return router;
 }
