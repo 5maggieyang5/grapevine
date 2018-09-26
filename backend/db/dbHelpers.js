@@ -11,25 +11,25 @@ module.exports = (knex) => {
       .join('users', 'users.id', '=', 'posts.user_id')
       .join('foods', 'foods.id', '=', 'posts.food_id')
       .orderBy('posts.created_at', 'desc')
-      .then(result => {
-        result.forEach( object => {
-          // nest the user info
-          object.user = {
-            id: object.user_id,
-            username: object.user_username
-          };
-          object.user_id = undefined;
-          object.user_username = undefined;
-          //nest the food info
-          object.food = {
-            id: object.food_id,
-            name: object.food_name
-          };
-          object.food_id = undefined;
-          object.food_name = undefined;
-        });
-        return result;
-      });
+      .then(result => result.map(obj => {
+        const newObj = {
+          id: obj.id,
+          food_picture_url: obj.food_picture_url,
+          description: obj.description,
+          status: obj.status,
+          location_id: obj.location_id,
+          created_at: obj.created_at,
+          user: {
+            id: obj.user_id,
+            username: obj.user_username
+          },
+          food: {
+            id: obj.food_id,
+            name: obj.food_name
+          }
+        }
+        return newObj;
+      }));
     },
 
     getPost: async (post_id) => {
