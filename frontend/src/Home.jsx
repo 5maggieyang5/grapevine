@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Card, Button, CardImg, CardTitle, CardText, CardDeck,
-  CardSubtitle, CardBody } from 'reactstrap';
+  CardSubtitle, CardBody, Container, Row, Col } from 'reactstrap';
 
 
 // Client-side model
@@ -27,20 +27,27 @@ class Posts extends React.Component {
 
   render() {
     return (
-      <table>
-      {this.state.posts.map((post, index) => (
-        <tr key={index}>
-          <img src={post.food_picture_url} height="100" width="100"/>
-          <td>{post.description}</td>
-          <td>{post.user.username}</td>
-          <td>{post.food.name}</td>
-        </tr>
-      ))}
-      </table>
 
 
-
-
+      <div>
+        <Container>
+          <Row>
+            {this.state.posts.map((post, index) => (
+              <Col md="4" sm="6" xs="6">
+                <Card>
+                  <CardImg top width="100%" src={post.food_picture_url} alt="Card image cap" />
+                  <CardBody>
+                    <CardTitle>{post.food.name}</CardTitle>
+                    <CardSubtitle><b>Owner:</b> {post.user.username}</CardSubtitle>
+                    <CardText>{post.description}</CardText>
+                    <Button>Detail</Button>
+                  </CardBody>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </div>
     )
   }
 }
