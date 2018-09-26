@@ -6,20 +6,21 @@ import {
 
 // Client-side model
 import Resource from './models/resource'
-const Posts = Resource('posts')
-const Users = Resource('users')
+const PostsDB = Resource('posts')
+const UsersDB = Resource('users')
 
 class Posts extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       posts: [],
+      users: {},
       errors: null
     }
   }
 
   componentDidMount() {
-    Posts.findAll()
+    PostsDB.findAll()
     .then((result) => this.setState({posts: result}))
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -31,6 +32,8 @@ class Posts extends React.Component {
         <tr key={index}>
           <img src={post.food_picture_url} height="100" width="100"/>
           <td>{post.description}</td>
+          <td>{post.user.username}</td>
+          <td>{post.food.name}</td>
         </tr>
       ))}
       </table>
