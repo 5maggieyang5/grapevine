@@ -9,11 +9,10 @@ import { Card,Button, CardImg, CardText, CardBody, CardLink,
 
   class Post extends React.Component {
     constructor(props) {
-      debugger;
       super(props)
       this.state = {
-        food_Id : (props.match.params.postId || null ),
-        post: [],
+        postId : (props.match.params.postId || null ),
+        post:{ user:"", food:""} ,
         errors: null,
         redirect:''
       }
@@ -21,8 +20,7 @@ import { Card,Button, CardImg, CardText, CardBody, CardLink,
   
     componentDidMount() {
 
-      if (!this.state.food_Id) return;
-      PostStore.find(this.state.food_Id)
+      PostStore.find(this.state.postId)
       .then((result) => this.setState({
         
         post: result,
@@ -35,22 +33,25 @@ import { Card,Button, CardImg, CardText, CardBody, CardLink,
       
   
   render (){ 
+    let data = Object.entries(this.state.post);
+     console.log("Post stores: ",data);
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
-
+    
   return (
     
     <div>
-    <Card>
-      <CardBody>
-        <CardTitle>Food ID: </CardTitle>
-        <CardSubtitle>{this.state.post.food_id}</CardSubtitle>
-      </CardBody>
-      <CardBody>
-        <CardText>{this.state.post.description}</CardText>
-        <CardLink href="/">Home</CardLink>
-        <CardLink href="/MakeOffer">Make Offer</CardLink>
-      </CardBody>
-    </Card>
+    
+      
+        <h2>Details </h2>
+        Item Name: {this.state.post.food.name} <br/>
+        Food Description: {this.state.post.description}<br/>
+        User Name: {this.state.post.user.username}<br/>
+        Location Id:{this.state.post.location_id}<br/> <br/>
+        Description:{this.state.post.description}<br/>
+        Image:{this.state.post.food_picture_url}<br/>
+
+      
+    
   </div>
     );
   };

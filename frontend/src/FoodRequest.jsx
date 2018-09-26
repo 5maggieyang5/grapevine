@@ -4,9 +4,9 @@ import { Button, Form, FormGroup, Label, Input  } from 'reactstrap';
 export default class FoodRequest extends React.Component {
 
   handleSubmit(ev){
-    this.handleSubmit = this.hanleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     
-
+    
   }
 
   render() {
