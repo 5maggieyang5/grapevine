@@ -31,9 +31,7 @@ app.use(function(req, res, next) {
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static("public"));
 
 // Mount all resource routers
