@@ -3,6 +3,8 @@
 module.exports = (knex) => {
   return {
 
+//-------------------POSTS-----------------------//
+
     getPosts: async () => {
       return await
       knex.select().from('posts')
@@ -14,7 +16,7 @@ module.exports = (knex) => {
       knex.select().from('posts')
       .where('id', post_id)
       .then((result) => {return result[0]});
-    }
+    },
 
     createPost: async (user_id, food_id, food_picture_url, description, location_id) => {
       return await
@@ -25,7 +27,16 @@ module.exports = (knex) => {
         description,
         location_id
       });
+    },
+
+//-------------------USERS-----------------------//
+
+    getUsers: async () => {
+      return await
+      knex.select().from('users')
+      .orderBy('created_at', 'desc');
     }
+
 
   };
 }

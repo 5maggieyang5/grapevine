@@ -11,11 +11,11 @@ module.exports = (knex) => {
     res.json(posts);
   });
 
-  router.post("/"), async (req, res) => {
+  router.post("/", async (req, res) => {
     const { userId, foodId, imageUrl, description, locationId } = req.body;
     await db.createPost(userId, foodId, imageUrl, description, locationId);
     res.json('success?');
-  }
+  });
 
   router.get("/:id", async (req, res) => {
     const postId = req.params.id;
