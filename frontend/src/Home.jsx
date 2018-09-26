@@ -1,35 +1,29 @@
 import React from 'react'
-import {Row, Col, PageHeader, Table} from 'react-bootstrap'
+
 
 // Client-side model
-import Resource from '../models/resource'
-const ClientStore = Resource('clients')
+import Resource from './models/resource'
+const PostStore = Resource('posts')
 
-class Clients extends React.Component {
+class Posts extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      products: [],
+      posts: [],
       errors: null
     }
   }
 
-  componentWillMount() {
-    Product.findAll()
-    .then((result) => this.setState({clients: result.data}))
+  componentDidMount() {
+    PostStore.findAll()
+    .then((result) => this.setState({posts: result}))
     .catch((errors) => this.setState({errors: errors}))
   }
 
   render() {
     return (
-      <Row>
-        <Col xs={12}>
 
-          <PageHeader>
-            Products
-          </PageHeader>
-
-          <Table>
+          <table>
             <thead>
               <tr>
                 <th>#</th>
@@ -39,19 +33,17 @@ class Clients extends React.Component {
             </thead>
 
             <tbody>
-              {this.state.clients.map((client, index) => (
+              {this.state.posts.map((post, index) => (
                 <tr key={index}>
-                  <td>{client.id}</td>
-                  <td>{client.firstName} {client.lastName}</td>
-                  <td>{client.email}</td>
+                  <td>{post.id}</td>
+                  <td>{post.description}</td>
                 </tr>
               ))}
             </tbody>
-          </Table>
-        </Col>
-      </Row>
+          </table>
+
     )
   }
 }
 
-export default Clients
+export default Posts
