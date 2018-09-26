@@ -10,9 +10,21 @@ import {
   BreadcrumbItem, InputGroup,
   InputGroupAddon,
   Button,
-  Input} from 'reactstrap'
+  Input,
+} from 'reactstrap'
 
 class TopNav extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state={
+      searchInput: ""
+    }
+  }
+
+  handleChange = evt => {
+    this.setState({[evt.target.name]: evt.target.value})
+  }
 
   render() {
     return (
@@ -31,9 +43,13 @@ class TopNav extends React.Component {
           </NavbarBrand>
 
           <InputGroup id="nav-search">
-            <Input />
+            <Input onChange={this.handleChange} name="searchInput"/>
             <InputGroupAddon addonType="append">
-              <Button color="secondary">Search</Button>
+              <Link to={`/posts?food_name=${this.state.searchInput}`} >
+              {/*  <Button color="secondary">*/}
+                    Search
+              {/*  </Button>*/}
+              </Link>
             </InputGroupAddon>
           </InputGroup>
 
@@ -42,7 +58,7 @@ class TopNav extends React.Component {
               <NavItem>
                <Badge color="warning" id="creat-post">
                   <Link to='/creatNewPost'>
-                    Creat New Post
+                    Create New Post
                   </Link>
                 </Badge>
               </NavItem>

@@ -6,6 +6,7 @@ import './styles/App.css'
 import Register from './Register.jsx'
 import Posts from './Home.jsx'
 import Login from './Login.jsx'
+import SearchedPosts from './SearchedPosts.jsx'
 
 
 const Main = () => (
@@ -15,6 +16,7 @@ const Main = () => (
       <Route exact path='/login' component= {Login} />
       <Route exact path='/register' component= {Register} />
       <Route exact path='/map' component= {SimpleMap}/>
+      <Route exact path='/posts' component={SearchedPosts} />
     </Switch>
   </main>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Card, Button, CardImg, CardTitle, CardText, CardDeck,
   CardSubtitle, CardBody, Container, Row, Col } from 'reactstrap';
+import * as qs from 'query-string';
 
 
 // Client-side model
@@ -9,7 +10,7 @@ import Resource from './models/resource'
 const PostsDB = Resource('posts')
 const UsersDB = Resource('users')
 
-class Posts extends React.Component {
+class SearchedPosts extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,7 +21,12 @@ class Posts extends React.Component {
   }
 
   componentDidMount() {
-    PostsDB.findAll()
+
+    const parsed = qs.parse(this.props.location.search);
+    console.log(Object.keys(parsed)[0]);
+
+
+    PostsDB.search(Object.keys(parsed)[0], parsed.food_name)
     .then((result) => this.setState({posts: result}))
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -52,4 +58,4 @@ class Posts extends React.Component {
   }
 }
 
-export default Posts
+export default SearchedPosts
