@@ -5,13 +5,19 @@ module.exports = (knex) => {
 
 //-------------------POSTS-----------------------//
 
-    getPosts: async () => {
+    getPosts: async (queries) => {
+      let knexStatement =
+        knex.select('posts.*', 'users.username as user_username', 'foods.name as food_name').from('posts')
+        .join('users', 'users.id', '=', 'posts.user_id')
+        .join('foods', 'foods.id', '=', 'posts.food_id')
+        .orderBy('posts.created_at', 'desc');
+
+      if (queries.food_name) {
+        knexStatement = knexStatement.where('foods.name', queries.food_name);
+      }
+
       return await
-      knex.select('posts.*', 'users.username as user_username', 'foods.name as food_name').from('posts')
-      .join('users', 'users.id', '=', 'posts.user_id')
-      .join('foods', 'foods.id', '=', 'posts.food_id')
-      .orderBy('posts.created_at', 'desc')
-      .then(result => result.map(obj => {
+      knexStatement.then(result => result.map(obj => {
         const newObj = {
           id: obj.id,
           food_picture_url: obj.food_picture_url,

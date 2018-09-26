@@ -7,7 +7,7 @@ module.exports = (knex) => {
   const db = require('../db/dbHelpers')(knex);
 
   router.get("/", async (req, res) => {
-    const posts = await db.getPosts();
+    const posts = await db.getPosts(req.query);
     res.json(posts);
   });
 
