@@ -10,7 +10,7 @@ exports.seed = async function(knex, Promise) {
       knex('posts').insert({
         user_id: ((i % 20) + 1),
         food_id: (Math.floor(Math.random() * 61) + 1),
-        food_picture_url: faker.image.food(),
+        food_picture_url: '/grapes.jpg',
         description: faker.lorem.paragraph(),
         status: 'available',
         location_id: ((i % 20) + 1),
