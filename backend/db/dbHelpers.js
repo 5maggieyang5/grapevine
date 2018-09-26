@@ -7,8 +7,9 @@ module.exports = (knex) => {
 
     getPosts: async () => {
       return await
-      knex.select().from('posts')
-      .orderBy('created_at', 'desc');
+      knex.select('posts.id as post_id', 'posts.*', 'users.*').from('posts')
+      .join('users', 'users.id', '=', 'posts.user_id')
+      .orderBy('posts.created_at', 'desc');
     },
 
     getPost: async (post_id) => {
