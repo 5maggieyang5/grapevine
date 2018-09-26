@@ -32,14 +32,7 @@ app.use(function(req, res, next) {
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
-  debug: true,
-  outputStyle: 'expanded'
-}));
 app.use(express.static("public"));
 
 // Mount all resource routers
