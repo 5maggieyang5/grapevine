@@ -3,7 +3,7 @@
 module.exports = (knex) => {
   return {
 
-    getAllPosts: async () => {
+    getPosts: async () => {
       return await
       knex.select().from('posts')
       .orderBy('created_at', 'desc');
@@ -14,6 +14,17 @@ module.exports = (knex) => {
       knex.select().from('posts')
       .where('id', post_id)
       .then((result) => {return result[0]});
+    }
+
+    createPost: async (user_id, food_id, food_picture_url, description, location_id) => {
+      return await
+      knex('posts').insert({
+        user_id,
+        food_id,
+        food_picture_url,
+        description,
+        location_id
+      });
     }
 
   };
