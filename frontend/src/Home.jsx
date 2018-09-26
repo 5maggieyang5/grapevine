@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {
+  Card, Button, CardImg, CardTitle, CardText, CardDeck,
+  CardSubtitle, CardBody } from 'reactstrap';
 
 
 // Client-side model
 import Resource from './models/resource'
-const PostStore = Resource('posts')
+const Posts = Resource('posts')
+const Users = Resource('users')
 
 class Posts extends React.Component {
   constructor(props) {
@@ -15,32 +19,24 @@ class Posts extends React.Component {
   }
 
   componentDidMount() {
-    PostStore.findAll()
+    Posts.findAll()
     .then((result) => this.setState({posts: result}))
     .catch((errors) => this.setState({errors: errors}))
   }
 
   render() {
     return (
+      <table>
+      {this.state.posts.map((post, index) => (
+        <tr key={index}>
+          <img src={post.food_picture_url} height="100" width="100"/>
+          <td>{post.description}</td>
+        </tr>
+      ))}
+      </table>
 
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {this.state.posts.map((post, index) => (
-                <tr key={index}>
-                  <td>{post.id}</td>
-                  <td>{post.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+
 
     )
   }
