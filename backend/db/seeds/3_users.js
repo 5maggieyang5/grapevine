@@ -13,6 +13,7 @@ exports.seed = async function(knex, Promise) {
         username: faker.internet.userName(),
         email: faker.internet.email(),
         password: faker.internet.password(),
+        average_rating: 4,
         default_location_id: (i + 1),
         avatar_image_url: faker.internet.avatar(),
         phone_number: faker.phone.phoneNumberFormat()
