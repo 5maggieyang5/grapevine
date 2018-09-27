@@ -3,6 +3,20 @@
 module.exports = (knex) => {
   return {
 
+//-------------------WISHLISTS-------------------//
+
+    getWishlist: async (post_id) => {
+      return await knex.select(
+          'foods.id as food_id',
+          'foods.name as food_name'
+        )
+        .from('posts')
+        .join('users', 'users.id', '=', 'posts.user_id')
+        .join('wishlist_items', 'wishlist_items.user_id', '=', 'users.id')
+        .join('foods', 'foods.id', '=', 'wishlist_items.food_id')
+        .where('posts.id', post_id)
+    },
+
 //-------------------POSTS-----------------------//
 
     getPosts: async (queries) => {
@@ -43,16 +57,8 @@ module.exports = (knex) => {
       }));
     },
 
-    getPost: async (post_id) => {
-      async function knexWishlistQuery(user_id) {
-        return await knex.select(
-          'foods.name as food_name'
-        )
-        .from('users')
-        .join('wishlist_items', 'wishlist_items.user_id', '=', 'users.id')
-        .join('foods', 'foods.id', '=', 'wishlist_items.food_id')
-        .where('users.id', user_id)
-      }
+    getPost: async function(post_id) {
+      const wishlist = (await this.getWishlist(post_id)).map(obj => obj.food_name);
 
       return await
       knex.select(
@@ -67,7 +73,6 @@ module.exports = (knex) => {
       .join('foods', 'foods.id', '=', 'posts.food_id')
       .where('posts.id', post_id)
       .then(result => result.map(async obj => {
-        const wishlist = (await knexWishlistQuery(obj.user_id)).map(obj => obj.food_name);
 
         const newObj = {
           id: obj.id,
@@ -101,6 +106,18 @@ module.exports = (knex) => {
         description,
         location_id
       });
+    },
+
+    getSecondList: async function(post_id, current_user_id) {
+      return await knex.select(
+          'foods.id as food_id',
+          'foods.name as food_name'
+        )
+        .from('posts')
+        .join('users', 'users.id', '=', 'posts.user_id')
+        .join('wishlist_items', 'wishlist_items.user_id', '=', 'users.id')
+        .join('foods', 'foods.id', '=', 'wishlist_items.food_id')
+        .where('posts.id', post_id)
     },
 
 //-------------------USERS-----------------------//
