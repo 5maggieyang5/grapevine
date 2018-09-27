@@ -26,7 +26,7 @@ module.exports = (knex) => {
 //-------------------POSTS-----------------------//
 
     getPosts: async function(queries) {
-      let knexStatement =
+      let getAllPosts =
         knex.select(
           'posts.*',
           'users.username as user_username',
@@ -38,11 +38,11 @@ module.exports = (knex) => {
         .orderBy('posts.created_at', 'desc');
 
       if (queries.food_name) {
-        knexStatement = knexStatement.where('foods.name', queries.food_name);
+        getAllPosts = getAllPosts.where('foods.name', queries.food_name);
       }
 
       return await
-      knexStatement.then(result => result.map(obj => {
+      getAllPosts.then(result => result.map(obj => {
         const newObj = {
           id: obj.id,
           food_picture_url: obj.food_picture_url,
