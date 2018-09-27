@@ -10,6 +10,7 @@ import Posts from './Home.jsx'
 import Post from './Post.jsx'
 
 
+
 const Main = () => (
   <main>
     <Switch>
