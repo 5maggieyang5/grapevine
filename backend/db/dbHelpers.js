@@ -5,7 +5,7 @@ module.exports = (knex) => {
 
 //-------------------WISHLISTS-------------------//
 
-    getWishlist: async (post_id) => {
+    getWishlist: async function(post_id) {
       return await knex.select(
           'foods.id as food_id',
           'foods.name as food_name'
@@ -17,9 +17,15 @@ module.exports = (knex) => {
         .where('posts.id', post_id)
     },
 
+    getSecondList: async function(post_id, current_user_id) {
+      const first_list = await this.getWishlist(post_id);
+      return first_list;
+    },
+
+
 //-------------------POSTS-----------------------//
 
-    getPosts: async (queries) => {
+    getPosts: async function(queries) {
       let knexStatement =
         knex.select(
           'posts.*',
@@ -97,7 +103,7 @@ module.exports = (knex) => {
       })[0]);
     },
 
-    createPost: async (user_id, food_id, food_picture_url, description, location_id) => {
+    createPost: async function(user_id, food_id, food_picture_url, description, location_id) {
       return await
       knex('posts').insert({
         user_id,
@@ -108,27 +114,16 @@ module.exports = (knex) => {
       });
     },
 
-    getSecondList: async function(post_id, current_user_id) {
-      return await knex.select(
-          'foods.id as food_id',
-          'foods.name as food_name'
-        )
-        .from('posts')
-        .join('users', 'users.id', '=', 'posts.user_id')
-        .join('wishlist_items', 'wishlist_items.user_id', '=', 'users.id')
-        .join('foods', 'foods.id', '=', 'wishlist_items.food_id')
-        .where('posts.id', post_id)
-    },
 
 //-------------------USERS-----------------------//
 
-    getUsers: async () => {
+    getUsers: async function() {
       return await
       knex.select().from('users')
       .orderBy('created_at', 'desc');
     },
 
-    getUser: async (user_id) => {
+    getUser: async function(user_id) {
       return await
       knex.select().from('users')
       .where('id', user_id)
