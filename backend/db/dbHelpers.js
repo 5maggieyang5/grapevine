@@ -3,6 +3,8 @@
 module.exports = (knex) => {
   return {
 
+    test: 'hello world',
+
 //-------------------WISHLISTS-------------------//
 
     getWishlist: async function(post_id) {
@@ -19,7 +21,45 @@ module.exports = (knex) => {
 
     getSecondList: async function(post_id, current_user_id) {
       const first_list = await this.getWishlist(post_id);
-      return first_list;
+      const wanted_food_ids = first_list.map(obj => obj.food_id);
+      const wanted_posts = await knex.select().from('posts').whereIn('food_id', wanted_food_ids);
+      const intermediate_wishlists = await Promise.all(wanted_posts.map(post => this.getWishlist(post.id)));
+      const current_users_posts = await knex.select().from('posts').where('user_id', current_user_id);
+      // return current_users_posts;
+      const triplets = [];
+      wanted_posts.forEach((post, index) => {
+        triplets.push({
+          middle_man: post.user_id,
+          middle_mans_food: post.food_id,
+          // middle_mans_wishlist: intermediate_wishlists[index],
+          current_user_can_give: []
+        });
+        current_users_posts.forEach(post => {
+          const intermediate_food_ids = intermediate_wishlists[index].map(obj => obj.food_id);
+          if (intermediate_food_ids.includes(post.food_id)) {
+            triplets[index].current_user_can_give.push(post.food_id);
+          }
+        })
+      })
+      // return triplets;
+      // const testarray = []
+      // triplets.forEach(obj => testarray.push(...obj.current_user_can_give));
+      // return testarray;
+      const finalObject = {};
+      for (let i = 0; i < triplets.length; i++) {
+        if (triplets[i].current_user_can_give.length === 0) {
+          continue;
+        } else if (!finalObject[triplets[i].middle_man]) {
+          finalObject[triplets[i].middle_man] = {
+            will_give_to_poster: [triplets[i].middle_mans_food],
+            wants_from_current_user: triplets[i].current_user_can_give
+          }
+        } else {
+          finalObject[triplets[i].middle_man].will_give_to_poster.push(triplets[i].middle_mans_food);
+          finalObject[triplets[i].middle_man].wants_from_current_user.push(...triplets[i].current_user_can_give);
+        }
+      }
+      return finalObject;
     },
 
 

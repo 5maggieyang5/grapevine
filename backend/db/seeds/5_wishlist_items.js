@@ -2,8 +2,8 @@ exports.seed = function(knex, Promise) {
   const promises = [];
   const existingPairs = {};
 
-  for (let i = 0; i < 200; i++) {
-    let user = ((i % 20) + 1);
+  for (let i = 0; i < 480; i++) {
+    let user = ((i % 40) + 1);
     let food = (Math.floor(Math.random() * 61) + 1);
 
     if (!existingPairs[`[${user}, ${food}]`]) {

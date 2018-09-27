@@ -5,15 +5,15 @@ exports.seed = async function(knex, Promise) {
 
   const promises = [];
 
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 120; i++) {
     promises.push(
       knex('posts').insert({
-        user_id: ((i % 20) + 1),
+        user_id: ((i % 40) + 1),
         food_id: (Math.floor(Math.random() * 61) + 1),
         food_picture_url: '/grapes.jpg',
         description: faker.lorem.paragraph(),
         status: 'available',
-        location_id: ((i % 20) + 1),
+        location_id: ((i % 40) + 1),
       })
     );
   }
