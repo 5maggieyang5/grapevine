@@ -22,9 +22,9 @@ module.exports = (knex) => {
     getSecondList: async function(post_id, current_user_id) {
       const first_list = await this.getWishlist(post_id);
       const wanted_food_ids = first_list.map(obj => obj.food_id);
-      const wanted_posts = await knex.select().from('posts').whereIn('food_id', wanted_food_ids);
+      const wanted_posts = await knex.select().from('posts').whereIn('food_id', wanted_food_ids).andWhere('status', '=', 'available');
       const intermediate_wishlists = await Promise.all(wanted_posts.map(post => this.getWishlist(post.id)));
-      const current_users_posts = await knex.select().from('posts').where('user_id', current_user_id);
+      const current_users_posts = await knex.select().from('posts').where('user_id', current_user_id).andWhere('status', '=', 'available');
       // return current_users_posts;
       const triplets = [];
       wanted_posts.forEach((post, index) => {
@@ -34,8 +34,8 @@ module.exports = (knex) => {
           // middle_mans_wishlist: intermediate_wishlists[index],
           current_user_can_give: []
         });
+        const intermediate_food_ids = intermediate_wishlists[index].map(obj => obj.food_id);
         current_users_posts.forEach(post => {
-          const intermediate_food_ids = intermediate_wishlists[index].map(obj => obj.food_id);
           if (intermediate_food_ids.includes(post.food_id)) {
             triplets[index].current_user_can_give.push(post.food_id);
           }
@@ -56,10 +56,10 @@ module.exports = (knex) => {
           }
         } else {
           finalObject[triplets[i].middle_man].will_give_to_poster.push(triplets[i].middle_mans_food);
-          finalObject[triplets[i].middle_man].wants_from_current_user.push(...triplets[i].current_user_can_give);
         }
       }
       return finalObject;
+      return await knex.select('posts.*').from('users').join('posts', 'posts.user_id', '=', 'users.id').where('users.id', current_user_id);
     },
 
 
