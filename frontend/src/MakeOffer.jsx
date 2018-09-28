@@ -6,13 +6,7 @@ export default class MakeOffer extends React.Component {
   handleSubmit(ev){
     this.handleSubmit = this.handleSubmit.bind(this);
     
-
-
-
-
   }
-
-
   render() {
     return (
       <div>

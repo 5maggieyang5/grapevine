@@ -8,6 +8,7 @@ import Register from './Register.jsx'
 import FoodRequest from './FoodRequest.jsx'
 import Posts from './Home.jsx'
 import Post from './Post.jsx'
+import Trade from './Trade.jsx'
 
 
 
@@ -21,6 +22,7 @@ const Main = () => (
       <Route exact path='/Foodinfo' component ={Post} />
       <Route exact path = '/posts/:postId' component ={Post} />
       <Route exact path='/FoodRequest' component ={FoodRequest} />
+      <Route exact path='/posts/:postId/:selected' component = {Trade} />
     
     </Switch>
   </main>
