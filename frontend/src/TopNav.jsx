@@ -42,7 +42,7 @@ class TopNav extends React.Component {
               <NavItem>
                <Badge color="warning" id="creat-post">
                   <Link to='/creatNewPost'>
-                    Creat New Post
+                    Create New Post
                   </Link>
                 </Badge>
               </NavItem>
@@ -55,6 +55,11 @@ class TopNav extends React.Component {
                 <BreadcrumbItem>
                   <Link to='/register'>Register</Link>
                 </BreadcrumbItem>
+                
+                <BreadcrumbItem>
+                  <Link to='/Foodinfo'>TestFood</Link>
+              </BreadcrumbItem>
+
 
                 <BreadcrumbItem active>
                   <Link to='/user'>User Profile</Link>

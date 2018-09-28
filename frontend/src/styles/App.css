@@ -19,5 +19,16 @@
 }
 
 #title_register {
-  margin-bottom:
+  margin-bottom:1px;
+}
+
+#user-avatar {
+  border-radius: 50%;
+}
+
+#big-Container{
+  margin: 2em;
+  right: 0;
+  padding: 10px;
+  width: 100%;
 }

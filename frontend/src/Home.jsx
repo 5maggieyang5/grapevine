@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 
 
 // Client-side model
@@ -18,6 +20,7 @@ class Posts extends React.Component {
     PostStore.findAll()
     .then((result) => this.setState({posts: result}))
     .catch((errors) => this.setState({errors: errors}))
+    
   }
 
   render() {
@@ -35,7 +38,9 @@ class Posts extends React.Component {
             <tbody>
               {this.state.posts.map((post, index) => (
                 <tr key={index}>
-                  <td>{post.id}</td>
+                  <td><Link to ={`/posts/${post.id}`}>
+                  {post.id}
+                  </Link></td>
                   <td>{post.description}</td>
                 </tr>
               ))}
