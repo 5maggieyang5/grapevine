@@ -37,7 +37,7 @@ class TopNav extends React.Component {
           </NavbarBrand>
 
           <NavbarBrand>
-            <Link to='/'>
+            <Link to='/About'>
               About US!
             </Link>
           </NavbarBrand>
@@ -45,11 +45,10 @@ class TopNav extends React.Component {
           <InputGroup id="nav-search">
             <Input onChange={this.handleChange} name="searchInput"/>
             <InputGroupAddon addonType="append">
-              <Link to={`/posts?food_name=${this.state.searchInput}`} >
-              {/*  <Button color="secondary">*/}
-                    Search
-              {/*  </Button>*/}
-              </Link>
+              <Button color="secondary" tag={Link} to={`/posts?food_name=${this.state.searchInput}`} >
+                Search
+              </Button>
+
             </InputGroupAddon>
           </InputGroup>
 

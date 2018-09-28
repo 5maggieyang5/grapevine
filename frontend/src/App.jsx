@@ -7,6 +7,8 @@ import Register from './Register.jsx'
 import Posts from './Home.jsx'
 import Login from './Login.jsx'
 import SearchedPosts from './SearchedPosts.jsx'
+import NewPosts from './NewPosts.jsx'
+import Trades from './Trades.jsx'
 
 
 const Main = () => (
@@ -17,6 +19,8 @@ const Main = () => (
       <Route exact path='/register' component= {Register} />
       <Route exact path='/map' component= {SimpleMap}/>
       <Route exact path='/posts' component={SearchedPosts} />
+      <Route exact path='/creatNewPost' component={NewPosts} />
+      <Route exact path='/trades' component={Trades} />
     </Switch>
   </main>
 
