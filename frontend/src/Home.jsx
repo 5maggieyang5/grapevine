@@ -1,7 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import {
   Card, Button, CardImg, CardTitle, CardText, CardDeck,
   CardSubtitle, CardBody, Container, Row, Col } from 'reactstrap';
+
 
 
 // Client-side model
@@ -40,7 +42,7 @@ class Posts extends React.Component {
                     <CardTitle><h3>{post.food.name}</h3></CardTitle>
                     <CardSubtitle><h5>Owner:{post.user.username}</h5></CardSubtitle>
                     <CardText>{post.description}</CardText>
-                    <Button>Detail</Button>
+                    <Button tag={Link} to={`/posts/${post.id}`}>Detail</Button>
                   </CardBody>
                 </Card>
               </Col>

@@ -25,13 +25,13 @@ import { Container,  Row,Col } from 'reactstrap';
         offered_item:""
       }
     }
-  
+
     componentDidMount() {
 
       PostStore.find(this.state.postId)
       .then((result) =>{
         this.setState({
-        
+
           post: result,
           errors: null,
           show: true,
@@ -56,7 +56,7 @@ import { Container,  Row,Col } from 'reactstrap';
         selected_food_item: event.target.value
       })
     }
-    
+
     handleGetFood = (event) => {
       event.preventDefault();
       console.log(" i got ", event.target.value)
@@ -87,7 +87,7 @@ import { Container,  Row,Col } from 'reactstrap';
       })
 
     }
-  
+
     handleClick = (ev) => {
       ev.preventDefault();
       this.setState({show:true});
@@ -96,38 +96,39 @@ import { Container,  Row,Col } from 'reactstrap';
     toggle = () => {
       this.setState({ collapse: !this.state.collapse });
     }
-  
-  render (){ 
+
+  render (){
     let userwishlist = this.state.post.user.wishlist;
-    
+    console.log("this.state.post-------:", this.state.post);
+
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
-    
-   
+
+
   return (
     <Container id="big-Container">
     <Row>
       <Col>
         <img src ={this.state.post.food_picture_url} alt="" />
       </Col>
-      
+
       <Col>
         <Row>
           <h3>Item: <b>{this.state.post.food.name} </b> </h3> <br/>
           {this.state.post.description}<br/><br/>
         </Row>
       </Col>
-    </Row>    
+    </Row>
     <Row>
       <Col>
-        
+
       </Col>
       <Col>
       Map Id :{this.state.post.location_id}<br/> <br/>
-      </Col>  
+      </Col>
     </Row>
     <Row>
     <br/><br/>
-    <Col xs="3"><img id = "user-avatar" src = {this.state.post.user.avatar} ></img> 
+    <Col xs="3"><img id = "user-avatar" src = {this.state.post.user.avatar} ></img>
     </Col>
     <Col xs="3"></Col>
     <Col>
@@ -137,7 +138,7 @@ import { Container,  Row,Col } from 'reactstrap';
     </Col>
     <Col>
       <FoodOffered list = {Foodlist} action = {this.handleGetFood} />
-      
+
     </Col>
     </Row>
     <Row>
@@ -145,11 +146,11 @@ import { Container,  Row,Col } from 'reactstrap';
       <br/>
       <h4>Name: {this.state.post.user.username}</h4>
       <h4>Rating :{this.state.post.user.average_rating} </h4>
-    </Col>   
+    </Col>
     <Col>
       <button onClick={this.handleButtonClick}>Trade</button>
     </Col>
-   </Row>  
+   </Row>
   </Container>
     );
   };
