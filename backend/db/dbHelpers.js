@@ -17,7 +17,7 @@ module.exports = (knex) => {
         .where('posts.id', post_id)
     },
 
-    getSecondList: async function(post_id, current_user_id) {
+    getSecondaryList: async function(post_id, current_user_id) {
       const first_list = await this.getWishlist(post_id);
       const wanted_food_ids = first_list.map(obj => obj.food_id);
       const wanted_posts = await
