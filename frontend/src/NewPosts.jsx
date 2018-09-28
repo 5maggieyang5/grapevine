@@ -1,24 +1,31 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {
   Button,
   Form,
   FormGroup,
   Label,
+  Col,
   Input} from 'reactstrap'
 
-class Register extends React.Component {
+class NewPosts extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      first_name: "",
-      last_name: "",
-      user_name: "",
-      email: "",
-      password: "",
-      address: "",
-      phone_numb: ""
-    }
+      food_picture_url: "",
+      description: "",
+      status: "",
+      location_id: 17,
+      created_at: "2018-09-26T18:28:57.400Z",
+      user: {
+      id: 17,
+      username: "Bennett.Kovacek"
+      },
+      food: {
+      id: 58,
+      name: "Tomatillos"
+      }    }
   }
 
   handleChange = evt => {
@@ -50,16 +57,18 @@ class Register extends React.Component {
   render() {
     return (
       <div id="register-form">
-        <h1 id="title_register">Register Form: </h1>
+        <h1 id="title_register">Create a New Post Form: </h1>
+
+
         <Form>
           <FormGroup>
-            <Label for="first_name">First Name</Label>
-            <Input type="text" name="first_name" id="first_name" onChange={this.handleChange} />
+            <label for="avatar">Food picture</label>
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
           </FormGroup>
 
           <FormGroup>
-            <Label for="last_name">Last Name</Label>
-            <Input type="text" name="last_name" id="last_name" onChange={this.handleChange} />
+            <Label for="first_name">Description</Label>
+            <Input type="text" name="first_name" id="first_name" onChange={this.handleChange} />
           </FormGroup>
 
           <FormGroup>
@@ -68,30 +77,15 @@ class Register extends React.Component {
           </FormGroup>
 
           <FormGroup>
-            <Label for="Email">Email</Label>
-            <Input type="email" name="email" id="Email" onChange={this.handleChange} />
-          </FormGroup>
-
-          <FormGroup>
-            <Label for="Password">Password</Label>
-            <Input type="password" name="password" id="Password" onChange={this.handleChange} />
-          </FormGroup>
-
-          <FormGroup>
             <Label for="address">Address</Label>
             <Input type="text" name="address" id="address" onChange={this.handleChange} />
           </FormGroup>
 
-          <FormGroup>
-            <Label for="phone_numb">Phone Number</Label>
-            <Input type="tel" name="phone_numb" id="phone_numb" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required onChange={this.handleChange} />
-          </FormGroup>
-
-          <Button onClick={this.handleClick}>Submit</Button>
+          <Button onClick={this.handleClick}>   Submit     </Button>
         </Form>
       </div>
     );
   }
 }
 
-export default Register
+export default NewPosts
