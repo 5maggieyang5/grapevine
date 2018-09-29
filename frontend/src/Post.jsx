@@ -4,12 +4,13 @@ import { Container,  Row,Col } from 'reactstrap';
 
   import {Redirect} from 'react-router-dom'
   import Wishlist from './Wishlist.jsx';
-  import FoodOffered from './FoodOffered.jsx';
-  import Resource from './models/resource'
+  // import FoodOffered from './FoodOffered.jsx';
+  import Resource from './models/resource';
+  import WishContainer from './WishContainer.jsx';
 
 
   const PostStore = Resource('posts');
-  const Foodlist = ["apples","oranges","bananas","grapes","avocadoes"];
+  const Trade = Resource('trades');
 
   class Post extends React.Component {
     constructor(props) {
@@ -22,6 +23,8 @@ import { Container,  Row,Col } from 'reactstrap';
         collapse: false,
         selected_food_item:"",
         current_user: 1,
+        isHidden:true,
+        radio_selection:"",
         offered_item:""
       }
     }
@@ -51,43 +54,30 @@ import { Container,  Row,Col } from 'reactstrap';
 
     handleChange = (event) => {
       event.preventDefault();
-      console.log(" i got ", event.target.value)
       this.setState({
         selected_food_item: event.target.value
       })
+      console.log(" i got submit  value as: ", this.state.radio_selection)
+      
+      let result = fetch(`http://localhost:8080/posts/${this.state.postId}/secondarylist/1`,
+      { method:'GET', mode:'cors'})
+      .then( result  =>{
+        console.log("data stores:" , result.json())
+      }
+      )
+
+      // });
+      
+  
     }
     
-    handleGetFood = (event) => {
-      event.preventDefault();
-      console.log(" i got ", event.target.value)
+    handleRadioChange = (event) => {
+      console.log("radio button item: ",event.target.value)
       this.setState({
-        offered_item: event.target.value
-      })
+        radio_selection: event.target.value
+      });
     }
 
-
-    handleButtonClick = (event) => {
-      event.preventDefault();
-      console.log("state info: ",this.state);
-
-      console.log("i got this as selection :", this.state.selected_food_item)
-      console.log("post id: ", this.state.postId)
-      fetch('/trades', {
-        method: 'POST',
-        headers:  {
-          'Content-Type' : 'application /json'
-        },
-        body: JSON.stringify ({
-          selected_food_item: this.state.selected_food_item,
-          postId:this.state.postId,
-          current_user: this.state.current_user,
-          offered_item: this.state.offered_item
-        })
-
-      })
-
-    }
-  
     handleClick = (ev) => {
       ev.preventDefault();
       this.setState({show:true});
@@ -96,13 +86,30 @@ import { Container,  Row,Col } from 'reactstrap';
     toggle = () => {
       this.setState({ collapse: !this.state.collapse });
     }
-  
+    toggleHidden =() =>  {
+      this.setState({
+        isHidden: !this.state.isHidden
+      })
+    }
+
+    handleButtonClick = (event) => {
+      event.preventDefault();
+      console.log("state info: ",this.state);
+
+      console.log("i got this as selection :", this.state.selected_food_item)
+      console.log("post id: ", this.state.postId)
+      Trade.create(JSON.stringify ({
+          selected_food_item: this.state.selected_food_item,
+          postId:this.state.postId,
+          current_user: this.state.current_user,
+        })
+      )
+    }
+    
+
   render (){ 
     let userwishlist = this.state.post.user.wishlist;
-    
-    if (this.state.redirect) return <Redirect to={this.state.redirect} />
-    
-   
+       
   return (
     <Container id="big-Container">
     <Row>
@@ -132,11 +139,18 @@ import { Container,  Row,Col } from 'reactstrap';
     <Col xs="3"></Col>
     <Col>
     <div>
-        <Wishlist list={userwishlist} action = {this.handleChange}  />
+        <button onClick = {this.toggleHidden}>
+        Show Wishlist
+        </button>
+        {!this.state.isHidden && 
+          <Wishlist list={userwishlist} form_action = {this.handleChange}
+          radio_action = {this.handleRadioChange}
+          radio_select ={this.state.radio_selection}
+          /> 
+        }
      </div>
     </Col>
     <Col>
-      <FoodOffered list = {Foodlist} action = {this.handleGetFood} />
       
     </Col>
     </Row>
@@ -146,7 +160,7 @@ import { Container,  Row,Col } from 'reactstrap';
       <h4>Name: {this.state.post.user.username}</h4>
       <h4>Rating :{this.state.post.user.average_rating} </h4>
     </Col>   
-    <Col>
+    <Col >
       <button onClick={this.handleButtonClick}>Trade</button>
     </Col>
    </Row>  

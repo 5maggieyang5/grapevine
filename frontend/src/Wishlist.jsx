@@ -7,9 +7,11 @@ export default class Wishlist extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      radio_select : props.radio_select
     };
   }
+
 
   toggle() {
     this.setState(prevState => ({
@@ -20,15 +22,33 @@ export default class Wishlist extends React.Component {
   render() {
 
     let wishes = this.props.list ;  // get data from Parent component
-  
-    let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item} </option> );
+    
+    let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item} 
+    </option> );
+    
+    let Itemlist3 = wishes.map ((item,index) => 
+      
+      <ul  key = {index}>
+        <input 
+          type  =  "radio"
+          value =  {item} 
+          checked = {this.props.radio_select === item}
+          onChange= {this.props.radio_action}
+        />
+        {item}
+      </ul>);
+
 
     return (
+
       <div>
-        <select onClick = {this.props.action}>
-        <option defaultValue = ""> Click here for Wishlist</option> 
-          {Itemlist2}
-        </select>
+          <form onSubmit={this.props.form_action}>
+            <ul>
+               {Itemlist3}          
+            </ul>
+          <button type="submit" value = "Save">See Potential Trades</button>
+          <button type="submit" value = "Cancel">Cancel</button>
+        </form>
       </div>
       
     );
@@ -37,6 +57,12 @@ export default class Wishlist extends React.Component {
 
 
 
+
+// oldversion of wishlist
+// <select onClick = {this.props.action}>
+//         <option defaultValue = ""> Click here for Wishlist</option> 
+//           {Itemlist2}
+//         </select>
 
 // <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
 //         <DropdownToggle caret>
