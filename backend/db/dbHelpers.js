@@ -171,6 +171,11 @@ module.exports = (knex) => {
 
 //-------------------TRADES-------------------//
 
+    getTrade: async function(trade_id) {
+      return await
+      knex.select().from('trades').where('id', trade_id);
+    },
+
     createTrade: async function(user_id, food_id, food_picture_url, description, location_id) {
       return await
       knex('posts').insert({

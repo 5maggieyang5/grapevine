@@ -12,9 +12,9 @@ module.exports = (knex) => {
   });
 
   router.get("/:id", async (req, res) => {
-    const userId = req.params.id;
-    const user = await db.getUser(userId);
-    res.json(user);
+    const trade_id = req.params.id;
+    const trade = await db.getTrade(trade_id);
+    res.json(trade);
   });
 
   return router;
