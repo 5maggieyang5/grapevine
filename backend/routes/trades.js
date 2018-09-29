@@ -7,8 +7,8 @@ module.exports = (knex) => {
   const db = require('../db/dbHelpers')(knex);
 
   router.post("/", async (req, res) => {
-
-    res.json('id');
+    console.log('-----the right route got called', req.body);
+    res.json('RESPONSE RESPONSE RESPONSE');
   });
 
   router.get("/:id", async (req, res) => {

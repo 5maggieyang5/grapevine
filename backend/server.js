@@ -13,6 +13,15 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(bodyParser.json());
+app.use(express.static("public"));
+
 // Seperated Routers for each Resource
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
@@ -28,17 +37,10 @@ app.use("/trades", tradesRouter(knex));
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
 
 app.listen(PORT, () => {
   console.log("API server listening on port " + PORT);
