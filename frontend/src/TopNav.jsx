@@ -56,11 +56,6 @@ class TopNav extends React.Component {
                   <Link to='/register'>Register</Link>
                 </BreadcrumbItem>
                 
-                <BreadcrumbItem>
-                  <Link to='/Foodinfo'>TestFood</Link>
-              </BreadcrumbItem>
-
-
                 <BreadcrumbItem active>
                   <Link to='/user'>User Profile</Link>
                 </BreadcrumbItem>

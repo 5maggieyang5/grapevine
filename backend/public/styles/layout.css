@@ -5,3 +5,15 @@ body {
 body h1 {
   color: #244751;
 }
+
+ul {
+    padding: 0;
+  margin-top: 1em;
+  }
+
+
+.radiobox-item {
+  padding: 10px;
+  margin-top: 1em;
+
+}

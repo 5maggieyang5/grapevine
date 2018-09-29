@@ -57,18 +57,12 @@ import { Container,  Row,Col } from 'reactstrap';
       this.setState({
         selected_food_item: event.target.value
       })
-      console.log(" i got submit  value as: ", this.state.radio_selection)
       
-      let result = fetch(`http://localhost:8080/posts/${this.state.postId}/secondarylist/1`,
+    let result = fetch(`http://localhost:8080/posts/${this.state.postId}/secondarylist/1`,
       { method:'GET', mode:'cors'})
       .then( result  =>{
         console.log("data stores:" , result.json())
-      }
-      )
-
-      // });
-      
-  
+      })
     }
     
     handleRadioChange = (event) => {
@@ -124,7 +118,7 @@ import { Container,  Row,Col } from 'reactstrap';
         </Row>
       </Col>
     </Row>    
-    <Row>
+    <Row>   
       <Col>
         
       </Col>
@@ -155,12 +149,12 @@ import { Container,  Row,Col } from 'reactstrap';
     </Col>
     </Row>
     <Row>
-    <Col>
+    <Col xs="6">
       <br/>
       <h4>Name: {this.state.post.user.username}</h4>
       <h4>Rating :{this.state.post.user.average_rating} </h4>
     </Col>   
-    <Col >
+    <Col  xs="6">
       <button onClick={this.handleButtonClick}>Trade</button>
     </Col>
    </Row>  
