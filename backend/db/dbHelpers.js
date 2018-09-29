@@ -108,7 +108,7 @@ module.exports = (knex) => {
       return await
       knex.select().from('users')
       .where('id', user_id)
-      .then(result => {return result[0]});
+      .then(result => result[0]);
     },
 
     getPoster: async function(post_id) {
@@ -116,7 +116,7 @@ module.exports = (knex) => {
       knex.select('users.*').from('users')
       .join('posts', 'posts.user_id', '=', 'users.id')
       .where('posts.id', post_id)
-      .then(result => {return result[0]});
+      .then(result => result[0]);
     },
 
 //-------------------WISHLISTS-------------------//
@@ -181,7 +181,8 @@ module.exports = (knex) => {
 
     getTrade: async function(trade_id) {
       return await
-      knex.select().from('trades').where('id', trade_id);
+      knex.select().from('trades').where('id', trade_id)
+      .then(result => result[0]);
     },
 
     createTrade: async function(post_id, edges) {
@@ -190,7 +191,31 @@ module.exports = (knex) => {
         post_id,
         edges: JSON.stringify(edges)
       }).returning('id')
-      .then(returned => returned[0]);
+      .then(result => result[0]);
+    },
+
+//-------------------TRADE USERS-------------------//
+
+    getTradeUsers: async function(trade_id) {
+      return await
+      knex.select().from('trade_users')
+      .where('trade_id', trade_id)
+    },
+
+    // getTradeUser: async function(trade_id, user_id) {
+    //   return await
+    //   knex.select().from('trade_users')
+    //   .where('trade_id', trade_id)
+    //   .andWhere('user_id', user_id)
+    //   .then(result => result[0]);
+    // },
+
+    updateTradeUser: async function(trade_id, user_id, changes) {
+      return await
+      knex('trade_users')
+      .update(changes)
+      .where('trade_id', trade_id)
+      .andWhere('user_id', user_id);
     },
 
 //-------------------FOODS-------------------//
@@ -200,7 +225,7 @@ module.exports = (knex) => {
       knex.select('foods.*').from('foods')
       .join('posts', 'posts.food_id', '=', 'foods.id')
       .where('posts.id', post_id)
-      .then(result => {return result[0]});
+      .then(result => result[0]);
     },
 
   };

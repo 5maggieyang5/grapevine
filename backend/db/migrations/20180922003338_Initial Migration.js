@@ -39,12 +39,12 @@ exports.up = (knex, Promise) => {
       table.date('closing_date');
       table.integer('suggested_location_id');
       table.integer('actual_location_id');
-      table.jsonb('edges'); // format = [{from: user_id, to: user_id, foods: [food_names]},...]
+      table.jsonb('edges'); // format = [{from: username, to: username, foods: [food_names]},...]
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('trade_users', function (table) { //participants of a trade
-      table.integer('user_id');
       table.integer('trade_id');
+      table.integer('user_id');
       table.boolean('confirmed'); //agreed to what items will be traded
       table.date('availability_start');
       table.date('availability_end');

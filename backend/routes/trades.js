@@ -6,12 +6,14 @@ const router  = express.Router();
 module.exports = (knex) => {
   const db = require('../db/dbHelpers')(knex);
 
+  router.get("/:id", async (req, res) => {
+    const trade_id = req.params.id;
+    const trade = await db.getTrade(trade_id);
+    trade.users = await db.getTradeUsers(trade_id);
+    res.json(trade);
+  });
+
   router.post("/", async (req, res) => {
-    console.log('-----the right route got called', req.body);
-    // { selected_food_item: 'Spinach',
-    //   postId: '4',
-    //   current_user: 1,
-    //   offered_item: '' }
     const post_id = req.body.postId;
 
     const poster = (await db.getPoster(post_id)).username;
@@ -38,11 +40,13 @@ module.exports = (knex) => {
     res.json(created_trade_id);
   });
 
-  router.get("/:id", async (req, res) => {
-    const trade_id = req.params.id;
-    const trade = await db.getTrade(trade_id);
-    res.json(trade);
-  });
-
+  router.patch('/:trade_id/users/:user_id', async (req, res) => {
+    const trade_id = req.params.trade_id;
+    const user_id = req.params.user_id;
+    const changes = req.body;
+    await db.updateTradeUser(trade_id, user_id, changes);
+    // res.status(200).end();
+    res.json(changes);
+  })
   return router;
 }
