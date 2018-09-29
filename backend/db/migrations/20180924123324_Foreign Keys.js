@@ -21,8 +21,6 @@ exports.up = (knex, Promise) => {
     knex.schema.table('trade_users', function (table) {
       table.foreign('user_id').references('users.id');
       table.foreign('trade_id').references('trades.id');
-      table.foreign('offered_food_id').references('foods.id');
-      table.foreign('desired_food_id').references('foods.id');
       table.foreign('location_id').references('locations.id');
     }),
     knex.schema.table('messages', function (table) {
