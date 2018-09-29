@@ -1,11 +1,43 @@
 import React from 'react'
 import { Table, Drawer, Button } from 'antd';
+import TradeOpt from './TradeOpt.jsx';
+import TwoWayTrade from './TwoWayTrade.jsx';
+import './styles/App.css'
 // Client-side model
 import Resource from './models/resource'
 
+
 const Trades = Resource('trades')
 
-const columns = [
+const edges = [
+  {
+    from: 'UserA',
+    to: 'UserB',
+    foods: ['food1', 'food2']
+  }, {
+    from: 'UserB',
+    to: 'UserC',
+    foods: ['food3', 'food4']
+  }, {
+    from: 'UserC',
+    to: 'UserA',
+    foods: ['food5', 'food6']
+  }
+];
+/*
+const edges = [
+  {
+    from: 'UserA',
+    to: 'UserB',
+    foods: ['food1', 'food2']
+  }, {
+    from: 'UserB',
+    to: 'UserC',
+    foods: ['food3', 'food4']
+  }
+]*/
+
+/*const columns = [
   {
     title: 'Trading Information',
     dataIndex: 'trades',
@@ -13,7 +45,8 @@ const columns = [
     title: 'Trading Users',
     className: 'column-money',
     dataIndex: 'user',
-    render: text => <a href="javascript:;">{text}</a>,
+    render: text => <button type="primary" onClick={this.showDrawer}>{text}</button>
+
   }, {
     title: 'Confirmation',
     dataIndex: 'confirmed',
@@ -45,7 +78,7 @@ const data = [{
   user: 'UserC',
   confirmed: "denied"
 }];
-
+*/
 
 class ConfirmTrading extends React.Component {
  /* constructor(props) {
@@ -65,8 +98,8 @@ class ConfirmTrading extends React.Component {
     }))
     .catch((errors) => this.setState({errors: errors}))
   }*/
-
-  state = { visible: false };
+/*
+  state = { visible: false};
 
   showDrawer = () => {
     this.setState({
@@ -80,36 +113,68 @@ class ConfirmTrading extends React.Component {
     });
   };
 
+/*  disableBtn = () {
+    document.getElementById("myBtn").disabled = true;
+  }*/
+
+/*  handleClick = evt => {
+    evt.preventDefault();
+    fetch(`/trades/${this.state.tradeId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        confirmed: true,
+        current_user_id: 5
+      })
+    })
+    //diable button
+    this.disableBtn;
+    //update confirm
+
+  }
+*/
   render() {
+    let tradeOpt;
+    if (edges.length === 3) {
+      tradeOpt = edges.map((item,index) => <TradeOpt key={index} classKey={index} item={item} /> );
+    } else {
+      tradeOpt = edges.map((item,index) => <TwoWayTrade key={index} twoClassKey={index} twoItem={item} /> );
+    }
+
     return (
-      <div>
-        <Button type="primary" onClick={this.showDrawer}>
-          Open
-        </Button>
-        <Drawer
-          title="Basic Drawer"
-          placement="right"
-          closable={false}
-          onClose={this.onClose}
-          visible={this.state.visible}
-        >
-          <p>User Name</p>
-          <p>User Rating</p>
-          <p>User Review</p>
-        </Drawer>
+      <div className="allTrades">
+        {tradeOpt}
       </div>
-    );
+    )
   }
 
-  render() {
-    return (
-      <Table
+/*     return (
+      <div className="allTrades">
+
+        {tradeOpt}
+     <Table
         columns={columns}
         dataSource={data}
         bordered
       />
-    )
-  }
+      <Button id="myBtn" onClick={this.handleClick}>Confirm!</Button>
+      <Drawer
+        title="Basic Drawer"
+        placement="right"
+        closable={false}
+        onClose={this.onClose}
+        visible={this.state.visible}
+      >
+        <p>User Name</p>
+        <p>User Rating</p>
+        <p>User Review</p>
+      </Drawer>
+
+
+      </div>
+    )*/
 }
 
 export default ConfirmTrading
