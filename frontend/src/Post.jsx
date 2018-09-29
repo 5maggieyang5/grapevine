@@ -9,6 +9,7 @@ import { Container,  Row,Col } from 'reactstrap';
 
 
   const PostStore = Resource('posts');
+  const Trade = Resource('trades');
   const Foodlist = ["apples","oranges","bananas","grapes","avocadoes"];
 
   class Post extends React.Component {
@@ -72,19 +73,12 @@ import { Container,  Row,Col } from 'reactstrap';
 
       console.log("i got this as selection :", this.state.selected_food_item)
       console.log("post id: ", this.state.postId)
-      fetch('/trades', {
-        method: 'POST',
-        headers:  {
-          'Content-Type' : 'application /json'
-        },
-        body: JSON.stringify ({
-          selected_food_item: this.state.selected_food_item,
-          postId:this.state.postId,
-          current_user: this.state.current_user,
-          offered_item: this.state.offered_item
-        })
 
-      })
+      Trade.create(JSON.stringify({
+        selected_food_item: this.state.selected_food_item,
+        postId:this.state.postId,
+        current_user: this.state.current_user
+      }));
 
     }
 

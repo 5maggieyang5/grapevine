@@ -36,20 +36,19 @@ exports.up = (knex, Promise) => {
     knex.schema.createTable('trades', function (table) {
       table.increments('id');
       table.integer('post_id'); // what is the post that sparked this trade?
-      table.integer('progress_step'); //step 1, step 2, etc...
       table.date('closing_date');
       table.integer('suggested_location_id');
       table.integer('actual_location_id');
+      table.jsonb('edges'); // format = [{from: username, to: username, foods: [food_names]},...]
       table.timestamp('created_at', true).defaultTo(knex.fn.now());
     }),
     knex.schema.createTable('trade_users', function (table) { //participants of a trade
-      table.integer('user_id');
       table.integer('trade_id');
-      table.integer('offered_food_id');
-      table.integer('desired_food_id');
+      table.integer('user_id');
+      table.boolean('confirmed'); //agreed to what items will be traded
       table.date('availability_start');
       table.date('availability_end');
-      table.integer('location_id') //location they set as their location for this trade
+      table.integer('location_id'); //location they set as their location for this trade
     }),
     knex.schema.createTable('locations', function (table) {
       table.increments('id');
