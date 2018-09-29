@@ -45,8 +45,7 @@ module.exports = (knex) => {
     const user_id = req.params.user_id;
     const changes = req.body;
     await db.updateTradeUser(trade_id, user_id, changes);
-    // res.status(200).end();
-    res.json(changes);
+    res.status(200).end();
   })
   return router;
 }
