@@ -77,8 +77,7 @@ import { Container,  Row,Col } from 'reactstrap';
       Trade.create(JSON.stringify({
         selected_food_item: this.state.selected_food_item,
         postId:this.state.postId,
-        current_user: this.state.current_user,
-        offered_item: this.state.offered_item
+        current_user: this.state.current_user
       }));
 
     }

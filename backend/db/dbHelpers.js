@@ -111,6 +111,14 @@ module.exports = (knex) => {
       .then(result => {return result[0]});
     },
 
+    getPoster: async function(post_id) {
+      return await
+      knex.select('users.*').from('users')
+      .join('posts', 'posts.user_id', '=', 'users.id')
+      .where('posts.id', post_id)
+      .then(result => {return result[0]});
+    },
+
 //-------------------WISHLISTS-------------------//
 
     getWishlist: async function(post_id) {
@@ -176,15 +184,23 @@ module.exports = (knex) => {
       knex.select().from('trades').where('id', trade_id);
     },
 
-    createTrade: async function(user_id, food_id, food_picture_url, description, location_id) {
+    createTrade: async function(post_id, edges) {
       return await
-      knex('posts').insert({
-        user_id,
-        food_id,
-        food_picture_url,
-        description,
-        location_id
-      });
+      knex('trades').insert({
+        post_id,
+        edges: JSON.stringify(edges)
+      }).returning('id')
+      .then(returned => returned[0]);
+    },
+
+//-------------------FOODS-------------------//
+
+    getPostedFood: async function(post_id) {
+      return await
+      knex.select('foods.*').from('foods')
+      .join('posts', 'posts.food_id', '=', 'foods.id')
+      .where('posts.id', post_id)
+      .then(result => {return result[0]});
     },
 
   };

@@ -1,5 +1,4 @@
 exports.seed = async function(knex, Promise) {
-  await knex.raw('ALTER SEQUENCE trades_id_seq RESTART');
 
   return Promise.all([
     knex('trade_users').insert({

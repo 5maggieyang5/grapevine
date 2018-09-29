@@ -61,8 +61,6 @@ exports.down = (knex, Promise) => {
     knex.schema.table('trade_users', function (table) {
       table.dropForeign('user_id');
       table.dropForeign('trade_id');
-      table.dropForeign('offered_food_id');
-      table.dropForeign('desired_food_id');
       table.dropForeign('location_id');
     }),
     knex.schema.table('messages', function (table) {
