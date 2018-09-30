@@ -32,13 +32,13 @@ import { Container,  Row,Col } from 'reactstrap';
         trade_id: ""          // the associated id of the trade radio button
       }
     }
-  
+
     componentDidMount() {
 
       PostStore.find(this.state.postId)
       .then((result) =>{
         this.setState({
-        
+
           post: result,
           errors: null,
           show: true,
@@ -97,6 +97,12 @@ import { Container,  Row,Col } from 'reactstrap';
       console.log("Trade confirm button pressed. Value", event.target.value )
 
     }
+    // handleGetFood = (event) => {
+    //   event.preventDefault();
+    //   this.setState({trade_radio_select: event.target.value})
+    //   console.log("Trade confirm button pressed. Value", event.target.value )
+
+    // }
     handleTradeRadioChange = (event) =>{
       this.setState({
         trade_radio_select: event.target.value,
@@ -115,23 +121,36 @@ import { Container,  Row,Col } from 'reactstrap';
       console.log("This is trades list: ",this.state.trade_list,"temP: ",temp);
       let i = 0;
       let the_data=[];
-
       for (var item in trade_data){
         if (i === temp){
           console.log("Key:", item);
           the_data.push(item)
           console.log("value:",trade_data[item])
           the_data.push(trade_data[item])
-          
+       
         }
         i++;
-        
       }
       console.log("Sending out this data :",the_data);
-
-
     }
 
+
+
+    handleTwoWayTrade = (event) => {
+      event.preventDefault(); 
+      alert("Two way trade called..")
+      console.log("state info: ",this.state);
+    
+      console.log("i got this as selection :", this.state.selected_food_item)
+      console.log("post id: ", this.state.postId)
+
+      Trade.create(JSON.stringify({
+        selected_food_item: this.state.selected_food_item,
+        postId:this.state.postId,
+        current_user: this.state.current_user
+      }));
+
+    }
 
     handleClick = (ev) => {
       ev.preventDefault();
@@ -141,32 +160,18 @@ import { Container,  Row,Col } from 'reactstrap';
     toggle = () => {
       this.setState({ collapse: !this.state.collapse });
     }
+    
     toggleHidden =() =>  {
       this.setState({
         isHidden: !this.state.isHidden
       })
     }
 
-    handleTwoWayTrade = (event) => {
-      event.preventDefault();
-      // console.log("state info: ",this.state);
 
-      // console.log("i got this as selection :", this.state.selected_food_item)
-      // console.log("post id: ", this.state.postId)
-      alert(" Posting JSON object to trade table with current user, postid, selcted food")
-      Trade.create(JSON.stringify ({
-        selected_food_item: this.state.selected_food_item,
-        postId:this.state.postId,
-        post_username: this.state.post.user.username,
-        current_user: this.state.current_user,
-        })
-      )
-    }
-    
+  render () {
+    let userwishlist = this.state.post.user.wishlist;
 
- render (){ 
-  let userwishlist = this.state.post.user.wishlist;
-       
+
   return (
     <Container id="big-Container">
     <Row className="mainItem">
@@ -187,7 +192,7 @@ import { Container,  Row,Col } from 'reactstrap';
   
       <Col xs="6">
       Map Id :{this.state.post.location_id}<br/> <br/>
-      </Col>  
+      </Col>
     </Row>
     <Row className="mainItem">
 
@@ -228,4 +233,5 @@ import { Container,  Row,Col } from 'reactstrap';
     );
   };
 }
+    
 export default Post;

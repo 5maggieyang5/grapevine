@@ -35,6 +35,18 @@ const Resource = (endpoint) => {
     })
   }
 
+  function search(query, input) {
+    return new Promise((resolve, reject) => {
+      api.get(`/${endpoint}?${query}=${input}`)
+      .then((result) => {
+        console.log("result.data", result)
+        resolve(result.data)
+      })
+
+      .catch((errors) => reject(errors))
+    })
+  }
+
   function create(data) {
     return api.post(`/${endpoint}`, data)
   }
@@ -50,10 +62,11 @@ const Resource = (endpoint) => {
   return {
     findAll,
     find,
+    search,
     create,
     update,
     destroy
-  }
+    }
 
 }
 
