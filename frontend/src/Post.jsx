@@ -56,6 +56,17 @@ import { Container,  Row,Col } from 'reactstrap';
       });
     }
 
+    clear_Radio = (event) =>{
+      event.preventDefault();
+      this.setState({
+          radio_selection:false
+        });
+      }
+
+    
+
+
+
     handleChange = async (event) => {
       event.preventDefault();
       this.setState({
@@ -136,15 +147,17 @@ import { Container,  Row,Col } from 'reactstrap';
       })
     }
 
-    handleButtonClick = (event) => {
+    handleTwoWayTrade = (event) => {
       event.preventDefault();
       // console.log("state info: ",this.state);
 
       // console.log("i got this as selection :", this.state.selected_food_item)
       // console.log("post id: ", this.state.postId)
+      alert(" Posting JSON object to trade table with current user, postid, selcted food")
       Trade.create(JSON.stringify ({
         selected_food_item: this.state.selected_food_item,
         postId:this.state.postId,
+        post_username: this.state.post.user.username,
         current_user: this.state.current_user,
         })
       )
@@ -197,6 +210,7 @@ import { Container,  Row,Col } from 'reactstrap';
           <Wishlist list={userwishlist} form_action = {this.handleChange}
           radio_action = {this.handleRadioChange}
           radio_select ={this.state.radio_selection}
+          clear_Radio = {this.clear_Radio}
           
           trade_radio_action = {this.handleTradeRadioChange}
           trade_radio_select = {this.state.trade_radio_select}
@@ -206,7 +220,7 @@ import { Container,  Row,Col } from 'reactstrap';
           /> 
         }
      </div>
-     <button onClick={this.handleButtonClick}>Trade</button>
+     <button onClick={this.handleTwoWayTrade}>Trade</button>
     </Col>
   
    </Row>   

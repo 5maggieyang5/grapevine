@@ -50,7 +50,7 @@ export default class Wishlist extends React.Component {
             trade_radio_select = {this.props.trade_radio_select} 
             trade_radio_action = {this.props.trade_radio_action} />
           }
-          <button type="button" value = "Cancel">Cancel</button>
+          <button type="button" value = "Cancel" onClick ={this.props.clear_Radio} >Clear Selection</button>
         </form>
           
       </div>
