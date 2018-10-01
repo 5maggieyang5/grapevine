@@ -36,7 +36,7 @@ class Posts extends React.Component {
           <Row>
             {this.state.posts.map((post, index) => (
               <Col md="4" sm="6" xs="12">
-                <Card>
+                <Card >
                   <CardImg top width="100%" src={post.food_picture_url} alt="Card image cap" />
                   <CardBody>
                     <CardTitle><h3>{post.food.name}</h3></CardTitle>

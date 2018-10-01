@@ -1,13 +1,11 @@
 import React from 'react';
 import { Container,  Row,Col } from 'reactstrap';
 
-
-  import {Redirect} from 'react-router-dom'
-  import Wishlist from './Wishlist.jsx';
-  // import FoodOffered from './FoodOffered.jsx';
-  import Resource from './models/resource';
-  import WishContainer from './WishContainer.jsx';
-
+import {Redirect} from 'react-router-dom'
+import Wishlist from './Wishlist.jsx';
+// import FoodOffered from './FoodOffered.jsx';
+import Resource from './models/resource';
+// import WishContainer from './WishContainer.jsx';
 
   const PostStore = Resource('posts');
   const Trade = Resource('trades');
@@ -19,6 +17,7 @@ import { Container,  Row,Col } from 'reactstrap';
         postId : (props.match.params.postId || null ),
         post:{ user:{wishlist:[]}, food:"" } ,
         errors: null,
+        typeOfTrade: "twoway",
         redirect:'',
         collapse: false,
         selected_food_item:"",
@@ -56,19 +55,30 @@ import { Container,  Row,Col } from 'reactstrap';
       });
     }
 
+    handleTradeButton = async (event) =>{
+      
+      event.preventDefault();
+      // Check the state variable to determine the type of trade to execute
+      if (this.state.typeOfTrade ==="twoway"){
+        console.log("2way called")
+       this.handleTwoWayTrade(event)
+      } else if (this.state.typeOfTrade ==="threeway"){
+        this.handleThreeWayTrade(event);
+
+      }
+    }
+
     clear_Radio = (event) =>{
       event.preventDefault();
       this.setState({
           radio_selection:false
         });
-      }
-
-    
-
-
+    }
 
     handleChange = async (event) => {
       event.preventDefault();
+      console.log("got called !!")
+      
       this.setState({
         selected_food_item: event.target.value
       })
@@ -94,25 +104,18 @@ import { Container,  Row,Col } from 'reactstrap';
       // second level menu
       event.preventDefault();
       this.setState({trade_radio_select: event.target.value})
-      console.log("Trade confirm button pressed. Value", event.target.value )
-
     }
-    // handleGetFood = (event) => {
-    //   event.preventDefault();
-    //   this.setState({trade_radio_select: event.target.value})
-    //   console.log("Trade confirm button pressed. Value", event.target.value )
-
-    // }
+   
     handleTradeRadioChange = (event) =>{
       this.setState({
         trade_radio_select: event.target.value,
+        typeOfTrade: "threeway",
         trade_id: event.target.getAttribute("id")
       });
-      console.log("Event target info:",event.target.getAttribute('id'));
-
+      console.log("radio button index:",event.target.getAttribute('id'));
     }
 
-    handleTradeForm = (event) =>{
+    handleThreeWayTrade = (event) =>{
       event.preventDefault();   
       event.stopPropagation()   // prevents the nested from also triggering parent form 
       console.log("Confirm Trade",this.state.trade_radio_select, " ID: ",this.state.trade_id, typeof this.state.trade_id)
@@ -120,37 +123,52 @@ import { Container,  Row,Col } from 'reactstrap';
       let trade_data = this.state.trade_list;
       console.log("This is trades list: ",this.state.trade_list,"temP: ",temp);
       let i = 0;
-      let the_data=[];
+      let the_data={};
       for (var item in trade_data){
         if (i === temp){
-          console.log("Key:", item);
-          the_data.push(item)
-          console.log("value:",trade_data[item])
-          the_data.push(trade_data[item])
-       
+           the_data[item]= trade_data[item];
         }
         i++;
       }
-      console.log("Sending out this data :",the_data);
+      // Attempt to push the 3way trade info to the trade table.
+      // Need to confirm with Jordan
+      Trade.create(JSON.stringify({the_data, 
+        users: [{user_id: this.state.post.user.id}, {user_id:this.state.current_user }]}))
+        .then(response => {
+          this.setState({trade_id:response.data})
+          const Url = this.buildUrl(response.data) // sets up localhst
+          console.log("new url for 3way: ",Url)
+          this.setState({redirect: Url})
+        })
+      }
+
+    buildUrl =   (param)  => {
+      console.log('building: '+`http://localhost:3000/trades/${param}`);
+      return `/trades/${param}`;
     }
-
-
 
     handleTwoWayTrade = (event) => {
+      let sel_food="";
       event.preventDefault(); 
-      alert("Two way trade called..")
-      console.log("state info: ",this.state);
-    
-      console.log("i got this as selection :", this.state.selected_food_item)
-      console.log("post id: ", this.state.postId)
-
+  
+      if (!this.state.selected_food_item) {
+        sel_food = this.state.post.food.name;
+      } else {
+        sel_food = this.state.selected_food_item
+      }
       Trade.create(JSON.stringify({
-        selected_food_item: this.state.selected_food_item,
+        will_give_to_poster : sel_food,
+        wants_from_poster: this.state.post.food.name, 
         postId:this.state.postId,
-        current_user: this.state.current_user
-      }));
-
-    }
+        current_user: this.state.current_user,
+        users: [{user_id: this.state.post.user.id}, {user_id:this.state.current_user }]
+        })
+        ) .then ( response => {
+          this.setState({trade_id:response.data})
+          const Url = this.buildUrl(response.data) // sets up localhst
+          this.setState({redirect: Url})
+        })
+      }
 
     handleClick = (ev) => {
       ev.preventDefault();
@@ -170,16 +188,19 @@ import { Container,  Row,Col } from 'reactstrap';
 
   render () {
     let userwishlist = this.state.post.user.wishlist;
-
+    
+    if (this.state.redirect !== '') {
+      return <Redirect to={this.state.redirect} />
+    }
 
   return (
     <Container id="big-Container">
     <Row className="mainItem">
-      <Col xs="6">
-        <img src ={this.state.post.food_picture_url} alt="" />
+      <Col xs="7">
+        <img className ="imgView" src ={this.state.post.food_picture_url} alt="" />
       </Col>
       
-      <Col xs="6">
+      <Col xs="5">
         <Row>
           <h3>Item: <b>{this.state.post.food.name} </b> </h3> <br/>
           <div className="itemDescription">
@@ -220,12 +241,12 @@ import { Container,  Row,Col } from 'reactstrap';
           trade_radio_action = {this.handleTradeRadioChange}
           trade_radio_select = {this.state.trade_radio_select}
           trade_list         = {this.state.trade_list}
-          trade_form_action  = {this.handleTradeForm}
+          trade_form_action  = {this.handleThreeWayTrade}
           
           /> 
         }
      </div>
-     <button onClick={this.handleTwoWayTrade}>Trade</button>
+     <button onClick={this.handleTradeButton}>Confirm Trade !</button>
     </Col>
   
    </Row>   

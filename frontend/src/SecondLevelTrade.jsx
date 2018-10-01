@@ -3,11 +3,6 @@ import React from 'react';
 
 export default class SecondLevelTrade extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
-
   createTradeList = (tradeData) =>{
     let msglist = [];
     for (var key in tradeData){
@@ -21,17 +16,11 @@ export default class SecondLevelTrade extends React.Component {
   }
 
 
-
-
-
   render(){
-
+    // Generate a list of potential trades from the JSON object. 
     let msglist = this.createTradeList(this.props.trade_list);
-    // console.log("got into 2ndlevl trade");
-    // console.log("tradeData stores: ", tradeData);
-     
-    // let info = ["item1", "item2", "item3"]
-    // console.log("Obj.values has: ", data);
+   
+    // Make a radio button from which user will select which trade they want to be a part of
     let Itemlist = msglist.map ((item,index) => 
         <ul id="radiobutton" key = {index}   >
         <input 
@@ -44,18 +33,17 @@ export default class SecondLevelTrade extends React.Component {
         {item}
       </ul>);
 
-
+    
     return(
       <div>
-        <form onSubmit={this.props.trade_form_action}>
-          {Itemlist}
-          <button onClick = {this.toggleHidden} type="submit" value = "Save">Confirm Trade !</button>
-        </form>
-
+        {Itemlist}
       </div>
    )}
 
-
+//  <form onSubmit={this.props.trade_form_action}>
+//           {Itemlist}
+//           <button onClick = {this.toggleHidden} type="submit" value = "Save">Confirm Trade !</button>
+//         </form>
 
 
 
