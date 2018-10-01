@@ -9,7 +9,15 @@ module.exports = (knex) => {
   router.get("/:id", async (req, res) => {
     const trade_id = req.params.id;
     const trade = await db.getTrade(trade_id);
-    trade.users = await db.getTradeUsers(trade_id);
+    let trade_users = await db.getTradeUsers(trade_id);
+
+    trade_users = await Promise.all(trade_users.map(async user => {
+      let username = (await db.getUser(user.user_id)).username;
+      user.username = username;
+      return user;
+    }));
+
+    trade.users = trade_users;
     res.json(trade);
   });
 
