@@ -45,11 +45,43 @@ class Trades extends React.Component {
     this.setState({ current });
   }
 
+  currentUserConfirm = userConfirm => {
+    if (userConfirm === true) {
+      TradesDB.update(`${this.state.tradesId}/users/1`, JSON.stringify({confirmed: true}))
+      .then((result) => {
+        TradesDB.find(this.state.tradesId)
+        .then((result) => {
+          this.setState({
+            trade: result,
+            errors: null
+          })
+        })
+        .catch((errors) => this.setState({errors: errors}))
+      })
+      .catch((errors) => this.setState({errors: errors}))
+    } else if (userConfirm === false) {
+      TradesDB.update(`${this.state.tradesId}/users/1`, JSON.stringify({confirmed: false}))
+      .then((result) => {
+        TradesDB.find(this.state.tradesId)
+        .then((result) => {
+          this.setState({
+            trade: result,
+            errors: null
+          })
+        })
+        .catch((errors) => this.setState({errors: errors}))
+      })
+      .catch((errors) => this.setState({errors: errors}))
+    } else {
+      console.log("error!!!!!!!!!!!!!!!!!")
+    }
+  }
+
   render() {
     const { current } = this.state;
     const steps = [{
       title: 'Confirm Trading',
-      content: <ConfirmTrading edges={this.state.trade.edges} users={this.state.trade.users} tradesId={this.state.tradesId}/>
+      content: <ConfirmTrading edges={this.state.trade.edges} users={this.state.trade.users} tradesId={this.state.tradesId} currentUserConfirm={userConfirm => this.currentUserConfirm(userConfirm)} />
     }, {
       title: 'Pick the Trading Date',
       content: <PickDate />

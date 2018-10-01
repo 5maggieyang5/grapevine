@@ -11,9 +11,14 @@ const TradesDB = Resource('trades');
 class ConfirmTrading extends React.Component {
   constructor(props) {
     super(props);
-
+/*    let confirmed = {};
+    console.log("------------test--------", props)
+    props.users.forEach(user => {
+      console.log('constructor foreach user', user)
+      confirmed[user] = user.confirmed;
+    })*/
     this.state = {
-      confirmed: ""
+      confirmed: null
     }
   }
 
@@ -24,17 +29,24 @@ class ConfirmTrading extends React.Component {
 
   handleClick = evt => {
     evt.preventDefault();
-    TradesDB.update(`${this.props.tradesId}/users/2`, JSON.stringify({confirmed: true}))
+    console.log("-----props: ", this.props);
+    if(evt.target.name === "confirm"){
+      this.props.currentUserConfirm(true);
+    }
+    if(evt.target.name === "decline"){
+      this.props.currentUserConfirm(false);
+    }
+
+  }
+
+/*  handleDeclineClick = evt => {
+    evt.preventDefault();
+    TradesDB.update(`${this.props.tradesId}/users/1`, JSON.stringify({confirmed: false}))
     .then((result) => {
       console.log('----------result ', result);
     })
     .catch((errors) => this.setState({errors: errors}))
-
-    //diable button
-/*    this.disableBtn;*/
-    //update confirm
-
-  }
+  }*/
 
   render() {
     const columns = [
@@ -84,6 +96,7 @@ class ConfirmTrading extends React.Component {
     } else {
       tradeOpt = this.props.edges.map((item,index) => <TwoWayTrade key={index} twoClassKey={index} twoItem={item} /> );
     }
+    console.log("!!!!this is users:", this.props.users)
 
     return (
       <div>
@@ -94,9 +107,10 @@ class ConfirmTrading extends React.Component {
 
         <Table className="tradingTable" columns={columns} dataSource={data(this.props.edges, this.props.users)} bordered/>
 
-        <div>
-          <Button id="confirmBtn" onClick={this.handleClick}>Confirm!</Button>
-          <Button id="declineBtn" onClick={this.handleClick}>Decline!</Button>
+        <div className="tradingConfirm">
+          <h4>Please kindly confirm whether you want process this trading: </h4>
+          <input  id="confirmBtn" type="submit" value="Confirm!" name="confirm" onClick={this.handleClick} />
+          <input id="declineBtn" type="submit" value="Decline!" name="decline" onClick={this.handleClick} />
         </div>
       </div>
     )
