@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
 import { Steps, Button, message } from 'antd';
 import TopNav from './TopNav.jsx';
-import PickDate from './tradingDate/PickDate.jsx'
-import ConfirmTrading from './ConfirmTrading.jsx'
+import PickDate from './tradingDate/PickDate.jsx';
+import ConfirmTrading from './ConfirmTrading.jsx';
+import Resource from './models/resource'
+
+
+const TradesDB = Resource('trades');
 
 const Step = Steps.Step;
 
-const steps = [{
-  title: 'Confirm Trading',
-/*  content: 'Confirm Trading Component'*/
-content: <ConfirmTrading />
-}, {
-  title: 'Pick the Trading Date',
-  content: <PickDate />
-}, {
-  title: 'Pick the Trading Location',
-  content: 'Pick the Trading Date Component'
-}, {
-  title: 'Trading Information',
-  content: 'Trading Information Component'
-}, {
-  title: 'Provide a Review',
-  content: 'Provide a Review Component'
-}];
 
 class Trades extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       current: 0,
+      tradesId: (props.match.params.tradesId || null),
+      trade: {edges: [], users: []},
+      errors: null
     };
+  }
+
+  componentDidMount() {
+    console.log('..........', this.state.tradesId);
+    TradesDB.find(this.state.tradesId)
+    .then((result) => {
+      this.setState({
+        trade: result,
+        errors: null
+      })
+      console.log('----------trade ', this.state.trade.edges);
+    })
+    .catch((errors) => this.setState({errors: errors}))
   }
 
   next() {
@@ -44,6 +47,23 @@ class Trades extends React.Component {
 
   render() {
     const { current } = this.state;
+    const steps = [{
+      title: 'Confirm Trading',
+      content: <ConfirmTrading edges={this.state.trade.edges}/>
+    }, {
+      title: 'Pick the Trading Date',
+      content: <PickDate />
+    }, {
+      title: 'Pick the Trading Location',
+      content: 'Pick the Trading Date Component'
+    }, {
+      title: 'Trading Information',
+      content: 'Trading Information Component'
+    }, {
+      title: 'Provide a Review',
+      content: 'Provide a Review Component'
+    }];
+
     return (
       <div id="trading-container">
         <Steps current={current}>

@@ -33,7 +33,7 @@ const Main = () => (
 
       <Route exact path='/posts' component={SearchedPosts} />
       <Route exact path='/createNewPost' component={NewPosts} />
-      <Route exact path='/trades' component={Trades} />
+      <Route exact path='/trades/:tradesId' component={Trades} />
 
     </Switch>
   </main>

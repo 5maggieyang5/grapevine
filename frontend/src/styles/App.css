@@ -224,3 +224,11 @@ td.column-money {
   text-align: center;
   overflow-wrap: break-word;
 }
+
+.tradingTable {
+  position: absolute;
+  left: 0%;
+  top: 99%;
+  width: 65%;
+  padding-top: 27px;
+}
