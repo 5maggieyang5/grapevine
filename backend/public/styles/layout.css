@@ -5,3 +5,9 @@ body {
 body h1 {
   color: #244751;
 }
+
+ul {
+  padding: 0;
+  margin-top: 1em;
+  }
+

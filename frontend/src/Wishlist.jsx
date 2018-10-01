@@ -1,4 +1,5 @@
 import React from 'react';
+import SecondLevelTrade from './SecondLevelTrade';
 // import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export default class Wishlist extends React.Component {
@@ -7,8 +8,15 @@ export default class Wishlist extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      isHidden: true
     };
+  }
+
+  toggleHidden =() =>  {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
   }
 
   toggle() {
@@ -16,27 +24,49 @@ export default class Wishlist extends React.Component {
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
-
   render() {
-
     let wishes = this.props.list ;  // get data from Parent component
-  
-    let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item} </option> );
+    let Itemlist3 = wishes.map ((item,index) => 
+      
+      <ul id="radiobutton" key = {index}>
+        <input 
+          type  =  "radio"
+          value =  {item} 
+          checked = {this.props.radio_select === item}
+          onChange= {this.props.radio_action}
+        />
+        {item}
+      </ul>);
 
     return (
       <div>
-        <select onClick = {this.props.action}>
-        <option defaultValue = ""> Click here for Wishlist</option> 
-          {Itemlist2}
-        </select>
+        <form onSubmit={this.props.form_action}>
+            {Itemlist3}          
+          <button onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>
+
+          {!this.state.isHidden &&
+            <SecondLevelTrade trade_list = {this.props.trade_list} 
+            trade_form_action = {this.props.trade_form_action}
+            trade_radio_select = {this.props.trade_radio_select} 
+            trade_radio_action = {this.props.trade_radio_action} />
+          }
+          <button type="button" value = "Cancel" onClick ={this.props.clear_Radio} >Clear Selection</button>
+        </form>
+          
       </div>
       
     );
   }
 }
 
-
-
+    
+// let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item} 
+// </option> );
+// oldversion of wishlist
+// <select onClick = {this.props.action}>
+//         <option defaultValue = ""> Click here for Wishlist</option> 
+//           {Itemlist2}
+//         </select>
 
 // <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
 //         <DropdownToggle caret>
