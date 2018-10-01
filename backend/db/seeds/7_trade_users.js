@@ -12,16 +12,16 @@ exports.seed = async function(knex, Promise) {
       }),
     knex('trade_users').insert({
         trade_id: 2,
-        user_id: 5,
+        user_id: 1,
         confirmed: true
       }),
     knex('trade_users').insert({
         trade_id: 2,
-        user_id: 7
+        user_id: 2
       }),
     knex('trade_users').insert({
         trade_id: 2,
-        user_id: 12
+        user_id: 3
       })
     ]);
 };
