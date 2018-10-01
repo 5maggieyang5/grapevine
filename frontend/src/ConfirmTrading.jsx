@@ -30,9 +30,9 @@ class ConfirmTrading extends React.Component {
   }
 */
   render() {
-/*    const columns = [
+    const columns = [
       {
-        title: 'Trading Information',
+        title: 'Trading Infor. Detail',
         dataIndex: 'trades',
       }, {
         title: 'Trading Users',
@@ -42,39 +42,34 @@ class ConfirmTrading extends React.Component {
         title: 'Confirmation',
         dataIndex: 'confirmed',
         render: text => {
-            if (text === "accept") {
+            if (text === true) {
               return "Confirmed";
-            } else if (text === "denied") {
+            } else if (text === false) {
               return "The user denied this trading, please back to main page start a new trade";
             } else {
               return "wait for the user to confirm this trade...";
             }
           }
         }
-    ];*/
+    ];
 
-/*    const data = /*(edges, users) => {
+    const data = (edges, users) => {
       let result = [];
-      for(let edge of edges) {
-        let row = {};
-        for(let key = )
-        result.push(row);
-      }
+
+      edges.forEach((edge, index) => {
+        const available_foods = edge.foods.join(' & ');
+        result[index] = {
+          trades: `${edge.from} has ${available_foods} available which match ${edge.to}'s wishlist`
+        };
+      })
+
+      users.forEach((user, index) => {
+        result[index].confirmed = user.confirmed;
+        result[index].user = user.user_id;
+      })
+
+      return result;
     }
-*/
-/*    [{
-      trades: '${edge.from} gives ${edge.foods} to ${edge.to}',//'UserA gives Banana to UserB',
-      user: '${edge.from}',
-      confirmed: ""
-    }, {
-      trades: 'UserB gives Banana to UserC',
-      user: 'UserB',
-      confirmed: "accept"
-    }, {
-      trades: 'UserC gives Banana to UserA',
-      user: 'UserC',
-      confirmed: "denied"
-    }];*/
 
     let tradeOpt;
     if (this.props.edges.length === 3) {
@@ -90,11 +85,11 @@ class ConfirmTrading extends React.Component {
           {tradeOpt}
         </div>
 
-{/*        <Table className="tradingTable" columns={columns} dataSource={data} bordered/>
+        <Table className="tradingTable" columns={columns} dataSource={data(this.props.edges, this.props.users)} bordered/>
 
         <div>
           <Button id="myBtn" onClick={this.handleClick}>Confirm!</Button>
-        </div>*/}
+        </div>
       </div>
     )
   }

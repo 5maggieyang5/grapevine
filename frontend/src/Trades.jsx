@@ -49,7 +49,7 @@ class Trades extends React.Component {
     const { current } = this.state;
     const steps = [{
       title: 'Confirm Trading',
-      content: <ConfirmTrading edges={this.state.trade.edges}/>
+      content: <ConfirmTrading edges={this.state.trade.edges} users={this.state.trade.users}/>
     }, {
       title: 'Pick the Trading Date',
       content: <PickDate />
