@@ -93,7 +93,6 @@ class Post extends React.Component {
 
   render (){
     let userwishlist = this.state.post.user.wishlist;
-    console.log("this.state.post-------:", this.state.post);
 
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
 
