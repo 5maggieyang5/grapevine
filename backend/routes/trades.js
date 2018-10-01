@@ -22,7 +22,7 @@ module.exports = (knex) => {
   });
 
   router.post("/", async (req, res) => {
-    const post_id = req.body.postId;
+    const post_id = req.body.post_id;
 
     const poster = (await db.getPoster(post_id)).username;
     const current_user = (await db.getUser(req.body.current_user)).username;
