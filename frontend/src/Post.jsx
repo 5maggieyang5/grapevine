@@ -17,7 +17,7 @@ class Post extends React.Component {
     super(props)
     this.state = {
       postId : (props.match.params.postId || null ),
-      post:{ user:{wishlist:[]}, food:"" } ,
+      post:{ user:{wishlist:[]}, food:"", location: "" } ,
       errors: null,
       redirect:'',
       collapse: false,
@@ -39,6 +39,9 @@ class Post extends React.Component {
         redirect: ''
       })
       console.log(' user selected: ', this.state.selected);
+      console.log('locations info', this.state.location);
+      console.log('locations info', this.state.location.latitude);
+      console.log('locations info', this.state.location.longitude);
     })
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -116,7 +119,11 @@ class Post extends React.Component {
 
       </Col>
       <Col>
-        <Map mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg" />
+        <Map
+          mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
+          latitude={this.state.post.location.latitude}
+          longitude={this.state.post.location.longitude}
+        />
       Map Id :{this.state.post.location_id}<br/> <br/>
       </Col>
     </Row>
