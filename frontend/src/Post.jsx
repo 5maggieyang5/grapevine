@@ -12,9 +12,10 @@ const Trade = Resource('trades');
 class Post extends React.Component {
   constructor(props) {
     super(props)
+    console.log("-------------constructor props", props);
     this.state = {
       post_id : (props.match.params.post_id || null ),
-      post:{ user:{wishlist:[]}, food:"" } ,
+      post:{ user:{wishlist:[]}, food:"", location:"" } ,
       errors: null,
       typeOfTrade: "twoway",
       redirect:'',
@@ -35,6 +36,7 @@ class Post extends React.Component {
 
     PostStore.find(this.state.post_id)
     .then((result) =>{
+      console.log("---------------result from did mount", result);
       this.setState({
 
         post: result,
@@ -45,7 +47,6 @@ class Post extends React.Component {
       console.log(' user selected: ', this.state.selected);
     })
     .catch((errors) => this.setState({errors: errors}))
-    }
   }
 
   select  =  (event) => {
@@ -190,6 +191,9 @@ class Post extends React.Component {
       return <Redirect to={this.state.redirect} />
     }
 
+  console.log("-------------latitude", this.state.post.location.latitude)
+  console.log("-------------longitude", this.state.post.location.longitude)
+
   return (
     <Container id="big-Container">
     <Row className="mainItem">
@@ -210,12 +214,12 @@ class Post extends React.Component {
     <Row className="mainItem">
 
       <Col xs="6">
+       {this.state.post.location.latitude && this.state.post.location.longitude &&
         <Map
           mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
           latitude={this.state.post.location.latitude}
           longitude={this.state.post.location.longitude}
-        />
-        Map Id :{this.state.post.location_id}<br/> <br/>
+        /> }
       </Col>
     </Row>
     <Row className="mainItem">

@@ -14,6 +14,7 @@ class Map extends Component {
   };
 
   render() {
+    console.log("mapbox rendered with props", this.props);
     return (
       <ReactMapGL
         {...this.state.viewport}
