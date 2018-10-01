@@ -14,7 +14,7 @@ import Resource from './models/resource';
     constructor(props) {
       super(props)
       this.state = {
-        postId : (props.match.params.postId || null ),
+        post_id : (props.match.params.post_id || null ),
         post:{ user:{wishlist:[]}, food:"" } ,
         errors: null,
         typeOfTrade: "twoway",
@@ -34,7 +34,7 @@ import Resource from './models/resource';
 
     componentDidMount() {
 
-      PostStore.find(this.state.postId)
+      PostStore.find(this.state.post_id)
       .then((result) =>{
         this.setState({
 
@@ -83,7 +83,7 @@ import Resource from './models/resource';
         selected_food_item: event.target.value
       })
       
-      let result = await fetch(`http://localhost:8080/posts/${this.state.postId}/secondarylist/1`,
+      let result = await fetch(`http://localhost:8080/posts/${this.state.post_id}/secondarylist/1`,
       { method:'GET', mode:'cors'})
       .then( result  =>{
         return result.json();
@@ -125,17 +125,22 @@ import Resource from './models/resource';
       let i = 0;
       let the_data={};
       for (var item in trade_data){
-        if (i === temp){
+        if (i === temp){  
            the_data[item]= trade_data[item];
         }
         i++;
       }
       // Attempt to push the 3way trade info to the trade table.
       // Need to confirm with Jordan
-      Trade.create(JSON.stringify({the_data, 
-        users: [{user_id: this.state.post.user.id}, {user_id:this.state.current_user }]}))
+      console.log("middleman info  ", the_data)
+
+      Trade.create(JSON.stringify( {
+        middle_man: the_data,
+        post_id: this.state.post_id,
+        current_user: this.state.current_user }))
         .then(response => {
           this.setState({trade_id:response.data})
+          console.log("data from 3way trade: ",response.data)
           const Url = this.buildUrl(response.data) // sets up localhst
           console.log("new url for 3way: ",Url)
           this.setState({redirect: Url})
@@ -143,25 +148,17 @@ import Resource from './models/resource';
       }
 
     buildUrl =   (param)  => {
-      console.log('building: '+`http://localhost:3000/trades/${param}`);
       return `/trades/${param}`;
     }
 
     handleTwoWayTrade = (event) => {
       let sel_food="";
       event.preventDefault(); 
-  
-      if (!this.state.selected_food_item) {
-        sel_food = this.state.post.food.name;
-      } else {
-        sel_food = this.state.selected_food_item
-      }
+   
       Trade.create(JSON.stringify({
-        will_give_to_poster : sel_food,
-        wants_from_poster: this.state.post.food.name, 
-        postId:this.state.postId,
+        selected_food_item : this.state.radio_selection,
+        post_id:this.state.post_id,
         current_user: this.state.current_user,
-        users: [{user_id: this.state.post.user.id}, {user_id:this.state.current_user }]
         })
         ) .then ( response => {
           this.setState({trade_id:response.data})
