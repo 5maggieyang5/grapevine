@@ -3,32 +3,39 @@ import { Table, Drawer, Button } from 'antd';
 import TradeOpt from './TradeOpt.jsx';
 import TwoWayTrade from './TwoWayTrade.jsx';
 import './styles/App.css';
+import Resource from './models/resource'
+
+
+const TradesDB = Resource('trades');
 
 class ConfirmTrading extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      confirmed: ""
+    }
+  }
 
 
 /*  disableBtn = () {
     document.getElementById("myBtn").disabled = true;
   }*/
 
-/*  handleClick = evt => {
+  handleClick = evt => {
     evt.preventDefault();
-    fetch(`/trades/${this.state.tradeId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        confirmed: true,
-        current_user_id: 5
-      })
+    TradesDB.update(`${this.props.tradesId}/users/2`, JSON.stringify({confirmed: true}))
+    .then((result) => {
+      console.log('----------result ', result);
     })
+    .catch((errors) => this.setState({errors: errors}))
+
     //diable button
-    this.disableBtn;
+/*    this.disableBtn;*/
     //update confirm
 
   }
-*/
+
   render() {
     const columns = [
       {
@@ -65,7 +72,7 @@ class ConfirmTrading extends React.Component {
 
       users.forEach((user, index) => {
         result[index].confirmed = user.confirmed;
-        result[index].user = user.user_id;
+        result[index].user = user.username;
       })
 
       return result;
@@ -88,7 +95,8 @@ class ConfirmTrading extends React.Component {
         <Table className="tradingTable" columns={columns} dataSource={data(this.props.edges, this.props.users)} bordered/>
 
         <div>
-          <Button id="myBtn" onClick={this.handleClick}>Confirm!</Button>
+          <Button id="confirmBtn" onClick={this.handleClick}>Confirm!</Button>
+          <Button id="declineBtn" onClick={this.handleClick}>Decline!</Button>
         </div>
       </div>
     )

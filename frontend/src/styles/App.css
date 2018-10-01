@@ -232,3 +232,15 @@ td.column-money {
   width: 65%;
   padding-top: 27px;
 }
+
+#confirmBtn {
+  position: absolute;
+  left: 84%;
+  top: 121%;
+}
+
+#declineBtn {
+  position: absolute;
+  left: 78%;
+  top: 121%;
+}
