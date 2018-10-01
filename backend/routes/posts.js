@@ -27,6 +27,8 @@ module.exports = (knex) => {
   router.get("/:id", async (req, res) => {
     const post_id = req.params.id;
     const post = await db.getPost(post_id);
+    const location = await db.getLocation(post.location_id);
+    post.location = location;
     res.json(post);
   });
 

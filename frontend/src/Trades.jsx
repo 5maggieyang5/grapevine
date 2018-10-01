@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Steps, Button, message } from 'antd';
 import TopNav from './TopNav.jsx';
 import PickDate from './tradingDate/PickDate.jsx'

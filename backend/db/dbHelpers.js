@@ -228,5 +228,14 @@ module.exports = (knex) => {
       .then(result => result[0]);
     },
 
+//-------------------FOODS-------------------//
+
+    getLocation: async function(location_id) {
+      return await
+      knex.select('latitude', 'longitude').from('locations')
+      .where('id', location_id)
+      .then(result => result[0]);
+    }
+
   };
 }
