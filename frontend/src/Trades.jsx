@@ -21,7 +21,8 @@ class Trades extends React.Component {
       current: 0,
       tradesId: (props.match.params.tradesId || null),
       trade: {edges: [], users: []},
-      errors: null
+      errors: null,
+      disabled: false
     };
   }
 
@@ -56,7 +57,8 @@ class Trades extends React.Component {
         .then((result) => {
           this.setState({
             trade: result,
-            errors: null
+            errors: null,
+            disabled: false
           })
         })
         .catch((errors) => this.setState({errors: errors}))
@@ -69,12 +71,15 @@ class Trades extends React.Component {
         .then((result) => {
           this.setState({
             trade: result,
-            errors: null
+            errors: null,
+            disabled: true
+
           })
         })
         .catch((errors) => this.setState({errors: errors}))
       })
       .catch((errors) => this.setState({errors: errors}))
+
     } else {
       console.log("error!!!!!!!!!!!!!!!!!")
     }
@@ -125,9 +130,14 @@ class Trades extends React.Component {
         <div className="steps-content">{steps[current].content}</div>
         <div className="steps-action">
           {
-            current < steps.length - 1
-            && <Button type="primary" onClick={() => this.next()}>Next</Button>
+            this.state.disabled ?
+              (current < steps.length - 1
+                && <Button disabled type="primary" onClick={() => this.next()}>Next</Button>)
+                :
+              (current < steps.length - 1
+                && <Button  type="primary" onClick={() => this.next()}>Next</Button>)
           }
+
           {
             current === steps.length - 1
             && <Button type="primary" onClick={() => message.success('Processing complete!')}>Done</Button>
