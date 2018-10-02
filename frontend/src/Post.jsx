@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container,  Row,Col } from 'reactstrap';
+import { Alert, Container,  Row,Col } from 'reactstrap';
 
 import {Redirect} from 'react-router-dom'
 import Wishlist from './Wishlist.jsx';
@@ -43,7 +43,7 @@ import Resource from './models/resource';
           show: true,
           redirect: ''
         })
-        console.log(' user selected: ', this.state.selected);
+
       })
       .catch((errors) => this.setState({errors: errors}))
     }
@@ -59,26 +59,41 @@ import Resource from './models/resource';
       
       event.preventDefault();
       // Check the state variable to determine the type of trade to execute
-      if (this.state.typeOfTrade ==="twoway"){
-        console.log("2way called")
-       this.handleTwoWayTrade(event)
+      if (this.state.typeOfTrade ==="twoway" ){
+        // check if a radio button selection was made
+        console.log("calling 2way trade...", this.state.radio_selection)
+       
+        this.handleTwoWayTrade(event)
       } else if (this.state.typeOfTrade ==="threeway"){
         this.handleThreeWayTrade(event);
 
       }
     }
 
+    ShowAlert = (msg) =>{
+      return ( 
+        <div>
+          <Alert color="warning">
+            msg;
+          </Alert>
+        </div>
+
+      )
+    }
+
+
     clear_Radio = (event) =>{
       event.preventDefault();
       this.setState({
-          radio_selection:false
+          radio_selection:false,
+          selected_food_item:''
         });
     }
 
     handleChange = async (event) => {
       event.preventDefault();
-      console.log("got called !!")
-      
+      console.log("See Possible Trades button clicked.. !!")
+   
       this.setState({
         selected_food_item: event.target.value
       })
@@ -86,8 +101,8 @@ import Resource from './models/resource';
       let result = await fetch(`http://localhost:8080/posts/${this.state.post_id}/secondarylist/1`,
       { method:'GET', mode:'cors'})
       .then( result  =>{
+        this.setState({trade_list:result})
         return result.json();
-        // console.log("data stores:" , result.json())
       })
       this.setState({trade_list:result})
     }
@@ -118,6 +133,11 @@ import Resource from './models/resource';
     handleThreeWayTrade = (event) =>{
       event.preventDefault();   
       event.stopPropagation()   // prevents the nested from also triggering parent form 
+      console.log("3way radio option selected: ", this.state.trade_radio_select)
+      if (!this.state.trade_radio_select || !this.state.radio_selection ) {
+        alert(" Select an item from the 'Potential Trades' list before going on..")
+        return
+      }
       console.log("Confirm Trade",this.state.trade_radio_select, " ID: ",this.state.trade_id, typeof this.state.trade_id)
       let temp = Number(this.state.trade_id);
       let trade_data = this.state.trade_list;
@@ -131,7 +151,6 @@ import Resource from './models/resource';
         i++;
       }
       // Attempt to push the 3way trade info to the trade table.
-      // Need to confirm with Jordan
       console.log("middleman info  ", the_data)
 
       Trade.create(JSON.stringify( {
@@ -140,7 +159,6 @@ import Resource from './models/resource';
         current_user: this.state.current_user }))
         .then(response => {
           this.setState({trade_id:response.data})
-          console.log("data from 3way trade: ",response.data)
           const Url = this.buildUrl(response.data) // sets up localhst
           console.log("new url for 3way: ",Url)
           this.setState({redirect: Url})
@@ -154,7 +172,11 @@ import Resource from './models/resource';
     handleTwoWayTrade = (event) => {
       let sel_food="";
       event.preventDefault(); 
-   
+      if (!this.state.radio_selection) {  
+         alert('Pick an  item from wishlist to trade')
+         return;
+      }
+      console.log("calling 2way trade routine...")
       Trade.create(JSON.stringify({
         selected_food_item : this.state.radio_selection,
         post_id:this.state.post_id,
@@ -181,7 +203,6 @@ import Resource from './models/resource';
         isHidden: !this.state.isHidden
       })
     }
-
 
   render () {
     let userwishlist = this.state.post.user.wishlist;
@@ -222,8 +243,6 @@ import Resource from './models/resource';
     </div>
     </Col>
 
-      
- 
     <Col xs="6" className="wishList">
     <div className="wishListButton">
         <button  onClick = {this.toggleHidden}>
@@ -234,6 +253,7 @@ import Resource from './models/resource';
           radio_action = {this.handleRadioChange}
           radio_select ={this.state.radio_selection}
           clear_Radio = {this.clear_Radio}
+          poster_name = {this.state.post.user.username}
           
           trade_radio_action = {this.handleTradeRadioChange}
           trade_radio_select = {this.state.trade_radio_select}

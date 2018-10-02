@@ -79,7 +79,7 @@ button {
   margin: 8px auto;
 }
 
-.leftRating {
+.leftRating,leftRating-name {
   text-align: left;
 }
 .steps-content {

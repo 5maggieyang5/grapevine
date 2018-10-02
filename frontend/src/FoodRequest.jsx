@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input  } from 'reactstrap';
+import { Form, FormGroup, Label, Input  } from 'reactstrap';
 
 export default class FoodRequest extends React.Component {
 
