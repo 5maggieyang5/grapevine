@@ -9,19 +9,6 @@ import Resource from './models/resource'
 const TradesDB = Resource('trades');
 
 class ConfirmTrading extends React.Component {
-  constructor(props) {
-    super(props);
-/*    let confirmed = {};
-    console.log("------------test--------", props)
-    props.users.forEach(user => {
-      console.log('constructor foreach user', user)
-      confirmed[user] = user.confirmed;
-    })*/
-    this.state = {
-      confirmed: null
-    }
-  }
-
 
 /*  disableBtn = () {
     document.getElementById("myBtn").disabled = true;
@@ -38,15 +25,6 @@ class ConfirmTrading extends React.Component {
     }
 
   }
-
-/*  handleDeclineClick = evt => {
-    evt.preventDefault();
-    TradesDB.update(`${this.props.tradesId}/users/1`, JSON.stringify({confirmed: false}))
-    .then((result) => {
-      console.log('----------result ', result);
-    })
-    .catch((errors) => this.setState({errors: errors}))
-  }*/
 
   render() {
     const columns = [

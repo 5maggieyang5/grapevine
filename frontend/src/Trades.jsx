@@ -3,7 +3,9 @@ import { Steps, Button, message } from 'antd';
 import TopNav from './TopNav.jsx';
 import PickDate from './tradingDate/PickDate.jsx';
 import ConfirmTrading from './ConfirmTrading.jsx';
-import Resource from './models/resource'
+import Resource from './models/resource';
+import Moment  from 'moment';
+
 
 
 const TradesDB = Resource('trades');
@@ -77,6 +79,24 @@ class Trades extends React.Component {
     }
   }
 
+  updateAvailableDate = (startDate, endDate) => {
+    let start = Moment(startDate).format("ll");
+    let end = Moment(endDate).format("ll");
+    TradesDB.update(`${this.state.tradesId}/users/1`, JSON.stringify({availability_start: start, availability_end: end}))
+      .then((result) => {
+        TradesDB.find(this.state.tradesId)
+        .then((result) => {
+          console.log("22222222222222222",result)
+          this.setState({
+            trade: result,
+            errors: null
+          })
+        })
+        .catch((errors) => this.setState({errors: errors}))
+      })
+      .catch((errors) => this.setState({errors: errors}))
+  }
+
   render() {
     const { current } = this.state;
     const steps = [{
@@ -84,7 +104,7 @@ class Trades extends React.Component {
       content: <ConfirmTrading edges={this.state.trade.edges} users={this.state.trade.users} tradesId={this.state.tradesId} currentUserConfirm={userConfirm => this.currentUserConfirm(userConfirm)} />
     }, {
       title: 'Pick the Trading Date',
-      content: <PickDate />
+      content: <PickDate users={this.state.trade.users} closingDate={this.state.trade.closing_date} updateAvailableDate={this.updateAvailableDate} />
     }, {
       title: 'Pick the Trading Location',
       content: 'Pick the Trading Date Component'

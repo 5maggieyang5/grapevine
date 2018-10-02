@@ -5,7 +5,7 @@ import UsersDateList        from './UsersDateList.jsx';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-const trade1 = {
+/*const trade1 = {
   users: {
     userA: {
       startDate: "Sep 25, 2018",
@@ -21,10 +21,10 @@ const trade1 = {
     },
   },
   date: "Waitting for everyone choose their available date.."
-}
+}*/
 
 class PickDate extends Component {
-  constructor(props){
+/*  constructor(props){
     super(props);
 
     this.state = {
@@ -32,10 +32,10 @@ class PickDate extends Component {
       users: trade1.users,
       date: trade1.date
     }
-  }
+  }*/
 
-  updateDate = (startDate, endDate) => {
-    let users = this.state.users;
+  /*updateDate = (startDate, endDate) => {
+    let users = this.props.users;
     let currentUser = this.state.currentUser;
     users[currentUser] = {
       startDate: Moment(startDate).format("ll"),
@@ -44,7 +44,7 @@ class PickDate extends Component {
     this.setState({users: users})
     console.log("this is the Current user START date after change: ", this.state.users[currentUser].startDate);
     console.log("this is the Current user END date after change: ", this.state.users[currentUser].endDate);
-  }
+  }*/
 
   render() {
 
@@ -52,8 +52,9 @@ class PickDate extends Component {
       <main>
       <h2>Please pick your available date range!</h2>
 
-        <UserDateRangePicker updateDate={this.updateDate}/>
-        <UsersDateList tradeUsers={this.state.users} tradeDate={this.state.date}/>
+{/*        <UserDateRangePicker updateDate={this.updateDate}/>
+*/}        <UserDateRangePicker updateDate={this.props.updateAvailableDate}/>
+        <UsersDateList tradeUsers={this.props.users} tradeDate={this.props.closingDate} />
       </main>
     );
   }
