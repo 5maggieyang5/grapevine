@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import './antd.css';
 
 body {
   font-size: 18px;
