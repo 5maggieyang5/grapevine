@@ -118,13 +118,16 @@ class Trades extends React.Component {
     }];
 
     if (this.state.trade.suggested_location) {
-      let markers = this.state.trade.users.map(user => user.location);
-      console.log('---------markers from trades render', markers);
+      let markers = this.state.trade.users.map(user => {
+        let marker = user.location;
+        marker.username = user.username;
+        return marker;
+      });
       steps[2].content =
         <TradeMap
           mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
-          latitude={this.state.trade.suggested_location.latitude}
-          longitude={this.state.trade.suggested_location.longitude}
+          center_latitude={this.state.trade.suggested_location.latitude}
+          center_longitude={this.state.trade.suggested_location.longitude}
           markers={markers}
         />;
     }
