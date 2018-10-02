@@ -38,7 +38,6 @@ class Post extends React.Component {
     .then((result) =>{
       console.log("---------------result from did mount", result);
       this.setState({
-
         post: result,
         errors: null,
         show: true,
@@ -213,7 +212,7 @@ class Post extends React.Component {
     </Row>
     <Row className="mainItem">
 
-      <Col xs="6">
+      <Col xs="12">
        {this.state.post.location.latitude && this.state.post.location.longitude &&
         <Map
           mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"

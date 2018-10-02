@@ -12,10 +12,13 @@ exports.seed = async function(knex, Promise) {
         city: faker.address.city(),
         province: faker.address.state(),
         postal_code: faker.address.zipCode(),
-        latitude: faker.address.latitude(),
-        longitude: faker.address.longitude()
+        latitude: (Math.floor(Math.random() * 102223) + 43672249) / 1000000,
+        longitude: (Math.floor(Math.random() * 304738) - 79618810) / 1000000
       })
     );
   }
   return Promise.all(promises);
 };
+
+        // latitude: faker.address.latitude(),
+        // longitude: faker.address.longitude()

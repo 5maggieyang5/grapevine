@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {Marker} from 'react-map-gl';
 
 class Map extends Component {
 
   state = {
+    marker_latitude: this.props.latitude,
+    marker_longitude: this.props.longitude,
     viewport: {
-      width: 400,
-      height: 400,
+      width: 800,
+      height: 500,
       latitude: this.props.latitude,
       longitude: this.props.longitude,
-      zoom: 12
+      center: [this.props.longitude,this.props.latitude],
+      zoom: 12.5
     }
   };
 
@@ -21,7 +24,11 @@ class Map extends Component {
         onViewportChange={(viewport) => this.setState({viewport})}
         mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
         mapStyle='mapbox://styles/jkyoungs/cjmo2omvntesa2rn6ob81w1wl'
-      />
+      >
+        <Marker latitude={this.state.marker_latitude} longitude={this.state.marker_longitude} >
+          <div>You are here</div>
+        </Marker>
+      </ReactMapGL>
     );
   }
 }
