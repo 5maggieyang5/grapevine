@@ -9,7 +9,7 @@ class UsersDateList extends Component {
 
   checkIfAllUsersHaveTradeDate = (users) => {
     for (let user in users) {
-      if (users[user].startDate && users[user].endDate) {
+      if (users[user].availability_start && users[user].availability_end) {
       } else {
         return false;
       }
@@ -17,7 +17,7 @@ class UsersDateList extends Component {
     return true;
   }
 
-  theOverlapDate = (users) => {
+  /*theOverlapDate = (users) => {
     if (this.checkIfAllUsersHaveTradeDate(users)) {
       const intersection = Object.values(users)
         .map(user => moment.range(user.startDate, user.endDate).snapTo('day'))
@@ -26,14 +26,29 @@ class UsersDateList extends Component {
     } else {
       return 'Waiting for everyone choose their available dates..';
     }
+  }*/
+
+  theOverlapDate = (users) => {
+    if (this.checkIfAllUsersHaveTradeDate(users)) {
+      const intersection = Object.values(users)
+        .map(user => moment.range(user.availability_start, user.availability_end).snapTo('day'))
+        .reduce((acc, x) => acc ? x.intersect(acc) : null);
+      return intersection ? intersection.start.format('ll') : 'Please kindly provide a date range that most people available!';
+    } else {
+      return 'Waiting for everyone choose their available dates..';
+    }
   }
 
   render(){
-    let users = Object.keys(this.props.tradeUsers).map((key) => {
+/*    let users = Object.keys(this.props.tradeUsers).map((key) => {
       return {...this.props.tradeUsers[key], username: key}
-    })
+    })*/
 
-    let user = users.map((user) =>
+/*    let user = users.map((user) =>
+      <UserDate user={user} key={user.username} />
+    )*/
+
+    let user = this.props.tradeUsers.map((user) =>
       <UserDate user={user} key={user.username} />
     )
 

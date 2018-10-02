@@ -88,9 +88,11 @@ module.exports = (knex) => {
   });
 
   router.patch('/:trade_id/users/:user_id', async (req, res) => {
+
     const trade_id = req.params.trade_id;
     const user_id = req.params.user_id;
     const changes = req.body;
+    console.log("-----------------",trade_id,user_id, changes);
     await db.updateTradeUser(trade_id, user_id, changes);
     res.status(200).end();
   })
