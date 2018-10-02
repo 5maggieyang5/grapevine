@@ -4,7 +4,7 @@ import { Container,  Row,Col } from 'reactstrap';
 import {Redirect} from 'react-router-dom'
 import Wishlist from './Wishlist.jsx';
 import Resource from './models/resource'
-import Map from './Mapbox.jsx';
+import PostMap from './PostMap.jsx';
 
 const PostStore = Resource('posts');
 const Trade = Resource('trades');
@@ -214,7 +214,7 @@ class Post extends React.Component {
 
       <Col xs="12">
        {this.state.post.location.latitude && this.state.post.location.longitude &&
-        <Map
+        <PostMap
           mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
           latitude={this.state.post.location.latitude}
           longitude={this.state.post.location.longitude}

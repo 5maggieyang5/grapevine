@@ -12,12 +12,21 @@ module.exports = (knex) => {
     let trade_users = await db.getTradeUsers(trade_id);
 
     trade_users = await Promise.all(trade_users.map(async user => {
-      let username = (await db.getUser(user.user_id)).username;
-      user.username = username;
+      let location = await db.getLocation(user.location_id);
+      user.location = location;
+
+      let userData = await db.getUser(user.user_id);
+      user.username = userData.username;
+      user.email = userData.email;
+      user.phone_number = userData.phone_number;
       return user;
     }));
 
     trade.users = trade_users;
+
+    let trade_location = await db.getLocation(trade.suggested_location_id);
+    trade.suggested_location = trade_location;
+
     res.json(trade);
   });
 
@@ -83,6 +92,21 @@ module.exports = (knex) => {
     }
 
     await Promise.all(promises);
+
+    // trade_users created, now create suggested central location
+
+    const user_location_ids = (await db.getTradeUsers(created_trade_id)).map(user => user.location_id);
+    const user_locations = await Promise.all(user_location_ids.map(async id => await db.getLocation(id)));
+    const totals = {latitude: 0, longitude: 0};
+    user_locations.forEach(location => {
+      totals.latitude += location.latitude;
+      totals.longitude += location.longitude;
+    });
+    totals.latitude = totals.latitude / user_locations.length;
+    totals.longitude = totals.longitude / user_locations.length;
+    const created_location_id = await db.createLocation(totals.latitude, totals.longitude);
+
+    await db.updateTrade(created_trade_id, {suggested_location_id: created_location_id});
 
     res.json(created_trade_id);
   });

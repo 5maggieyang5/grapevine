@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
 
-class Map extends Component {
+class TradeMap extends Component {
 
   state = {
     marker_latitude: this.props.latitude,
@@ -33,4 +33,4 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default TradeMap;

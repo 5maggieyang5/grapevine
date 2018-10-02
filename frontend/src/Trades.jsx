@@ -5,6 +5,7 @@ import PickDate from './tradingDate/PickDate.jsx';
 import ConfirmTrading from './ConfirmTrading.jsx';
 import Resource from './models/resource';
 import Moment  from 'moment';
+import TradeMap from './TradeMap.jsx';
 
 
 
@@ -107,7 +108,12 @@ class Trades extends React.Component {
       content: <PickDate users={this.state.trade.users} closingDate={this.state.trade.closing_date} updateAvailableDate={this.updateAvailableDate} />
     }, {
       title: 'Pick the Trading Location',
-      content: 'Pick the Trading Date Component'
+      // content: {this.state.post.location.latitude && this.state.post.location.longitude &&
+      //   <TradeMap
+      //     mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
+      //     latitude={this.state.post.location.latitude}
+      //     longitude={this.state.post.location.longitude}
+      //   /> }
     }, {
       title: 'Trading Information',
       content: 'Trading Information Component'

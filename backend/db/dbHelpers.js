@@ -201,6 +201,13 @@ module.exports = (knex) => {
       .then(result => result[0]);
     },
 
+    updateTrade: async function(trade_id, changes) {
+      return await
+      knex('trades')
+      .update(changes)
+      .where('id', trade_id)
+    },
+
 //-------------------TRADE USERS-------------------//
 
     getTradeUsers: async function(trade_id) {
@@ -247,12 +254,21 @@ module.exports = (knex) => {
       .then(result => result[0]);
     },
 
-//-------------------FOODS-------------------//
+//-------------------LOCATIONS-------------------//
 
     getLocation: async function(location_id) {
       return await
       knex.select('latitude', 'longitude').from('locations')
       .where('id', location_id)
+      .then(result => result[0]);
+    },
+
+    createLocation: async function(latitude, longitude) {
+      return await
+      knex('locations').insert({
+        latitude,
+        longitude
+      }).returning('id')
       .then(result => result[0]);
     }
 
