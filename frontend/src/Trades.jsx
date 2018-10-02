@@ -108,12 +108,7 @@ class Trades extends React.Component {
       content: <PickDate users={this.state.trade.users} closingDate={this.state.trade.closing_date} updateAvailableDate={this.updateAvailableDate} />
     }, {
       title: 'Pick the Trading Location',
-      // content: {this.state.post.location.latitude && this.state.post.location.longitude &&
-      //   <TradeMap
-      //     mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
-      //     latitude={this.state.post.location.latitude}
-      //     longitude={this.state.post.location.longitude}
-      //   /> }
+      content: 'Central location Map'
     }, {
       title: 'Trading Information',
       content: 'Trading Information Component'
@@ -121,6 +116,15 @@ class Trades extends React.Component {
       title: 'Provide a Review',
       content: 'Provide a Review Component'
     }];
+
+    if (this.state.trade.suggested_location) {
+      steps[2].content =
+        <TradeMap
+          mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
+          latitude={this.state.trade.suggested_location.latitude}
+          longitude={this.state.trade.suggested_location.longitude}
+        />;
+    }
 
     return (
       <div id="trading-container">

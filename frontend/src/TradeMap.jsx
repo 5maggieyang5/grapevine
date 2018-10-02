@@ -7,8 +7,8 @@ class TradeMap extends Component {
     marker_latitude: this.props.latitude,
     marker_longitude: this.props.longitude,
     viewport: {
-      width: 800,
-      height: 500,
+      width: 1705,
+      height: 882,
       latitude: this.props.latitude,
       longitude: this.props.longitude,
       center: [this.props.longitude,this.props.latitude],
@@ -20,6 +20,7 @@ class TradeMap extends Component {
     console.log("mapbox rendered with props", this.props);
     return (
       <ReactMapGL
+        style={{textAlign: 'left', width: '100%', height: '100%'}}
         {...this.state.viewport}
         onViewportChange={(viewport) => this.setState({viewport})}
         mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
