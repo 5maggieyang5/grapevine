@@ -27,6 +27,9 @@ module.exports = (knex) => {
     const poster = (await db.getPoster(post_id)).username;
     const current_user = (await db.getUser(req.body.current_user)).username;
     const postedFood = (await db.getPostedFood(post_id)).name;
+    console.log('----------inside post', poster);
+    console.log('----------inside post', current_user);
+    console.log('----------inside post', postedFood);
 
     const edges = [];
     edges.push({ from: poster, to: current_user, foods: postedFood});

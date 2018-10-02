@@ -197,7 +197,7 @@ class Post extends React.Component {
     <Container id="big-Container">
     <Row className="mainItem">
       <Col xs="7">
-        <img className ="imgView" src ={this.state.post.food_picture_url} alt="" />
+        <img className="imgView" src={this.state.post.food_picture_url} alt="" />
       </Col>
 
       <Col xs="5">

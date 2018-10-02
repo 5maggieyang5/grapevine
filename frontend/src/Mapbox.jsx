@@ -25,8 +25,8 @@ class Map extends Component {
         mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
         mapStyle='mapbox://styles/jkyoungs/cjmo2omvntesa2rn6ob81w1wl'
       >
-        <Marker latitude={this.state.marker_latitude} longitude={this.state.marker_longitude} >
-          <div>You are here</div>
+        <Marker latitude={this.state.marker_latitude} longitude={this.state.marker_longitude} offsetLeft={-25} offsetTop={-50} >
+          <img src='/mapmarker.svg' style={{height:"50px", width:"50px"}} alt='map-marker' />
         </Marker>
       </ReactMapGL>
     );
