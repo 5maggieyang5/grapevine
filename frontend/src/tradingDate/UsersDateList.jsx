@@ -33,7 +33,7 @@ class UsersDateList extends Component {
       const intersection = Object.values(users)
         .map(user => moment.range(user.availability_start, user.availability_end).snapTo('day'))
         .reduce((acc, x) => acc ? x.intersect(acc) : null);
-      return intersection ? intersection.start.format('ll') : 'Please kindly provide a date range that most people available!';
+      return intersection ? moment.utc(intersection.start.endOf('day')).format('ll') : 'Please kindly provide a date range that most people available!';
     } else {
       return 'Waiting for everyone choose their available dates..';
     }
