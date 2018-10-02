@@ -56,8 +56,8 @@ module.exports = (knex) => {
         user_id: poster.id,
         location_id:poster.default_location_id,
         confirmed: true,                                //for demo purposes
-        availability_start: 20181008002824.012045, //for demo purposes
-        availability_end: 20181012232824.012045    //for demo purposes
+        availability_start: '2018-10-08',               //for demo purposes
+        availability_end: '2018-10-13'                  //for demo purposes
       }),
       db.createTradeUser({
         trade_id: created_trade_id,
@@ -66,16 +66,18 @@ module.exports = (knex) => {
       })
     ]
 
+    console.log("---------------req.body", req.body)
+    console.log("---------------req.body,middle_man", req.body.middle_man)
     if (req.body.middle_man) {
-      const middle_user = await db.getUserByName(middle_man);
+      const middle_user = await db.getUserByName(Object.keys(req.body.middle_man)[0]);
       promises.push(
         db.createTradeUser({
           trade_id: created_trade_id,
           user_id: middle_user.id,
           location_id: middle_user.default_location_id,
           confirmed: true,                                //for demo purposes
-          availability_start: 20181008002824.012045, //for demo purposes
-          availability_end: 20181012232824.012045    //for demo purposes
+          availability_start: '2018-10-10',               //for demo purposes
+          availability_end: '2018-10-15'                  //for demo purposes
         })
       )
     }
