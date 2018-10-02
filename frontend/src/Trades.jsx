@@ -3,6 +3,7 @@ import { Steps, Button, message } from 'antd';
 import TopNav from './TopNav.jsx';
 import PickDate from './tradingDate/PickDate.jsx';
 import ConfirmTrading from './ConfirmTrading.jsx';
+import ContactInfor from './ContactInfor.jsx';
 import Resource from './models/resource';
 import Moment  from 'moment';
 
@@ -109,8 +110,8 @@ class Trades extends React.Component {
       title: 'Pick the Trading Location',
       content: 'Pick the Trading Date Component'
     }, {
-      title: 'Trading Information',
-      content: 'Trading Information Component'
+      title: 'Contact Information',
+      content: <ContactInfor users={this.state.trade.users} />
     }, {
       title: 'Provide a Review',
       content: 'Provide a Review Component'

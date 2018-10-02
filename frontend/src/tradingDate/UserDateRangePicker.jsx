@@ -44,7 +44,7 @@ class UserDateRangePicker extends Component {
           minimumNights = {0}
         />
         <div>
-          <input type="submit" value="Submit" onClick={this.handleOnClick}/>
+          <input id="dateSubmit" type="submit" value="Submit" onClick={this.handleOnClick}/>
         </div>
       </div>
     );

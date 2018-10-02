@@ -307,3 +307,39 @@ td.column-money {
   width: 23%;
 }
 
+#dateString {
+  position: absolute;
+  left: 6%;
+  top: 7%;
+  padding: 3em;
+  height: 27%;
+}
+
+#datePicker {
+  position: absolute;
+  left: -16%;
+  top: 22%;
+  width: 73%;
+  padding-top: 27px;
+}
+
+#dateTable {
+  position: absolute;
+  right: 0%;
+  top: 17%;
+  padding: 1em;
+  height: 27%;
+  font-size: 2em;
+}
+
+#dateSubmit {
+  position: absolute;
+  margin-top: 2em;
+  font-size: 1.5em;
+  background: #56a732a6;
+}
+
+.tableLine {
+  border: 1px solid #e8e8e8;
+  padding: 1em;
+}
