@@ -32,11 +32,11 @@ module.exports = (knex) => {
     console.log('----------inside post', postedFood);
 
     const edges = [];
-    edges.push({ from: poster.username, to: current_user.username, foods: postedFood});
+    edges.push({ from: poster.username, to: current_user.username, foods: [postedFood]});
 
     if (!req.body.middle_man) {
       console.log('its a two way trade');
-      edges.push({ from: current_user.username, to: poster.username, foods: req.body.selected_food_item});
+      edges.push({ from: current_user.username, to: poster.username, foods: [req.body.selected_food_item]});
     } else {
       console.log('its a three way trade');
       const middle_man = Object.keys(req.body.middle_man)[0];
