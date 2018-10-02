@@ -162,52 +162,50 @@ td.column-money {
 
 .twoUser0 {
   background: #56a732a6;
-  width: 328px;
+  width: 405px;
   height: 142px;
   border-radius: 10px;
   position: absolute;
-  left: 16%;
-  top: 35%;
-  padding-top: 50px;
+  left: 12%;
+  top: 21%;
+  padding: 50px;
 }
 
 .twoUser1 {
   background: #56a732a6;
-  width: 328px;
+  width: 405px;
   height: 142px;
   border-radius: 10px;
   position: absolute;
-  right: 21%;
-  top: 35%;
-  padding-top: 50px;
+  right: 12%;
+  top: 21%;
+  padding: 50px;
 }
 
 .twoArrRight0 {
-  font-size:20em;
-/*  transform: rotate(45deg);*/
+  font-size: 23em;
   position: absolute;
-  right: 46%;
-  top: 14%;
+  right: 40%;
+  top: 6%;
 }
 
 .twoArrRight1 {
-  font-size: 20em;
+  font-size: 23em;
   transform: rotate(180deg);
   position: absolute;
-  right: 46%;
-  top: 30%;
+  right: 40%;
+  top: 15%;
 }
-
 
 .twoArrRight0 + .foodItem {
   font-size: 45px;
   background: #edae68d6;
   border-radius: 10px;
   position: absolute;
-  left: 41%;
-  top: 10%;
+  left: 45%;
+  top: 3%;
   margin: auto;
-  padding-top: 20px;
+  padding: 10px;
   text-align: center;
   overflow-wrap: break-word;
 }
@@ -217,10 +215,10 @@ td.column-money {
   background: #edae68d6;
   border-radius: 10px;
   position: absolute;
-  left: 41%;
-  top: 71%;
+  left: 46%;
+  top: 46%;
   margin: auto;
-  padding-top: 20px;
+  padding: 10px;
   text-align: center;
   overflow-wrap: break-word;
 }
@@ -248,9 +246,9 @@ td.column-money {
 .tradingConfirm {
   position: absolute;
   right: 1%;
-  top: 67%;
+  top: 66%;
   border: 1px solid #e8e8e8;
   padding: 3em;
-  height: 31%;
-  width: 20%;
+  height: 27%;
+  width: 23%;
 }
