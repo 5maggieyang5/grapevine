@@ -4,7 +4,10 @@
 body {
   font-size: 18px;
   font-family: 'Lato', sans-serif;
+}
 
+#root {
+  background-color: #dfd;
 }
 
 #nav-search {
@@ -16,7 +19,7 @@ body {
   margin-bottom: 0;
 }
 
-#creat-post {
+#create-post {
   font-size: 100%;
   padding: 12px 16px;
   height: 48px;

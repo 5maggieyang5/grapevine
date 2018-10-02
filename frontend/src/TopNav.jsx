@@ -55,7 +55,7 @@ class TopNav extends React.Component {
             <Nav className="ml-auto" navbar>
 
               <NavItem>
-               <Badge color="warning" id="creat-post">
+               <Badge color="warning" id="create-post">
                   <Link to='/creatNewPost'>
                     Create New Post
                   </Link>
@@ -70,7 +70,7 @@ class TopNav extends React.Component {
                 <BreadcrumbItem>
                   <Link to='/register'>Register</Link>
                 </BreadcrumbItem>
-                
+
                 <BreadcrumbItem active>
                   <Link to='/user'>User Profile</Link>
                 </BreadcrumbItem>
