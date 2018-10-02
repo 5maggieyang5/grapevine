@@ -4,6 +4,7 @@ import ReactMapGL, {Marker} from 'react-map-gl';
 class TradeMap extends Component {
 
   state = {
+    markers: this.props.markers,
     marker_latitude: this.props.latitude,
     marker_longitude: this.props.longitude,
     viewport: {
@@ -29,6 +30,11 @@ class TradeMap extends Component {
         <Marker latitude={this.state.marker_latitude} longitude={this.state.marker_longitude} offsetLeft={-25} offsetTop={-50} >
           <img src='/mapmarker.svg' style={{height:"50px", width:"50px"}} alt='map-marker' />
         </Marker>
+        {this.state.markers.map(marker => (
+          <Marker latitude={marker.latitude} longitude={marker.longitude} offsetLeft={-25} offsetTop={-50} >
+            <img src='/mapmarker.svg' style={{height:"50px", width:"50px"}} alt='map-marker' />
+          </Marker>
+        ))}
       </ReactMapGL>
     );
   }
