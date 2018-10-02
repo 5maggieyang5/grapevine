@@ -29,15 +29,15 @@ class TopNav extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar id="navbar-color" color="light" light expand="md">
           <NavbarBrand>
-            <Link to='/'>
+            <Link to='/'  id="navbar-brand">
               ~Grapevine~
             </Link>
           </NavbarBrand>
 
           <NavbarBrand>
-            <Link to='/About'>
+            <Link to='/About' id="navbar-aboutUs">
               About US!
             </Link>
           </NavbarBrand>
@@ -55,7 +55,7 @@ class TopNav extends React.Component {
             <Nav className="ml-auto" navbar>
 
               <NavItem>
-               <Badge color="warning" id="creat-post">
+               <Badge color="light" id="creat-post">
                   <Link to='/creatNewPost'>
                     Create New Post
                   </Link>
@@ -70,7 +70,7 @@ class TopNav extends React.Component {
                 <BreadcrumbItem>
                   <Link to='/register'>Register</Link>
                 </BreadcrumbItem>
-                
+
                 <BreadcrumbItem active>
                   <Link to='/user'>User Profile</Link>
                 </BreadcrumbItem>

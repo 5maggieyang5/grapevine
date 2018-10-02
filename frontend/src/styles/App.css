@@ -7,20 +7,31 @@ body {
 
 }
 
+#navbar-brand {
+  font-size: 1.2em;
+  margin: 1em;
+}
+
+#navbar-aboutUs {
+  font-size: 1.2em;
+}
+
 #nav-search {
-  width: 400px;
-  margin-left: 50px;
+  width: 500px;
+  margin: 0 auto;
 }
 
 .breadcrumb {
-  margin-bottom: 0;
+  margin: 2em;
+  font-size: 1.5em;
 }
 
 #creat-post {
-  font-size: 100%;
-  padding: 12px 16px;
+  padding: 31px 16px;
   height: 48px;
   margin-right: 10px;
+  margin-top: 28px;
+  font-size: 1.5em;
 }
 
 #register-form {
@@ -70,9 +81,14 @@ button {
   margin-right: 2%;
 }
 
+#itemName {
+  margin-left: 1.6em;
+}
+
 .itemDescription {
   text-align: left;
   line-height: 1.7rem;
+  margin-left: 3em;
 }
 
 .rating {
@@ -333,13 +349,25 @@ td.column-money {
 }
 
 #dateSubmit {
-  position: absolute;
-  margin-top: 2em;
+  margin-left: 1em;
+  color: white;
   font-size: 1.5em;
-  background: #56a732a6;
+  background: #1ea2fa;
+  height: 50px;
+  border: none;
 }
 
 .tableLine {
   border: 1px solid #e8e8e8;
   padding: 1em;
+}
+
+.cards {
+  margin: 3em 0;
+}
+
+#navbar-color {
+  background-color: #e2e2e2;
+  height: 7em;
+  font-family: 'Source Sans Pro', sans-serif;
 }

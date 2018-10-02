@@ -202,7 +202,7 @@ class Post extends React.Component {
 
       <Col xs="5">
         <Row>
-          <h3>Item: <b>{this.state.post.food.name} </b> </h3> <br/>
+          <h3 id="itemName">Item: <b>{this.state.post.food.name} </b> </h3> <br/>
           <div className="itemDescription">
           {this.state.post.description}<br/><br/>
           </div>
