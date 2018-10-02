@@ -70,7 +70,8 @@ exports.seed = async function(knex, Promise) {
   foods.forEach( food => {
     promises.push(
       knex('foods').insert({
-        name: food
+        name: food,
+        picture: `/food/${food.replace(/ /,'')}.jpg`
       }),
     );
   })

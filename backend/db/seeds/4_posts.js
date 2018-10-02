@@ -10,6 +10,7 @@ exports.seed = async function(knex, Promise) {
     let user = ((i % 40) + 1);
     let food = (Math.floor(Math.random() * 61) + 1);
     let status = 'completed'; //duplicate posts will default to completed
+    let pictureObj = await knex.select('picture').from('foods').where('id', food).then(result => result[0]);
 
     if (!existingPairs[`[${user}, ${food}]`]) { //if post is unique
       status = 'available';
@@ -20,7 +21,7 @@ exports.seed = async function(knex, Promise) {
       knex('posts').insert({
         user_id: user,
         food_id: food,
-        food_picture_url: '/grapes.jpg',
+        food_picture_url: pictureObj.picture,
         description: faker.lorem.paragraph(),
         status: status,
         location_id: ((i % 40) + 1),
@@ -29,11 +30,14 @@ exports.seed = async function(knex, Promise) {
   }
 
   for (let i = 0; i < 80; i++) {
+    let food = (Math.floor(Math.random() * 61) + 1);
+    let pictureObj = await knex.select('picture').from('foods').where('id', food).then(result => result[0]);
+
     promises.push(
       knex('posts').insert({
         user_id: ((i % 40) + 1),
-        food_id: (Math.floor(Math.random() * 61) + 1),
-        food_picture_url: '/grapes.jpg',
+        food_id: food,
+        food_picture_url: pictureObj.picture,
         description: faker.lorem.paragraph(),
         status: 'completed',
         location_id: ((i % 40) + 1),

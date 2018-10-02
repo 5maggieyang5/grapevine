@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactMapGL, {Marker} from 'react-map-gl';
 
-class Map extends Component {
+class PostMap extends Component {
 
   state = {
     marker_latitude: this.props.latitude,
@@ -11,7 +11,7 @@ class Map extends Component {
       height: 500,
       latitude: this.props.latitude,
       longitude: this.props.longitude,
-      center: [this.props.longitude,this.props.latitude],
+      // center: [this.props.longitude,this.props.latitude],
       zoom: 12.5
     }
   };
@@ -33,4 +33,4 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default PostMap;
