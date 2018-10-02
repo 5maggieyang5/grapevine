@@ -24,30 +24,64 @@ module.exports = (knex) => {
   router.post("/", async (req, res) => {
     const post_id = req.body.post_id;
 
-    const poster = (await db.getPoster(post_id)).username;
-    const current_user = (await db.getUser(req.body.current_user)).username;
+    const poster = await db.getPoster(post_id);
+    const current_user = await db.getUser(req.body.current_user);
     const postedFood = (await db.getPostedFood(post_id)).name;
     console.log('----------inside post', poster);
     console.log('----------inside post', current_user);
     console.log('----------inside post', postedFood);
 
     const edges = [];
-    edges.push({ from: poster, to: current_user, foods: postedFood});
+    edges.push({ from: poster.username, to: current_user.username, foods: postedFood});
 
     if (!req.body.middle_man) {
       console.log('its a two way trade');
-      edges.push({ from: current_user, to: poster, foods: req.body.selected_food_item});
+      edges.push({ from: current_user.username, to: poster.username, foods: req.body.selected_food_item});
     } else {
       console.log('its a three way trade');
       const middle_man = Object.keys(req.body.middle_man)[0];
       const middle_man_gives = req.body.middle_man[middle_man].will_give_to_poster;
       const middle_man_wants = req.body.middle_man[middle_man].wants_from_current_user;
 
-      edges.push({ from: current_user, to: middle_man, foods: middle_man_wants});
-      edges.push({ from: middle_man, to: poster, foods: middle_man_gives});
+      edges.push({ from: current_user.username, to: middle_man, foods: middle_man_wants});
+      edges.push({ from: middle_man, to: poster.username, foods: middle_man_gives});
     }
 
     const created_trade_id = await db.createTrade(post_id, edges);
+
+    //trade created, now create trade users
+    const promises = [
+      db.createTradeUser({
+        trade_id: created_trade_id,
+        user_id: poster.id,
+        location_id:poster.default_location_id,
+        confirmed: true,                                //for demo purposes
+        availability_start: 20181008002824.012045, //for demo purposes
+        availability_end: 20181012232824.012045    //for demo purposes
+      }),
+      db.createTradeUser({
+        trade_id: created_trade_id,
+        user_id: current_user.id,
+        location_id: current_user.default_location_id
+      })
+    ]
+
+    if (req.body.middle_man) {
+      const middle_user = await db.getUserByName(middle_man);
+      promises.push(
+        db.createTradeUser({
+          trade_id: created_trade_id,
+          user_id: middle_user.id,
+          location_id: middle_user.default_location_id,
+          confirmed: true,                                //for demo purposes
+          availability_start: 20181008002824.012045, //for demo purposes
+          availability_end: 20181012232824.012045    //for demo purposes
+        })
+      )
+    }
+
+    await Promise.all(promises);
+
     res.json(created_trade_id);
   });
 

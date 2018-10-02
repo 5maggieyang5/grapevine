@@ -111,6 +111,13 @@ module.exports = (knex) => {
       .then(result => result[0]);
     },
 
+    getUserByName: async function(username) {
+      return await
+      knex.select().from('users')
+      .where('username', username)
+      .then(result => result[0]);
+    },
+
     getPoster: async function(post_id) {
       return await
       knex.select('users.*').from('users')
@@ -200,6 +207,18 @@ module.exports = (knex) => {
       return await
       knex.select().from('trade_users')
       .where('trade_id', trade_id)
+    },
+
+    createTradeUser: async function({trade_id, user_id, location_id, confirmed, availability_start, availability_end}) {
+      return await
+      knex('trade_users').insert({
+        trade_id,
+        user_id,
+        location_id,
+        confirmed,
+        availability_start,
+        availability_end
+      });
     },
 
     // getTradeUser: async function(trade_id, user_id) {
