@@ -222,15 +222,22 @@ class Post extends React.Component {
       </div>
 
       <div id="post-username-rating">
-        <h3>Name: {this.state.post.user.username}</h3>
-        <h3>Rating :{this.state.post.user.average_rating}</h3>
+        <h3>Username: {this.state.post.user.username}</h3>
+        <h3>Rating:
+          {this.state.post.user.average_rating}
+          <img className="grapes" src="/purplegrapes.svg" />
+          <img className="grapes" src="/purplegrapes.svg" />
+          <img className="grapes" src="/purplegrapes.svg" />
+          <img className="grapes" src="/purplegrapes.svg" />
+          <img className="grapes" src="/cleargrapes.svg" />
+        </h3>
       </div>
 
 
 
     <Col xs="6" className="wishList">
     <div className="wishListButton">
-        <button  onClick = {this.toggleHidden}>
+        <button  onClick={this.toggleHidden}>
         Show Wishlist
         </button>
         {!this.state.isHidden &&

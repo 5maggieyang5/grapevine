@@ -6,6 +6,10 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+#container {
+  background-color: #dfd;
+}
+
 /*-----------------HOME PAGE---------------------------*/
 #root {
   background-color: #dfd;
@@ -172,7 +176,10 @@ li.nav-item {
   margin: auto 0;
 }
 
-
+#post-username-rating .grapes {
+  height: 64px;
+  width: 64px;
+}
 
 #register-form {
   margin: 100px 200px;
