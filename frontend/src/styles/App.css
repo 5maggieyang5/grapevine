@@ -189,12 +189,21 @@ li.nav-item {
   margin-bottom:1px;
 }
 
-
 #radiobutton {
   padding: 0px;
   margin-top: 1em;
 
 }
+#radiobutton:hover {
+  background-color: rgb(141, 141, 222) ;
+  border-radius: 6px;
+}
+
+#simplebuttons{
+  border-radius: 6px;
+  margin: 2px;
+}
+
 
 .mainItem {
   margin-top: 5%;

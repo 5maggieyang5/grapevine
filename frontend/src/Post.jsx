@@ -29,6 +29,7 @@ class Post extends React.Component {
       trade_list:"",        // list of 2rd level trades
       trade_radio_select:"",
       trade_id: ""          // the associated id of the trade radio button
+
     }
   }
 
@@ -61,15 +62,36 @@ class Post extends React.Component {
     // Check the state variable to determine the type of trade to execute
     if (this.state.typeOfTrade ==="twoway"){
       console.log("2way called")
+      if (!this.state.radio_selection){
+        alert("Please select an item to trade.")
+        return;
+      }
      this.handleTwoWayTrade(event)
     } else if (this.state.typeOfTrade ==="threeway"){
+      console.log("entering 3way with  wishitem of ", this.state.radio_selection)
+      if (this.state.radio_selection){
+        alert("Please clear selection to go on")
+        return;
+      }
+      if (this.state.radio_selection) {  // if they chose an item from 1st menu
+        alert("Unselect the item chosen to see possible 3way trades")
+        return;
+      }
       this.handleThreeWayTrade(event);
 
     }
   }
 
+  closeTrades = (event) =>{
+    event.preventDefault(event);
+    const checkIsHidden = this.state.isHidden
+    this.setState({isHidden: !checkIsHidden})
+
+  }
+
+
   clear_Radio = (event) =>{
-    event.preventDefault();
+    event.preventDefault(event);
     this.setState({
         radio_selection:false
       });
@@ -77,10 +99,13 @@ class Post extends React.Component {
 
   handleChange = async (event) => {
     event.preventDefault();
+
     console.log("got called !!")
 
     this.setState({
-      selected_food_item: event.target.value
+      selected_food_item: event.target.value,
+      dropdownOpen: !this.state.dropdownOpen,
+
     })
 
     let result = await fetch(`http://localhost:8080/posts/${this.state.post_id}/secondarylist/1`,
@@ -118,6 +143,7 @@ class Post extends React.Component {
   handleThreeWayTrade = (event) =>{
     event.preventDefault();
     event.stopPropagation()   // prevents the nested from also triggering parent form
+
     console.log("Confirm Trade",this.state.trade_radio_select, " ID: ",this.state.trade_id, typeof this.state.trade_id)
     let temp = Number(this.state.trade_id);
     let trade_data = this.state.trade_list;
@@ -154,6 +180,7 @@ class Post extends React.Component {
   handleTwoWayTrade = (event) => {
     let sel_food="";
     event.preventDefault();
+
 
     Trade.create(JSON.stringify({
       selected_food_item : this.state.radio_selection,
@@ -237,7 +264,8 @@ class Post extends React.Component {
 
     <Col xs="6" className="wishList">
     <div className="wishListButton">
-        <button  onClick={this.toggleHidden}>
+
+        <button  id="simplebuttons" onClick = {this.toggleHidden}>
         Show Wishlist
         </button>
         {!this.state.isHidden &&
@@ -245,16 +273,18 @@ class Post extends React.Component {
           radio_action = {this.handleRadioChange}
           radio_select ={this.state.radio_selection}
           clear_Radio = {this.clear_Radio}
+          poster_name = {this.state.post.user.username}
 
           trade_radio_action = {this.handleTradeRadioChange}
           trade_radio_select = {this.state.trade_radio_select}
           trade_list         = {this.state.trade_list}
           trade_form_action  = {this.handleThreeWayTrade}
+          closeTrades             = {this.closeTrades}
 
           />
         }
      </div>
-     <button onClick={this.handleTradeButton}>Confirm Trade !</button>
+     <button id="simplebuttons" onClick={this.handleTradeButton}>Confirm Trade !</button>
     </Col>
 
    </Container>

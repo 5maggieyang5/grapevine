@@ -23,7 +23,7 @@ class Trades extends React.Component {
       tradesId: (props.match.params.tradesId || null),
       trade: {edges: [], users: []},
       errors: null,
-      disabled: false
+      disabled: true
     };
   }
 
