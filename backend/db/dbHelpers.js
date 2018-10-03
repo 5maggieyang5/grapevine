@@ -19,7 +19,7 @@ module.exports = (knex) => {
         .orderBy('posts.created_at', 'desc');
 
       if (queries.food_name) {
-        getAllPosts = getAllPosts.andWhere('foods.name', queries.food_name);
+        getAllPosts = getAllPosts.andWhere('foods.name', 'ilike', queries.food_name);
       }
 
       return await

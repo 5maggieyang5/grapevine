@@ -22,7 +22,7 @@ exports.seed = async function(knex, Promise) {
         user_id: user,
         food_id: food,
         food_picture_url: pictureObj.picture,
-        description: faker.lorem.paragraph(),
+        description: faker.lorem.sentences(4),
         status: status,
         location_id: ((i % 40) + 1),
       })

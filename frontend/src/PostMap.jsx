@@ -7,7 +7,7 @@ class PostMap extends Component {
     marker_latitude: this.props.latitude,
     marker_longitude: this.props.longitude,
     viewport: {
-      width: 800,
+      width: 685,
       height: 500,
       latitude: this.props.latitude,
       longitude: this.props.longitude,
