@@ -203,13 +203,11 @@ li.nav-item {
   font-weight: bold;
   color: white;
   background-color: darkviolet;
-/*  grid-column: -1 / -2;
-  grid-row: 6 / 7;*/
   white-space: nowrap;
 }
 
 #wishlist {
-  grid-column: 2 / span 1;
+  grid-column: 2 / span 4;
   grid-row: 7 / -1;
   margin-left: 30px;
   font-size: 24px;
