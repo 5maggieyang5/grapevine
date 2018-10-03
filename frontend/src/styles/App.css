@@ -121,10 +121,11 @@ li.nav-item {
 
 #post-container {
   padding-top: 9em;
+  padding-bottom: 500px;
   max-width: 1400px;
   display: grid;
   grid-template-columns: 50% 1fr 1fr 1fr 1fr;
-  grid-template-rows: repeat(10, 100px);
+  grid-template-rows: repeat(5, 100px) repeat(10, 50px);
 }
 
 #post-food-picture {
@@ -157,7 +158,7 @@ li.nav-item {
 
 #post-map {
   grid-column: 1 / 2;
-  grid-row: 6 / span 5;
+  grid-row: 6 / span 10;
 }
 
 #post-avatar {
@@ -180,6 +181,38 @@ li.nav-item {
   height: 64px;
   width: 64px;
 }
+
+#show-wishlist {
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: darkviolet;
+  grid-column: 2 / 3;
+  grid-row: 6 / 7;
+  margin-left: 30px;
+}
+
+#confirm-button {
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: darkviolet;
+  grid-column: -1 / -2;
+  grid-row: 6 / 7;
+  white-space: nowrap;
+}
+
+#wishlist {
+  grid-column: 2 / span 2;
+  grid-row: 7 / -1;
+  margin-left: 30px;
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/*--------------------------------------------*/
 
 #register-form {
   margin: 100px 200px;

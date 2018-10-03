@@ -260,34 +260,33 @@ class Post extends React.Component {
         </h3>
       </div>
 
+      <button  id="show-wishlist" onClick = {this.toggleHidden}>
+        Wishlist
+      </button>
 
+      <button id="confirm-button" onClick={this.handleTradeButton}>
+        Start Trade
+      </button>
 
-    <Col xs="6" className="wishList">
-    <div className="wishListButton">
-
-        <button  id="simplebuttons" onClick = {this.toggleHidden}>
-        Show Wishlist
-        </button>
-        {!this.state.isHidden &&
+      {!this.state.isHidden &&
+        <div id="wishlist">
           <Wishlist list={userwishlist} form_action = {this.handleChange}
-          radio_action = {this.handleRadioChange}
-          radio_select ={this.state.radio_selection}
-          clear_Radio = {this.clear_Radio}
-          poster_name = {this.state.post.user.username}
+            radio_action = {this.handleRadioChange}
+            radio_select ={this.state.radio_selection}
+            clear_Radio = {this.clear_Radio}
+            poster_name = {this.state.post.user.username}
 
-          trade_radio_action = {this.handleTradeRadioChange}
-          trade_radio_select = {this.state.trade_radio_select}
-          trade_list         = {this.state.trade_list}
-          trade_form_action  = {this.handleThreeWayTrade}
-          closeTrades             = {this.closeTrades}
-
+            trade_radio_action = {this.handleTradeRadioChange}
+            trade_radio_select = {this.state.trade_radio_select}
+            trade_list         = {this.state.trade_list}
+            trade_form_action  = {this.handleThreeWayTrade}
+            closeTrades        = {this.closeTrades}
           />
-        }
-     </div>
-     <button id="simplebuttons" onClick={this.handleTradeButton}>Confirm Trade !</button>
-    </Col>
+        </div>
+      }
 
-   </Container>
+
+    </Container>
     );
   };
 }
