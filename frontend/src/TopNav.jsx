@@ -12,14 +12,21 @@ import {
   Button,
   Input,
 } from 'reactstrap'
+import Resource from './models/resource'
+const UsersDB = Resource('users')
 
 class TopNav extends React.Component {
   constructor(props) {
     super(props);
 
     this.state={
-      searchInput: ""
+      searchInput: "",
+      current_username: ''
     }
+  }
+
+  componentDidMount() {
+    UsersDB.find(1).then(result => this.setState({current_username: result.username}));
   }
 
   handleChange = evt => {
@@ -56,7 +63,7 @@ class TopNav extends React.Component {
 
               <NavItem>
                 <h2 id="welcome-user">
-                  Welcome user 1
+                  Welcome, {this.state.current_username}
                 </h2>
               </NavItem>
               {/*<Breadcrumb>
