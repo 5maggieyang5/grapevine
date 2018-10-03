@@ -48,7 +48,8 @@ export default class Wishlist extends React.Component {
             <SecondLevelTrade trade_list = {this.props.trade_list} 
             trade_form_action = {this.props.trade_form_action}
             trade_radio_select = {this.props.trade_radio_select} 
-            trade_radio_action = {this.props.trade_radio_action} />
+            trade_radio_action = {this.props.trade_radio_action} 
+            poster_name        ={this.props.poster_name} />
           }
           <button type="button" value = "Cancel" onClick ={this.props.clear_Radio} >Clear Selection</button>
         </form>

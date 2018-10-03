@@ -243,6 +243,7 @@ class Post extends React.Component {
           radio_action = {this.handleRadioChange}
           radio_select ={this.state.radio_selection}
           clear_Radio = {this.clear_Radio}
+          poster_name = {this.state.post.user.username}
 
           trade_radio_action = {this.handleTradeRadioChange}
           trade_radio_select = {this.state.trade_radio_select}
