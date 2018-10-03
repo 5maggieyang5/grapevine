@@ -3390,9 +3390,10 @@ textarea.ant-input {
   border: 1px solid transparent;
   white-space: nowrap;
   padding: 0 15px;
-  font-size: 14px;
+  font-size: 34px;
   border-radius: 4px;
-  height: 32px;
+  height: 68px;
+  width: 165px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -3555,9 +3556,11 @@ textarea.ant-input {
   pointer-events: none;
 }
 .ant-btn-primary {
+  float: right;
+
   color: #fff;
-  background-color: #1890ff;
-  border-color: #1890ff;
+  background-color: #995cd3;
+  border-color: #995cd3;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
           box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
@@ -3577,8 +3580,8 @@ textarea.ant-input {
 .ant-btn-primary:hover,
 .ant-btn-primary:focus {
   color: #fff;
-  background-color: #40a9ff;
-  border-color: #40a9ff;
+  background-color: #995cd3;
+  border-color: #995cd3;
 }
 .ant-btn-primary:hover > a:only-child,
 .ant-btn-primary:focus > a:only-child {
@@ -3597,8 +3600,8 @@ textarea.ant-input {
 .ant-btn-primary:active,
 .ant-btn-primary.active {
   color: #fff;
-  background-color: #096dd9;
-  border-color: #096dd9;
+  background-color: #995cd3;
+  border-color: #995cd3;
 }
 .ant-btn-primary:active > a:only-child,
 .ant-btn-primary.active > a:only-child {
@@ -4198,9 +4201,9 @@ textarea.ant-input {
   color: #fff;
 }
 .ant-btn-background-ghost.ant-btn-primary {
-  color: #1890ff;
+  color: #995cd3;
   background-color: transparent;
-  border-color: #1890ff;
+  border-color: #995cd3;
   text-shadow: none;
 }
 .ant-btn-background-ghost.ant-btn-primary > a:only-child {
@@ -17894,7 +17897,7 @@ a.ant-notification-notice-close:focus {
   line-height: 32px;
   text-align: center;
   border-radius: 32px;
-  font-size: 16px;
+  font-size: 32px;
   margin-right: 8px;
   -webkit-transition: background-color 0.3s, border-color 0.3s;
   transition: background-color 0.3s, border-color 0.3s;
@@ -17924,7 +17927,7 @@ a.ant-notification-notice-close:focus {
   transition: background .3s;
 }
 .ant-steps-item-title {
-  font-size: 16px;
+  font-size: 36px;
   color: rgba(0, 0, 0, 0.65);
   display: inline-block;
   padding-right: 16px;
@@ -17968,14 +17971,14 @@ a.ant-notification-notice-close:focus {
   background-color: #e8e8e8;
 }
 .ant-steps-item-process .ant-steps-item-icon {
-  border-color: #1890ff;
+  border-color: #995cd3;
   background-color: #fff;
 }
 .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
-  color: #1890ff;
+  color: #995cd3;
 }
 .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
-  background: #1890ff;
+  background: #995cd3;
 }
 .ant-steps-item-process > .ant-steps-item-content > .ant-steps-item-title {
   color: rgba(0, 0, 0, 0.85);
@@ -17990,7 +17993,7 @@ a.ant-notification-notice-close:focus {
   background-color: #e8e8e8;
 }
 .ant-steps-item-process .ant-steps-item-icon {
-  background: #1890ff;
+  background: #995cd3;
 }
 .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
   color: #fff;
@@ -17999,26 +18002,26 @@ a.ant-notification-notice-close:focus {
   font-weight: 500;
 }
 .ant-steps-item-finish .ant-steps-item-icon {
-  border-color: #1890ff;
+  border-color: #995cd3;
   background-color: #fff;
 }
 .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
-  color: #1890ff;
+  color: #995cd3;
 }
 .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
-  background: #1890ff;
+  background: #995cd3;
 }
 .ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title {
   color: rgba(0, 0, 0, 0.65);
 }
 .ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title:after {
-  background-color: #1890ff;
+  background-color: #995cd3;
 }
 .ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-description {
   color: rgba(0, 0, 0, 0.45);
 }
 .ant-steps-item-finish > .ant-steps-item-tail:after {
-  background-color: #1890ff;
+  background-color: #995cd3;
 }
 .ant-steps-item-error .ant-steps-item-icon {
   border-color: #f5222d;
@@ -18077,7 +18080,7 @@ a.ant-notification-notice-close:focus {
   height: 32px;
 }
 .ant-steps-item-custom.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
-  color: #1890ff;
+  color: #995cd3;
 }
 .ant-steps-small.ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
   margin-right: 12px;
@@ -18091,7 +18094,7 @@ a.ant-notification-notice-close:focus {
   line-height: 24px;
   text-align: center;
   border-radius: 24px;
-  font-size: 12px;
+  font-size: 32px;
 }
 .ant-steps-small .ant-steps-item-title {
   font-size: 14px;
@@ -18118,7 +18121,7 @@ a.ant-notification-notice-close:focus {
   background: none;
 }
 .ant-steps-small .ant-steps-item-custom .ant-steps-item-icon > .ant-steps-icon {
-  font-size: 24px;
+  font-size: 32px;
   line-height: 24px;
   -webkit-transform: none;
       -ms-transform: none;
@@ -18447,7 +18450,7 @@ a.ant-notification-notice-close:focus {
   font-weight: bold;
 }
 .ant-switch-checked {
-  background-color: #1890ff;
+  background-color: #995cd3;
 }
 .ant-switch-checked .ant-switch-inner {
   margin-left: 6px;
@@ -18514,7 +18517,7 @@ a.ant-notification-notice-close:focus {
 }
 .ant-table {
   font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 14px;
+  font-size: 26px;
   font-variant: tabular-nums;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);

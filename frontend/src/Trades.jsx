@@ -107,19 +107,19 @@ class Trades extends React.Component {
   render() {
     const { current } = this.state;
     const steps = [{
-      title: 'Confirm Trading',
+      title: <b>Confirm</b>,
       content: <ConfirmTrading edges={this.state.trade.edges} users={this.state.trade.users} tradesId={this.state.tradesId} currentUserConfirm={userConfirm => this.currentUserConfirm(userConfirm)} />
     }, {
-      title: 'Pick the Trading Date',
+      title: <b>Date</b>,
       content: <PickDate users={this.state.trade.users} closingDate={this.state.trade.closing_date} updateAvailableDate={this.updateAvailableDate} />
     }, {
-      title: 'Pick the Trading Location',
+      title: <b>Location</b>,
       content: 'Central location Map'
     }, {
-      title: 'Contact Information',
+      title: <b>Contact</b>,
       content: <ContactInfor users={this.state.trade.users} />
     }, {
-      title: 'Provide a Review',
+      title: <b>Review</b>,
       content: 'Provide a Review Component'
     }];
 

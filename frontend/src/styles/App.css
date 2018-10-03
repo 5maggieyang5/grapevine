@@ -286,7 +286,7 @@ button {
   min-height: 500px;
   text-align: center;
   position: relative;
-  min-height: 800px;
+  min-height: 1000px;
 }
 
 .steps-action {
@@ -294,7 +294,12 @@ button {
 }
 
 #trading-container {
-  margin: 80px 100px;
+  position: absolute;
+  top: 19%;
+  left: 4%;
+  width: 121em;
+  padding-bottom: 50px;
+
 }
 
 th.column-money,
@@ -304,34 +309,34 @@ td.column-money {
 
 .user0 {
   background: #56a732a6;
-  width: 335px;
-  height: 101px;
+  width: 446px;
+  height: 92px;
   border-radius: 10px;
   position: absolute;
-  left: 40%;
-  top: 3%;
+  left: 37%;
+  top: 2%;
   padding-top: 27px;
 }
 
 .user1 {
   background: #56a732a6;
-  width: 335px;
+  width: 446px;
   height: 101px;
   border-radius: 10px;
   position: absolute;
-  right: 21%;
-  top: 35%;
+  right: 14%;
+  top: 22%;
   padding-top: 27px;
 }
 
 .user2 {
   background: #56a732a6;
-  width: 362px;
+  width: 446px;
   height: 101px;
   border-radius: 10px;
   position: absolute;
-  left: 22%;
-  top: 35%;
+  left: 14%;
+  top: 22%;
   padding-top: 27px;
 }
 
@@ -340,15 +345,15 @@ td.column-money {
   transform: rotate(45deg);
   position: absolute;
   right: 30%;
-  top: 16%;
+  top: 10%;
 }
 
 .arr1 {
   font-size: 9em;
   transform: rotate(180deg);
   position: absolute;
-  right: 45%;
-  top: 34%;
+  right: 46%;
+  top: 20%;
 }
 
 
@@ -362,7 +367,7 @@ td.column-money {
   transform: rotate(315deg);
   position: absolute;
   left: 30%;
-  top: 16%;
+  top: 10%;
 }
 
 .arr0 + .foodItem {
@@ -371,7 +376,7 @@ td.column-money {
   border-radius: 10px;
   position: absolute;
   left: 70%;
-  top: 17%;
+  top: 12%;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -383,8 +388,8 @@ td.column-money {
   background: #edae68d6;
   border-radius: 10px;
   position: absolute;
-  left: 43%;
-  top: 52%;
+  left: 41%;
+  top: 33%;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -397,7 +402,7 @@ td.column-money {
   border-radius: 10px;
   position: absolute;
   right: 70%;
-  top: 17%;
+  top: 12%;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -406,23 +411,23 @@ td.column-money {
 
 .twoUser0 {
   background: #56a732a6;
-  width: 405px;
+  width: 446px;
   height: 142px;
   border-radius: 10px;
   position: absolute;
-  left: 12%;
-  top: 21%;
+  left: 7%;
+  top: 14%;
   padding: 50px;
 }
 
 .twoUser1 {
   background: #56a732a6;
-  width: 405px;
+  width: 446px;
   height: 142px;
   border-radius: 10px;
   position: absolute;
-  right: 12%;
-  top: 21%;
+  right: 6%;
+  top: 14%;
   padding: 50px;
 }
 
@@ -430,15 +435,17 @@ td.column-money {
   font-size: 23em;
   position: absolute;
   right: 40%;
-  top: 6%;
+  top: 1%;
 }
 
 .twoArrRight1 {
   font-size: 23em;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   position: absolute;
   right: 40%;
-  top: 15%;
+  top: 7%;
 }
 
 .twoArrRight0 + .foodItem {
@@ -447,7 +454,7 @@ td.column-money {
   border-radius: 10px;
   position: absolute;
   left: 45%;
-  top: 3%;
+  top: 2%;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -460,7 +467,7 @@ td.column-money {
   border-radius: 10px;
   position: absolute;
   left: 46%;
-  top: 46%;
+  top: 30%;
   margin: auto;
   padding: 10px;
   text-align: center;
@@ -471,53 +478,55 @@ td.column-money {
 .tradingTable {
   position: absolute;
   left: 1%;
-  top: 63%;
-  width: 73%;
+  top: 38%;
+  width: 98%;
   padding-top: 27px;
 }
 
 #confirmBtn {
   position: absolute;
-  left: 68%;
-  top: 69%;
+  left: 53%;
+  top: 75%;
+  font-size: 2em;
 }
 
 #declineBtn {
   position: absolute;
-  left: 20%;
-  top: 69%;
+  left: 33%;
+  top: 75%;
+  font-size: 2em;
 }
 
 .tradingConfirm {
   position: absolute;
-  right: 1%;
-  top: 66%;
-  border: 1px solid #e8e8e8;
+  right: 21%;
+  top: 82%;
   padding: 3em;
-  height: 27%;
-  width: 23%;
 }
 
 
 #dateString {
   position: absolute;
   left: 6%;
-  top: 7%;
+  top: -15%;
   padding: 3em;
   height: 27%;
+  font-family: 'Acme', sans-serif;
+  font-size: 67px;
+  color: darkviolet;
 }
 
 #datePicker {
   position: absolute;
-  left: -16%;
-  top: 22%;
+  left: 37%;
+  top: 37%;
   width: 73%;
   padding-top: 27px;
 }
 
 #dateTable {
   position: absolute;
-  right: 0%;
+  right: 43%;
   top: 17%;
   padding: 1em;
   height: 27%;
@@ -528,7 +537,7 @@ td.column-money {
   margin-left: 1em;
   color: white;
   font-size: 1.5em;
-  background: #1ea2fa;
+  background: #995cd3;
   height: 50px;
   border: none;
 }
@@ -553,7 +562,12 @@ td.column-money {
 
 #contact_header {
   position: absolute;
-  left: 11%;
-  top: 10%;
-  font-size: 4em;
+  left: 3%;
+  top: -8%;
+  padding: 3em;
+  height: 27%;
+  font-family: 'Acme', sans-serif;
+  font-size: 70px;
+  color: darkviolet;
 }
+

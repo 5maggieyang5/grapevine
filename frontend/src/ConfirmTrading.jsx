@@ -29,14 +29,14 @@ class ConfirmTrading extends React.Component {
   render() {
     const columns = [
       {
-        title: 'Trading Infor. Detail',
+        title: <b>Trading Infor. Detail</b>,
         dataIndex: 'trades',
       }, {
-        title: 'Trading Users',
+        title: <b>Trading Users</b>,
         className: 'column-money',
         dataIndex: 'user',
       }, {
-        title: 'Confirmation',
+        title: <b>Confirmation</b>,
         dataIndex: 'confirmed',
         render: text => {
             if (text === true) {
@@ -84,9 +84,8 @@ class ConfirmTrading extends React.Component {
         </div>
 
         <Table className="tradingTable" columns={columns} dataSource={data(this.props.edges, this.props.users)} bordered/>
-
         <div className="tradingConfirm">
-          <h4>Please kindly confirm whether you want process this trading: </h4>
+          <h2 ><b>Please kindly confirm whether you want process this trading: </b></h2>
           <input  id="confirmBtn" type="submit" value="Confirm!" name="confirm" onClick={this.handleClick} />
           <input id="declineBtn" type="submit" value="Decline!" name="decline" onClick={this.handleClick} />
         </div>

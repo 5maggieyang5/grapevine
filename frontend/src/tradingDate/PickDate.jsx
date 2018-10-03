@@ -51,7 +51,7 @@ class PickDate extends Component {
     return (
       <main>
         <div id="dateString">
-          <h2>Please pick your available date range!</h2>
+          <p>Please pick your available date range!</p>
         </div>
 
         <div id="datePicker">

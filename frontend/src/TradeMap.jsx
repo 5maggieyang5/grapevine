@@ -8,8 +8,8 @@ class TradeMap extends Component {
     center_latitude: this.props.center_latitude,
     center_longitude: this.props.center_longitude,
     viewport: {
-      width: 1705,
-      height: 882,
+      width: 1694,
+      height: 1000,
       latitude: this.props.center_latitude,
       longitude: this.props.center_longitude,
       zoom: 11.6
