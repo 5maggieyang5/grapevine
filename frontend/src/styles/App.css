@@ -6,6 +6,7 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+/*-----------------HOME PAGE---------------------------*/
 #root {
   background-color: #dfd;
   margin-bottom: auto;
@@ -39,6 +40,7 @@ p.card-text {
   line-height: 30px;
 }
 
+/*-----------------NAV BAR---------------------------*/
 #navbar {
   background-color: #dfd;
   height: 9em;
@@ -104,32 +106,82 @@ li.nav-item {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   color: darkviolet;
-  grid-row: -5   / -10;
+  grid-row: -4 / -9;
   margin: 0;
   margin-left: 20px;
   margin-right: 200px;
   white-space: nowrap;
 }
 
+/*-------------------POST DETAILS PAGE-------------------------*/
+
+#post-container {
+  padding-top: 9em;
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: 50% 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(10, 100px);
+}
+
+#post-food-picture {
+  padding-bottom: 20px;
+  grid-column: 1 / 2;
+  grid-row: 1 / 6;
+}
+
+#post-food-picture img {
+  width: 100%;
+  height: 100%;
+}
+
+#post-food-name {
+  font-family: 'Acme', sans-serif;
+  font-size: 40px;
+  color: darkviolet;
+  padding: 30px;
+  grid-column: 2 / span 2;
+  grid-row: 1 / 2;
+}
+
+#post-description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  padding: 0 30px;
+  grid-column: 2 / span 4;
+  grid-row: 2 / span 2;
+}
+
+#post-map {
+  grid-column: 1 / 2;
+  grid-row: 6 / span 5;
+}
+
+#post-avatar {
+  grid-column: 2 / 3;
+  grid-row: 4 / span 2;
+}
+
+#post-avatar img {
+  border-radius: 50%;
+  margin: 30px;
+}
+
+#post-username-rating {
+  grid-column: 3 / 6;
+  grid-row: 4 / 6;
+  margin: auto 0;
+}
+
+
+
 #register-form {
   margin: 100px 200px;
 }
 
 #title_register {
-
   margin-bottom:1px;
 }
 
-#user-avatar {
-  border-radius: 50%;
-}
-
-#big-Container{
-  margin: 2em auto;
-  right: 0;
-  padding: 10px;
-  width: 100%;
-}
 
 #radiobutton {
   padding: 0px;

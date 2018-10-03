@@ -194,42 +194,37 @@ class Post extends React.Component {
   console.log("-------------longitude", this.state.post.location.longitude)
 
   return (
-    <Container id="big-Container">
-    <Row className="mainItem">
-      <Col xs="7">
+    <Container id="post-container">
+      <div id='post-food-picture'>
         <img className="imgView" src={this.state.post.food_picture_url} alt="" />
-      </Col>
+      </div>
 
-      <Col xs="5">
-        <Row>
-          <h3 id="itemName">Item: <b>{this.state.post.food.name} </b> </h3> <br/>
-          <div className="itemDescription">
-          {this.state.post.description}<br/><br/>
-          </div>
-        </Row>
-      </Col>
+      <h2 id="post-food-name">
+        {this.state.post.food.name}
+      </h2>
 
-    </Row>
-    <Row className="mainItem">
+      <p id="post-description">
+        {this.state.post.description}
+      </p>
 
-      <Col xs="12">
-       {this.state.post.location.latitude && this.state.post.location.longitude &&
-        <PostMap
-          mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
-          latitude={this.state.post.location.latitude}
-          longitude={this.state.post.location.longitude}
-        /> }
-      </Col>
-    </Row>
-    <Row className="mainItem">
+      {this.state.post.location.latitude && this.state.post.location.longitude &&
+        <div id="post-map">
+          <PostMap
+            mapboxApiAccessToken="pk.eyJ1Ijoiamt5b3VuZ3MiLCJhIjoiY2ptbnpoOG9xMHpoejNrbnlxYjcwbjE2aCJ9.nQQU3n63lrlEQw6N1Odtxg"
+            latitude={this.state.post.location.latitude}
+            longitude={this.state.post.location.longitude}
+          />
+        </div>
+      }
 
-    <Col xs="6"><img id = "user-avatar" src = {this.state.post.user.avatar} ></img>
-    <br/>
-    <div className="rating">
-    <h4 className="leftRating">Name: {this.state.post.user.username}</h4>
-    <h4 className="leftRating">Rating :{this.state.post.user.average_rating} </h4>
-    </div>
-    </Col>
+      <div id="post-avatar">
+        <img id="user-avatar" src={this.state.post.user.avatar} />
+      </div>
+
+      <div id="post-username-rating">
+        <h3>Name: {this.state.post.user.username}</h3>
+        <h3>Rating :{this.state.post.user.average_rating}</h3>
+      </div>
 
 
 
@@ -255,7 +250,6 @@ class Post extends React.Component {
      <button onClick={this.handleTradeButton}>Confirm Trade !</button>
     </Col>
 
-   </Row>
    </Container>
     );
   };
