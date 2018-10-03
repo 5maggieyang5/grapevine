@@ -26,12 +26,12 @@ export default class Wishlist extends React.Component {
   }
   render() {
     let wishes = this.props.list ;  // get data from Parent component
-    let Itemlist3 = wishes.map ((item,index) => 
-      
+    let Itemlist3 = wishes.map ((item,index) =>
+
       <ul id="radiobutton" key = {index}>
-        <input 
+        <input
           type  =  "radio"
-          value =  {item} 
+          value =  {item}
           checked = {this.props.radio_select === item}
           onChange= {this.props.radio_action}
         />
@@ -41,36 +41,36 @@ export default class Wishlist extends React.Component {
     return (
       <div>
         <form onSubmit={this.props.form_action}>
-            {Itemlist3}          
+            {Itemlist3}
             <div>
-              <button id="simplebuttons" onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>
-              <button id="simplebuttons" type="button" value = "Cancel" onClick ={this.props.clear_Radio} >Clear Selection</button>
-            </div>       
+              <button id="simplebuttons" onClick={this.toggleHidden} type="submit" value="Save">See Possible Trades</button>
+              <button id="simplebuttons" type="button" value="Cancel" onClick={this.props.clear_Radio} >Clear Selection</button>
+            </div>
             {!this.state.isHidden &&
-            <SecondLevelTrade trade_list = {this.props.trade_list} 
-            trade_form_action = {this.props.trade_form_action}
-            trade_radio_select = {this.props.trade_radio_select} 
-            trade_radio_action = {this.props.trade_radio_action} 
-            poster_name        ={this.props.poster_name} />
+            <SecondLevelTrade trade_list = {this.props.trade_list}
+            trade_form_action  = {this.props.trade_form_action}
+            trade_radio_select = {this.props.trade_radio_select}
+            trade_radio_action = {this.props.trade_radio_action}
+            poster_name        = {this.props.poster_name} />
           }
-          
-        </form> 
-          
+
+        </form>
+
       </div>
-      
+
     );
   }
 }
 
-// <button id="simplebuttons" onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>    
+// <button id="simplebuttons" onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>
 
 
 
-// let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item} 
+// let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item}
 // </option> );
 // oldversion of wishlist
 // <select onClick = {this.props.action}>
-//         <option defaultValue = ""> Click here for Wishlist</option> 
+//         <option defaultValue = ""> Click here for Wishlist</option>
 //           {Itemlist2}
 //         </select>
 

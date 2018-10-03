@@ -249,24 +249,20 @@ class Post extends React.Component {
       </div>
 
       <div id="post-username-rating">
-        <h3>Username: {this.state.post.user.username}</h3>
-        <h3>Rating:
-          {this.state.post.user.average_rating}
+        <h3>{this.state.post.user.username}</h3>
+        <div>
           <img className="grapes" src="/purplegrapes.svg" />
           <img className="grapes" src="/purplegrapes.svg" />
           <img className="grapes" src="/purplegrapes.svg" />
           <img className="grapes" src="/purplegrapes.svg" />
           <img className="grapes" src="/cleargrapes.svg" />
-        </h3>
+        </div>
       </div>
 
-      <button  id="show-wishlist" onClick = {this.toggleHidden}>
+      <button  id="show-wishlist" onClick={this.toggleHidden}>
         Wishlist
       </button>
 
-      <button id="confirm-button" onClick={this.handleTradeButton}>
-        Start Trade
-      </button>
 
       {!this.state.isHidden &&
         <div id="wishlist">
@@ -282,6 +278,9 @@ class Post extends React.Component {
             trade_form_action  = {this.handleThreeWayTrade}
             closeTrades        = {this.closeTrades}
           />
+          <button id="submit-button" onClick={this.handleTradeButton}>
+            Start Trade
+          </button>
         </div>
       }
 

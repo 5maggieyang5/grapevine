@@ -24,8 +24,7 @@ class Posts extends React.Component {
   componentDidMount() {
     PostsDB.findAll()
     .then((result) => this.setState({posts: result}))
-    .catch((errors) => this.setState({errors: errors}))
-
+    .catch((errors) => this.setState({errors: errors}));
   }
 
   render() {
