@@ -6,7 +6,7 @@ exports.seed = async function(knex, Promise) {
   const promises = [];
   const existingPairs = {};
 
-  for (let i = 0; i < 160; i++) {
+  for (let i = 0; i < 140; i++) {
     let user = ((i % 40) + 1);
     let food = (Math.floor(Math.random() * 61) + 1);
     let status = 'completed'; //duplicate posts will default to completed

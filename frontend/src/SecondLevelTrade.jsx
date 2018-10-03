@@ -8,8 +8,8 @@ export default class SecondLevelTrade extends React.Component {
     for (var key in tradeData){
       if (! tradeData.hasOwnProperty(key)) continue;
       var obj = tradeData[key]
-    
-      let message = `Choose trade where ${key} will give ${obj['will_give_to_poster']} to ${this.props.poster_name} and wants ${obj['wants_from_current_user']} from the current user`
+
+      let message = `Offer ${obj['wants_from_current_user']} to ${key} who can give ${obj['will_give_to_poster']} to ${this.props.poster_name}`
       msglist.push(message);
     }
     return msglist;
@@ -17,23 +17,23 @@ export default class SecondLevelTrade extends React.Component {
 
 
   render(){
-    // Generate a list of potential trades from the JSON object. 
+    // Generate a list of potential trades from the JSON object.
     let msglist = this.createTradeList(this.props.trade_list);
-   
+
     // Make a radio button from which user will select which trade they want to be a part of
-    let Itemlist = msglist.map ((item,index) => 
+    let Itemlist = msglist.map ((item,index) =>
         <ul id="radiobutton" key = {index}   >
-        <input 
+        <input
           id = {index}
           type  =  "radio"
-          value =  {item} 
+          value =  {item}
           checked = {this.props.trade_radio_select === item}
           onChange= {this.props.trade_radio_action}
         />
         {item}
       </ul>);
 
-    
+
     return(
       <div>
         {Itemlist}

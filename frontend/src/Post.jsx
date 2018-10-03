@@ -3,6 +3,7 @@ import { Container,  Row,Col } from 'reactstrap';
 
 import {Redirect} from 'react-router-dom'
 import Wishlist from './Wishlist.jsx';
+import SecondLevelTrade from './SecondLevelTrade';
 import Resource from './models/resource'
 import PostMap from './PostMap.jsx';
 
@@ -279,8 +280,19 @@ class Post extends React.Component {
             closeTrades        = {this.closeTrades}
           />
           <button id="submit-button" onClick={this.handleTradeButton}>
-            Start Trade
+            Make Offer
           </button>
+        </div>
+      }
+
+      {!this.state.isHidden &&
+        <div id="secondarylist">
+          <SecondLevelTrade trade_list = {this.state.trade_list}
+            trade_form_action  = {this.handleThreeWayTrade}
+            trade_radio_select = {this.state.trade_radio_select}
+            trade_radio_action = {this.handleTradeRadioChange}
+            poster_name        = {this.state.post.user.username}
+          />
         </div>
       }
 
