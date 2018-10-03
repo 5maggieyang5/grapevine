@@ -4,6 +4,7 @@
 body {
   font-size: 18px;
   font-family: 'Lato', sans-serif;
+  background-color: #dfd !important;
 }
 
 #container {
@@ -121,7 +122,6 @@ li.nav-item {
 
 #post-container {
   padding-top: 9em;
-  padding-bottom: 1000px;
   max-width: 1400px;
   display: grid;
   grid-template-columns: 50% 1fr 1fr 1fr 1fr;
@@ -204,6 +204,7 @@ li.nav-item {
   color: white;
   background-color: darkviolet;
   white-space: nowrap;
+  margin-bottom: 50px;
 }
 
 #wishlist {
