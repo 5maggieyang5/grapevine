@@ -13,7 +13,7 @@ export default class Wishlist extends React.Component {
     };
   }
 
-  toggleHidden =() =>  {
+  toggleHidden =(event) =>  {
     this.setState({
       isHidden: !this.state.isHidden
     })
@@ -42,17 +42,19 @@ export default class Wishlist extends React.Component {
       <div>
         <form onSubmit={this.props.form_action}>
             {Itemlist3}          
-          <button onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>
-
-          {!this.state.isHidden &&
+            <div>
+              <button id="simplebuttons" onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>
+              <button id="simplebuttons" type="button" value = "Cancel" onClick ={this.props.clear_Radio} >Clear Selection</button>
+            </div>       
+            {!this.state.isHidden &&
             <SecondLevelTrade trade_list = {this.props.trade_list} 
             trade_form_action = {this.props.trade_form_action}
             trade_radio_select = {this.props.trade_radio_select} 
             trade_radio_action = {this.props.trade_radio_action} 
             poster_name        ={this.props.poster_name} />
           }
-          <button type="button" value = "Cancel" onClick ={this.props.clear_Radio} >Clear Selection</button>
-        </form>
+          
+        </form> 
           
       </div>
       
@@ -60,7 +62,10 @@ export default class Wishlist extends React.Component {
   }
 }
 
-    
+// <button id="simplebuttons" onClick = {this.toggleHidden} type="submit" value = "Save">See Possible Trades</button>    
+
+
+
 // let Itemlist2 = wishes.map((item,index) => <option key = {index} value ={item}>{item} 
 // </option> );
 // oldversion of wishlist
