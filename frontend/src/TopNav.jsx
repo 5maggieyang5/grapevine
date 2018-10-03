@@ -29,23 +29,17 @@ class TopNav extends React.Component {
   render() {
     return (
       <div>
-        <Navbar id="navbar-color" color="light" light expand="md">
+        <Navbar id="navbar" expand="md">
           <NavbarBrand>
             <Link to='/'  id="navbar-brand">
-              ~Grapevine~
-            </Link>
-          </NavbarBrand>
-
-          <NavbarBrand>
-            <Link to='/About' id="navbar-aboutUs">
-              About US!
+              Grapevine
             </Link>
           </NavbarBrand>
 
           <InputGroup id="nav-search">
             <Input onChange={this.handleChange} name="searchInput"/>
             <InputGroupAddon addonType="append">
-              <Button color="secondary" tag={Link} to={`/posts?food_name=${this.state.searchInput}`} >
+              <Button id="search-button" tag={Link} to={`/posts?food_name=${this.state.searchInput}`} >
                 Search
               </Button>
 
@@ -55,16 +49,17 @@ class TopNav extends React.Component {
             <Nav className="ml-auto" navbar>
 
               <NavItem>
-
-
-               <Badge color="light" id="create-post">
-                  <Link to='/creatNewPost'>
-                    Create New Post
-                  </Link>
-                </Badge>
+                <Button id="create-post" tag={Link} to='/createNewPost'>
+                  New Post
+                </Button>
               </NavItem>
 
-              <Breadcrumb>
+              <NavItem>
+                <h2 id="welcome-user">
+                  Welcome user 1
+                </h2>
+              </NavItem>
+              {/*<Breadcrumb>
                 <BreadcrumbItem>
                   <Link to='/login'>Log In</Link>
                 </BreadcrumbItem>
@@ -76,7 +71,7 @@ class TopNav extends React.Component {
                 <BreadcrumbItem active>
                   <Link to='/user'>User Profile</Link>
                 </BreadcrumbItem>
-              </Breadcrumb>
+              </Breadcrumb>*/}
             </Nav>
         </Navbar>
       </div>

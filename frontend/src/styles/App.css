@@ -8,20 +8,74 @@ body {
 
 #root {
   background-color: #dfd;
+  margin-bottom: auto;
+}
+
+#card-container {
+  padding-top: 9em;
+  max-width: 1500px;
+}
+
+h5.card-title {
+  font-family: 'Acme', sans-serif;
+  font-size: 40px;
+  color: darkviolet;
+}
+
+h6.card-subtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+p.card-text {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 60px;
+  line-height: 30px;
+}
+
+#navbar {
+  background-color: #dfd;
+  height: 9em;
+  font-family: 'Open Sans', sans-serif;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 #navbar-brand {
-  font-size: 1.2em;
-  margin: 1em;
-}
-
-#navbar-aboutUs {
-  font-size: 1.2em;
+  font-size: 60px;
+  margin: 0;
+  margin-left: 200px;
+  margin-right: 10px;
+  font-family: 'Pacifico', cursive;
+  color: darkviolet;
 }
 
 #nav-search {
-  width: 500px;
-  margin: 0 auto;
+  width: 100%;
+  font-size: 24px;
+  margin: 0;
+  padding-top: 15px;
+}
+
+#nav-search .form-control {
+  height: 50px;
+  font-size: 24px;
+}
+
+#search-button {
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: darkviolet;
 }
 
 .breadcrumb {
@@ -29,12 +83,32 @@ body {
   font-size: 1.5em;
 }
 
+li.nav-item {
+  height: 7em;
+  display: grid;
+  grid-template-rows: repeat(12, 10px);
+}
+
 #create-post {
-  padding: 31px 16px;
-  height: 48px;
-  margin-right: 10px;
-  margin-top: 28px;
-  font-size: 1.5em;
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: darkviolet;
+  grid-row: -5 / -10;
+  margin-left:20px;
+}
+
+#welcome-user {
+  font-size: 34px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  color: darkviolet;
+  grid-row: -5   / -10;
+  margin: 0;
+  margin-left: 20px;
+  margin-right: 200px;
+  white-space: nowrap;
 }
 
 #register-form {
@@ -364,14 +438,10 @@ td.column-money {
 }
 
 .cards {
-  margin: 3em 0;
+  margin: 20px 0;
+  font-size: 20px;
 }
 
-#navbar-color {
-  background-color: #e2e2e2;
-  height: 7em;
-  font-family: 'Source Sans Pro', sans-serif;
-}
 
 #contact_table {
   font-size: 2.5em;

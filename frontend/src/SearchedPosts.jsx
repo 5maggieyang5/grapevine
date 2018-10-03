@@ -51,17 +51,18 @@ class SearchedPosts extends React.Component {
 
 
       <div>
-        <Container>
+        <Container id="card-container">
           <Row>
             {this.state.posts.map((post, index) => (
               <Col md="4" sm="6" xs="12">
-                <Card>
-                  <CardImg top width="100%" src={post.food_picture_url} alt="Card image cap" />
+                <Card className="cards">
+                  <a href={`/posts/${post.id}`}>
+                    <CardImg top width="100%" height="300px" src={post.food_picture_url} alt="Card image cap" />
+                  </a>
                   <CardBody>
-                    <CardTitle><h3>{post.food.name}</h3></CardTitle>
-                    <CardSubtitle><h5>Owner:{post.user.username}</h5></CardSubtitle>
+                    <CardTitle>{post.food.name}</CardTitle>
+                    <CardSubtitle>{post.user.username}</CardSubtitle>
                     <CardText>{post.description}</CardText>
-                    <Button>Detail</Button>
                   </CardBody>
                 </Card>
               </Col>

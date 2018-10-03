@@ -32,18 +32,18 @@ class Posts extends React.Component {
     return (
 
       <div>
-        <Container>
+        <Container id="card-container">
           <Row>
             {this.state.posts.map((post, index) => (
               <Col md="4" sm="6" xs="12">
                 <Card className="cards">
-                  <CardImg top width="100%" height="230px" src={post.food_picture_url} alt="Card image cap" />
-
+                  <a href={`/posts/${post.id}`}>
+                    <CardImg top width="100%" height="300px" src={post.food_picture_url} alt="Card image cap" />
+                  </a>
                   <CardBody>
-                    <CardTitle><h3>{post.food.name}</h3></CardTitle>
-                    <CardSubtitle><h5>Owner:{post.user.username}</h5></CardSubtitle>
-                    <CardText>{post.description.slice(0,80)} ...more</CardText>
-                    <Button tag={Link} to={`/posts/${post.id}`}>Detail</Button>
+                    <CardTitle>{post.food.name}</CardTitle>
+                    <CardSubtitle>{post.user.username}</CardSubtitle>
+                    <CardText>{post.description}</CardText>
                   </CardBody>
                 </Card>
               </Col>
