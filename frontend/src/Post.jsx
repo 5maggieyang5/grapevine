@@ -284,17 +284,17 @@ class Post extends React.Component {
           </button>
         </div>
       }
-{/*
+
       {!this.state.isHidden &&
         <div id="secondarylist">
           <SecondLevelTrade trade_list = {this.state.trade_list}
             trade_form_action  = {this.handleThreeWayTrade}
-            trade_radio_select = {this.state.trade_radio_select}
-            trade_radio_action = {this.handleTradeRadioChange}
+            trade_radio_select = {this.state.radio_selection}
+            trade_radio_action = {this.handleTradeAction}
             poster_name        = {this.state.post.user.username}
           />
         </div>
-      }*/}
+      }
 
     </Container>
     );
