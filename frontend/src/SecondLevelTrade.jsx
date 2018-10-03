@@ -8,8 +8,8 @@ export default class SecondLevelTrade extends React.Component {
     for (var key in tradeData){
       if (! tradeData.hasOwnProperty(key)) continue;
       var obj = tradeData[key]
-    
-      let message = `Choose trade where ${key} will give ${obj['will_give_to_poster']} to ${this.props.poster_name} and wants ${obj['wants_from_current_user']} from the current user`
+
+      let message = <div><b>You ---</b>{obj['wants_from_current_user'].join(' or ')}<b>--> {key} ---</b>{obj['will_give_to_poster'].join(' or ')}<b>--> {this.props.poster_name} ---</b>{this.props.posted_food}<b>--> You</b></div>
       msglist.push(message);
     }
     return msglist;
@@ -17,23 +17,28 @@ export default class SecondLevelTrade extends React.Component {
 
 
   render(){
-    // Generate a list of potential trades from the JSON object. 
+    // Generate a list of potential trades from the JSON object.
     let msglist = this.createTradeList(this.props.trade_list);
-   
+
     // Make a radio button from which user will select which trade they want to be a part of
-    let Itemlist = msglist.map ((item,index) => 
-        <ul id="radiobutton" key = {index}   >
-        <input 
+    console.log("secondlevel this.props.radioselect", this.props.trade_radio_select)
+    let Itemlist = msglist.map((item,index) => {
+      console.log("secondlevel this.props.radioselect", this.props.trade_radio_select);
+      console.log("second-level index", index);
+      console.log("second-level boolean", (this.props.trade_radio_select == index));
+      return (<ul id="radiobutton" key={index} >
+        <input
           id = {index}
           type  =  "radio"
-          value =  {item} 
-          checked = {this.props.trade_radio_select === item}
+          value =  {index}
+          checked = {parseInt(this.props.trade_radio_select) === index}
           onChange= {this.props.trade_radio_action}
         />
         {item}
       </ul>);
+    });
 
-    
+
     return(
       <div>
         {Itemlist}

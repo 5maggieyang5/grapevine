@@ -2,7 +2,7 @@ exports.seed = async function(knex, Promise) {
   const promises = [];
   const existingPairs = {};
 
-  for (let i = 0; i < 480; i++) {
+  for (let i = 0; i < 400; i++) {
     let user = ((i % 40) + 1);
     let food = (Math.floor(Math.random() * 61) + 1);
 

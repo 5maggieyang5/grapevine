@@ -3,6 +3,7 @@ import { Container,  Row,Col } from 'reactstrap';
 
 import {Redirect} from 'react-router-dom'
 import Wishlist from './Wishlist.jsx';
+import SecondLevelTrade from './SecondLevelTrade';
 import Resource from './models/resource'
 import PostMap from './PostMap.jsx';
 
@@ -132,6 +133,8 @@ class Post extends React.Component {
   }
 
   handleTradeRadioChange = (event) =>{
+    console.log(event.target);
+    console.log(event.target.value);
     this.setState({
       trade_radio_select: event.target.value,
       typeOfTrade: "threeway",
@@ -271,6 +274,7 @@ class Post extends React.Component {
             radio_select ={this.state.radio_selection}
             clear_Radio = {this.clear_Radio}
             poster_name = {this.state.post.user.username}
+            posted_food = {this.state.post.food.name}
 
             trade_radio_action = {this.handleTradeRadioChange}
             trade_radio_select = {this.state.trade_radio_select}
@@ -279,7 +283,7 @@ class Post extends React.Component {
             closeTrades        = {this.closeTrades}
           />
           <button id="submit-button" onClick={this.handleTradeButton}>
-            Start Trade
+            Make Offer
           </button>
         </div>
       }
@@ -291,3 +295,15 @@ class Post extends React.Component {
 }
 
 export default Post;
+
+
+      // {!this.state.isHidden &&
+      //   <div id="secondarylist">
+      //     <SecondLevelTrade trade_list = {this.state.trade_list}
+      //       trade_form_action  = {this.handleThreeWayTrade}
+      //       trade_radio_select = {this.state.radio_selection}
+      //       trade_radio_action = {this.handleTradeAction}
+      //       poster_name        = {this.state.post.user.username}
+      //     />
+      //   </div>
+      // }
