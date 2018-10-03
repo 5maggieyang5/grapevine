@@ -284,7 +284,7 @@ class Post extends React.Component {
           </button>
         </div>
       }
-
+{/*
       {!this.state.isHidden &&
         <div id="secondarylist">
           <SecondLevelTrade trade_list = {this.state.trade_list}
@@ -294,8 +294,7 @@ class Post extends React.Component {
             poster_name        = {this.state.post.user.username}
           />
         </div>
-      }
-
+      }*/}
 
     </Container>
     );

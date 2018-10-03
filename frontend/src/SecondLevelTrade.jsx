@@ -9,7 +9,7 @@ export default class SecondLevelTrade extends React.Component {
       if (! tradeData.hasOwnProperty(key)) continue;
       var obj = tradeData[key]
 
-      let message = `Offer ${obj['wants_from_current_user']} to ${key} who can give ${obj['will_give_to_poster']} to ${this.props.poster_name}`
+      let message = <div>Offer <b>{obj['wants_from_current_user'].join(' or ')}</b> to <b>{key}</b> who can give {obj['will_give_to_poster'].join(' or ')} to {this.props.poster_name}</div>
       msglist.push(message);
     }
     return msglist;

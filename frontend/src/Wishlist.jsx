@@ -46,14 +46,17 @@ export default class Wishlist extends React.Component {
               <button id="simplebuttons" onClick={this.toggleHidden} type="submit" value="Save">See 3-way Trades</button>
               <button id="simplebuttons" type="button" value="Cancel" onClick={this.props.clear_Radio} >Clear</button>
             </div>
-  {/*          {!this.state.isHidden &&
-            <SecondLevelTrade trade_list = {this.props.trade_list}
-            trade_form_action  = {this.props.trade_form_action}
-            trade_radio_select = {this.props.trade_radio_select}
-            trade_radio_action = {this.props.trade_radio_action}
-            poster_name        = {this.props.poster_name} />
-          }
-*/}
+            {!this.state.isHidden &&
+              <div id="secondarylist">
+                <SecondLevelTrade trade_list = {this.props.trade_list}
+                  trade_form_action  = {this.props.trade_form_action}
+                  trade_radio_select = {this.props.trade_radio_select}
+                  trade_radio_action = {this.props.trade_radio_action}
+                  poster_name        = {this.props.poster_name}
+                />
+              </div>
+            }
+
         </form>
 
       </div>
