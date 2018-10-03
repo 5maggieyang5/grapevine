@@ -35,16 +35,9 @@ class SearchedPosts extends React.Component {
     this.searchPosts(nextProps)
   }
 
-/*  componentDidMount() {
-
-    const parsed = qs.parse(this.props.location.search);
-    console.log(Object.keys(parsed)[0]);
-
-
-    PostsDB.search(Object.keys(parsed)[0], parsed.food_name)
-    .then((result) => this.setState({posts: result}))
-    .catch((errors) => this.setState({errors: errors}))
-  }*/
+  componentDidMount() {
+    this.searchPosts(this.props)
+  }
 
   render() {
     return (
