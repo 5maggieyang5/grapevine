@@ -19,6 +19,7 @@ module.exports = (knex) => {
       user.username = userData.username;
       user.email = userData.email;
       user.phone_number = userData.phone_number;
+      user.avatar = userData.avatar_image_url;
       return user;
     }));
 

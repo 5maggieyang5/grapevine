@@ -7,6 +7,8 @@ import ContactInfor from './ContactInfor.jsx';
 import Resource from './models/resource';
 import Moment  from 'moment';
 import TradeMap from './TradeMap.jsx';
+import Review from './Review.jsx';
+import Complete from './Complete.jsx';
 
 
 
@@ -120,7 +122,10 @@ class Trades extends React.Component {
       content: <ContactInfor users={this.state.trade.users} />
     }, {
       title: <b>Review</b>,
-      content: 'Provide a Review Component'
+      content: <Review users={this.state.trade.users} />
+    }, {
+      title: <b>Complete</b>,
+      content: <Complete />
     }];
 
     if (this.state.trade.suggested_location) {

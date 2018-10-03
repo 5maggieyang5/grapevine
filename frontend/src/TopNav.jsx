@@ -38,7 +38,7 @@ class TopNav extends React.Component {
       <div>
         <Navbar id="navbar" expand="md">
           <NavbarBrand>
-            <Link to='/'  id="navbar-brand">
+            <Link to='/' id="navbar-brand">
               Grapevine
             </Link>
           </NavbarBrand>
