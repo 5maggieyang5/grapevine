@@ -26,7 +26,7 @@ const Main = () => (
       <Route exact path='/map' component= {SimpleMap}/>
 
       <Route exact path='/Foodinfo' component ={Post} />
-      <Route exact path ='/posts/:post_id' component ={Post} />
+      <Route exact path='/posts/:post_id' component ={Post} />
       <Route exact path='/FoodRequest' component ={FoodRequest} />
       <Route exact path='/posts/:postId/:selected' component = {Trade} />
 
