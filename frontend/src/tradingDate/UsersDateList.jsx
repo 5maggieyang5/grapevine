@@ -56,15 +56,15 @@ class UsersDateList extends Component {
       <table>
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Available dates:</th>
+            <th className="tableLine">Username</th>
+            <th className="tableLine">Available dates:</th>
           </tr>
         </thead>
         {user}
         <tfoot>
           <tr>
-            <td> Trade date: </td>
-            <td>{this.theOverlapDate(this.props.tradeUsers)}</td>
+            <td className="tableLine"> Trade date: </td>
+            <td className="tableLine">{this.theOverlapDate(this.props.tradeUsers)}</td>
           </tr>
         </tfoot>
       </table>

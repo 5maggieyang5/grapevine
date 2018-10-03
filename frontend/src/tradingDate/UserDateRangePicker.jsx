@@ -43,9 +43,7 @@ class UserDateRangePicker extends Component {
           onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
           minimumNights = {0}
         />
-        <div>
-          <input type="submit" value="Submit" onClick={this.handleOnClick}/>
-        </div>
+          <input id="dateSubmit" type="submit" value="Submit" onClick={this.handleOnClick}/>
       </div>
     );
   }

@@ -10,8 +10,8 @@ class UserDate extends Component {
     return (
       <tbody>
         <tr>
-          <td>{this.props.user.username} </td>
-          <td>{start} -- {end} </td>
+          <td className="tableLine">{this.props.user.username} </td>
+          <td className="tableLine">{start} -- {end} </td>
         </tr>
       </tbody>
     )

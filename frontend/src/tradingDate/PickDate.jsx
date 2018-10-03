@@ -50,11 +50,17 @@ class PickDate extends Component {
 
     return (
       <main>
-      <h2>Please pick your available date range!</h2>
+        <div id="dateString">
+          <h2>Please pick your available date range!</h2>
+        </div>
 
-{/*        <UserDateRangePicker updateDate={this.updateDate}/>
-*/}        <UserDateRangePicker updateDate={this.props.updateAvailableDate}/>
-        <UsersDateList tradeUsers={this.props.users} tradeDate={this.props.closingDate} />
+        <div id="datePicker">
+          <UserDateRangePicker updateDate={this.props.updateAvailableDate}/>
+        </div>
+
+        <div id="dateTable">
+          <UsersDateList tradeUsers={this.props.users} tradeDate={this.props.closingDate} />
+        </div>
       </main>
     );
   }
