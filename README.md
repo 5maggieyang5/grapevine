@@ -8,8 +8,37 @@ Our solution is to find another user, Damion. Damion has a carrot, which Maggie 
 
 Our app is centered around 3 way trades such as the scenario above. We use PostgresQL and Knex queries to generate possible 3 way trades. We setup the backend server with Node and Express. We used React for the frontend and connected to the backend using fetch/axios.
 
-Upon initiating a 3 way trade, traders are guided through a step-by-step process. First, they are shown a diagram detailing who will give what foods to who. Then, they pick an available date range on a calendar, and we calculate the earliest date when all traders are available.
-Then we show them a map with all the trader locations marked on it, as well as a center point between them all so they can find a convenient location to meet. Then we show them each others contact info so they can finalise details and meetup. The last step is to review eachother after the trade.
+## Screenshots
+
+Users can view all available foods from the home page:
+!["Home page"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/Home.png?raw=true)
+
+Clicking on a picture takes you to the details pages:
+!["Details page"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/PostDetails.png?raw=true)
+
+You can click to see the poster's wishlist:
+!["Wishlist"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/Wishlist.png?raw=true)
+
+Or click to see all possible 3 way trades:
+!["3 way trades"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/3WayList.png?raw=true)
+
+Once a trade has begun, you are shown a diagram and asked to confirm that you want to proceed:
+!["diagram confirm"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/Diagram.png?raw=true)
+
+Then users pick their available date range from the calendar, and we calculate the earliest date when all are available:
+!["calendar"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/Calendar.png?raw=true)
+
+Then they are shown a map with a central location marked on it so they can get ideas for a convenient meeting place:
+!["map"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/Map.png?raw=true)
+
+Then they are shown contact info so they can complete the trade:
+!["contact info"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/ContactInfo.png?raw=true)
+
+After the trade they can review eachother based on how the trade went:
+!["reviews"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/Review.png?raw=true)
+
+At the end of the trade we show them a thank you message and clicking on the logo takes them back to the home page:
+!["thank you"](https://github.com/jordanyoungs/grapevine/blob/master/screenshots/End.png?raw=true)
 
 ## Getting Started
 
@@ -24,17 +53,3 @@ Then we show them a map with all the trader locations marked on it, as well as a
 8. Start the frontend app from /frontend using the `npm start` command.
    The app will be served at <http://localhost:3000/>.
 9. Go to <http://localhost:3000/> in your browser.
-
-## Screenshots
-
-Two clients side by side
-!["Screenshot of two clients on load"](https://github.com/jordanyoungs/chatty/blob/master/docs/Home.png?raw=true)
-
-Name change feature
-!["Screenshot of names changing"](https://github.com/jordanyoungs/chatty/blob/master/docs/NameChanges.png?raw=true)
-
-Messages being sent
-!["Screenshot of some messaging"](https://github.com/jordanyoungs/chatty/blob/master/docs/Messaging.png?raw=true)
-
-Client leaving chatroom
-!["Screenshot of a client leaving"](https://github.com/jordanyoungs/chatty/blob/master/docs/Leaving.png?raw=true)
