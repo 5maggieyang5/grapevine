@@ -21,17 +21,13 @@ export default class SecondLevelTrade extends React.Component {
     let msglist = this.createTradeList(this.props.trade_list);
 
     // Make a radio button from which user will select which trade they want to be a part of
-    console.log("secondlevel this.props.radioselect", this.props.trade_radio_select)
     let Itemlist = msglist.map((item,index) => {
-      console.log("secondlevel this.props.radioselect", this.props.trade_radio_select);
-      console.log("second-level index", index);
-      console.log("second-level boolean", (this.props.trade_radio_select == index));
       return (<ul id="radiobutton" key={index} >
         <input
           id = {index}
           type  =  "radio"
           value =  {index}
-          checked = {parseInt(this.props.trade_radio_select) === index}
+          checked = {parseInt(this.props.trade_radio_select, 10) === index}
           onChange= {this.props.trade_radio_action}
         />
         {item}

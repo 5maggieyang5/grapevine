@@ -1,7 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-import {
-  Card, Button, CardImg, CardTitle, CardText, CardDeck,
+import { Card, CardImg, CardTitle, CardText,
   CardSubtitle, CardBody, Container, Row, Col } from 'reactstrap';
 
 
@@ -9,7 +7,6 @@ import {
 // Client-side model
 import Resource from './models/resource'
 const PostsDB = Resource('posts')
-const UsersDB = Resource('users')
 
 class Posts extends React.Component {
   constructor(props) {

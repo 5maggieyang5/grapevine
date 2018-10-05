@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import { Container,  Row,Col } from 'reactstrap';
 
 export default class Review extends React.Component {
 

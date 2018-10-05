@@ -1,11 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {
   Button,
   Form,
   FormGroup,
   Label,
-  Col,
   Input} from 'reactstrap'
 
 class Login extends React.Component {
@@ -24,7 +22,6 @@ class Login extends React.Component {
 
   handleClick = evt => {
     evt.preventDefault();
-    console.log(this.state);
     fetch('/register', {
       method: 'POST',
       headers: {

@@ -16,8 +16,6 @@ class UserDateRangePicker extends Component {
   }
 
   handleOnClick = evt => {
-    console.log("Start Date current user choose: ", this.state.startDate);
-    console.log("End Date current user choose: ", this.state.endDate);
     evt.preventDefault();
     if (this.state.startDate && this.state.endDate) {
       this.props.updateDate(this.state.startDate, this.state.endDate);

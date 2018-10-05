@@ -18,7 +18,6 @@ const Resource = (endpoint) => {
     return new Promise((resolve, reject) => {
       api.get(`/${endpoint}`)
       .then((result) => {
-        console.log("result.data", result)
         resolve(result.data)
       })
 
@@ -39,7 +38,6 @@ const Resource = (endpoint) => {
     return new Promise((resolve, reject) => {
       api.get(`/${endpoint}?${query}=${input}`)
       .then((result) => {
-        console.log("result.data", result)
         resolve(result.data)
       })
 

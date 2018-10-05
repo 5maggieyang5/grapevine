@@ -3,8 +3,6 @@ import { Icon } from 'antd';
 
 class TradeOpt extends Component {
   render() {
-/*    const food = this.props.item.foods.map(foodItem => foodItem);
-*/    console.log("this.props.key----------", this.props)
     return (
       <div className= {"option " + this.props.classKey}>
         <h1 className={"user" + this.props.classKey}>{this.props.item.from}</h1>

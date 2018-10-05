@@ -1,12 +1,9 @@
 import React from 'react';
-import { Table, Drawer, Button } from 'antd';
+import { Table } from 'antd';
 import TradeOpt from './TradeOpt.jsx';
 import TwoWayTrade from './TwoWayTrade.jsx';
 import './styles/App.css';
-import Resource from './models/resource'
 
-
-const TradesDB = Resource('trades');
 
 class ConfirmTrading extends React.Component {
 
@@ -16,7 +13,6 @@ class ConfirmTrading extends React.Component {
 
   handleClick = evt => {
     evt.preventDefault();
-    console.log("-----props: ", this.props);
     if(evt.target.name === "confirm"){
       this.props.currentUserConfirm(true);
     }
@@ -74,7 +70,6 @@ class ConfirmTrading extends React.Component {
     } else {
       tradeOpt = this.props.edges.map((item,index) => <TwoWayTrade key={index} twoClassKey={index} twoItem={item} /> );
     }
-    console.log("!!!!this is users:", this.props.users)
 
     return (
       <div>

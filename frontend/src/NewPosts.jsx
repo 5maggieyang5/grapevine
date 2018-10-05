@@ -1,11 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {
   Button,
   Form,
   FormGroup,
   Label,
-  Col,
   Input} from 'reactstrap'
 
 class NewPosts extends React.Component {
@@ -34,7 +32,6 @@ class NewPosts extends React.Component {
 
   handleClick = evt => {
     evt.preventDefault();
-    console.log(this.state);
     fetch('/register', {
       method: 'POST',
       headers: {

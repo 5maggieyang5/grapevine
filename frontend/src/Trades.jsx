@@ -1,6 +1,5 @@
 import React from 'react';
 import { Steps, Button, message } from 'antd';
-import TopNav from './TopNav.jsx';
 import PickDate from './tradingDate/PickDate.jsx';
 import ConfirmTrading from './ConfirmTrading.jsx';
 import ContactInfor from './ContactInfor.jsx';
@@ -30,14 +29,12 @@ class Trades extends React.Component {
   }
 
   componentDidMount() {
-    console.log('..........', this.state.tradesId);
     TradesDB.find(this.state.tradesId)
     .then((result) => {
       this.setState({
         trade: result,
         errors: null
       })
-      console.log('----------trade ', this.state.trade.edges);
     })
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -95,7 +92,6 @@ class Trades extends React.Component {
       .then((result) => {
         TradesDB.find(this.state.tradesId)
         .then((result) => {
-          console.log("22222222222222222",result)
           this.setState({
             trade: result,
             errors: null

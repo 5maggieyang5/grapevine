@@ -27,7 +27,6 @@ class Register extends React.Component {
 
   handleClick = evt => {
     evt.preventDefault();
-    console.log(this.state);
     fetch('/register', {
       method: 'POST',
       headers: {

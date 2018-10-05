@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container,  Row,Col } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 import {Redirect} from 'react-router-dom'
 import Wishlist from './Wishlist.jsx';
-import SecondLevelTrade from './SecondLevelTrade';
 import Resource from './models/resource'
 import PostMap from './PostMap.jsx';
 
@@ -13,7 +12,6 @@ const Trade = Resource('trades');
 class Post extends React.Component {
   constructor(props) {
     super(props)
-    console.log("-------------constructor props", props);
     this.state = {
       post_id : (props.match.params.post_id || null ),
       post:{ user:{wishlist:[]}, food:"", location:"" } ,
@@ -38,14 +36,12 @@ class Post extends React.Component {
 
     PostStore.find(this.state.post_id)
     .then((result) =>{
-      console.log("---------------result from did mount", result);
       this.setState({
         post: result,
         errors: null,
         show: true,
         redirect: ''
       })
-      console.log(' user selected: ', this.state.selected);
     })
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -62,14 +58,12 @@ class Post extends React.Component {
     event.preventDefault();
     // Check the state variable to determine the type of trade to execute
     if (this.state.typeOfTrade ==="twoway"){
-      console.log("2way called")
       if (!this.state.radio_selection){
         alert("Please select an item to trade.")
         return;
       }
      this.handleTwoWayTrade(event)
     } else if (this.state.typeOfTrade ==="threeway"){
-      console.log("entering 3way with  wishitem of ", this.state.radio_selection)
       if (this.state.radio_selection){
         alert("Please clear selection to go on")
         return;
@@ -101,8 +95,6 @@ class Post extends React.Component {
   handleChange = async (event) => {
     event.preventDefault();
 
-    console.log("got called !!")
-
     this.setState({
       selected_food_item: event.target.value,
       dropdownOpen: !this.state.dropdownOpen,
@@ -113,13 +105,11 @@ class Post extends React.Component {
     { method:'GET', mode:'cors'})
     .then( result  =>{
       return result.json();
-      // console.log("data stores:" , result.json())
     })
     this.setState({trade_list:result})
   }
 
   handleRadioChange = (event) => {
-    console.log("radio button item: ",event.target.value)
     this.setState({
       radio_selection: event.target.value
     });
@@ -133,24 +123,19 @@ class Post extends React.Component {
   }
 
   handleTradeRadioChange = (event) =>{
-    console.log(event.target);
-    console.log(event.target.value);
     this.setState({
       trade_radio_select: event.target.value,
       typeOfTrade: "threeway",
       trade_id: event.target.getAttribute("id")
     });
-    console.log("radio button index:",event.target.getAttribute('id'));
   }
 
   handleThreeWayTrade = (event) =>{
     event.preventDefault();
     event.stopPropagation()   // prevents the nested from also triggering parent form
 
-    console.log("Confirm Trade",this.state.trade_radio_select, " ID: ",this.state.trade_id, typeof this.state.trade_id)
     let temp = Number(this.state.trade_id);
     let trade_data = this.state.trade_list;
-    console.log("This is trades list: ",this.state.trade_list,"temP: ",temp);
     let i = 0;
     let the_data={};
     for (var item in trade_data){
@@ -159,9 +144,6 @@ class Post extends React.Component {
       }
       i++;
     }
-    // Attempt to push the 3way trade info to the trade table.
-    // Need to confirm with Jordan
-    console.log("middleman info  ", the_data)
 
     Trade.create(JSON.stringify( {
       middle_man: the_data,
@@ -169,9 +151,7 @@ class Post extends React.Component {
       current_user: this.state.current_user }))
       .then(response => {
         this.setState({trade_id:response.data})
-        console.log("data from 3way trade: ",response.data)
         const Url = this.buildUrl(response.data) // sets up localhst
-        console.log("new url for 3way: ",Url)
         this.setState({redirect: Url})
       })
     }
@@ -181,7 +161,6 @@ class Post extends React.Component {
   }
 
   handleTwoWayTrade = (event) => {
-    let sel_food="";
     event.preventDefault();
 
 
@@ -190,7 +169,7 @@ class Post extends React.Component {
       post_id:this.state.post_id,
       current_user: this.state.current_user,
       })
-      ) .then ( response => {
+      ).then( response => {
         this.setState({trade_id:response.data})
         const Url = this.buildUrl(response.data) // sets up localhst
         this.setState({redirect: Url})
@@ -220,9 +199,6 @@ class Post extends React.Component {
       return <Redirect to={this.state.redirect} />
     }
 
-  console.log("-------------latitude", this.state.post.location.latitude)
-  console.log("-------------longitude", this.state.post.location.longitude)
-
   return (
     <Container id="post-container">
       <div id='post-food-picture'>
@@ -248,17 +224,17 @@ class Post extends React.Component {
       }
 
       <div id="post-avatar">
-        <img id="user-avatar" src={this.state.post.user.avatar} />
+        <img id="user-avatar" src={this.state.post.user.avatar} alt="avatar" />
       </div>
 
       <div id="post-username-rating">
         <h3>{this.state.post.user.username}</h3>
         <div>
-          <img className="grapes" src="/purplegrapes.svg" />
-          <img className="grapes" src="/purplegrapes.svg" />
-          <img className="grapes" src="/purplegrapes.svg" />
-          <img className="grapes" src="/purplegrapes.svg" />
-          <img className="grapes" src="/cleargrapes.svg" />
+          <img className="grapes" src="/purplegrapes.svg" alt="grape-rating" />
+          <img className="grapes" src="/purplegrapes.svg" alt="grape-rating" />
+          <img className="grapes" src="/purplegrapes.svg" alt="grape-rating" />
+          <img className="grapes" src="/purplegrapes.svg" alt="grape-rating" />
+          <img className="grapes" src="/cleargrapes.svg"  alt="grape-rating" />
         </div>
       </div>
 
@@ -295,15 +271,3 @@ class Post extends React.Component {
 }
 
 export default Post;
-
-
-      // {!this.state.isHidden &&
-      //   <div id="secondarylist">
-      //     <SecondLevelTrade trade_list = {this.state.trade_list}
-      //       trade_form_action  = {this.handleThreeWayTrade}
-      //       trade_radio_select = {this.state.radio_selection}
-      //       trade_radio_action = {this.handleTradeAction}
-      //       poster_name        = {this.state.post.user.username}
-      //     />
-      //   </div>
-      // }

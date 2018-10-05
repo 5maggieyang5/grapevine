@@ -37,18 +37,13 @@ module.exports = (knex) => {
     const poster = await db.getPoster(post_id);
     const current_user = await db.getUser(req.body.current_user);
     const postedFood = (await db.getPostedFood(post_id)).name;
-    console.log('----------inside post', poster);
-    console.log('----------inside post', current_user);
-    console.log('----------inside post', postedFood);
 
     const edges = [];
     edges.push({ from: poster.username, to: current_user.username, foods: [postedFood]});
 
     if (!req.body.middle_man) {
-      console.log('its a two way trade');
       edges.push({ from: current_user.username, to: poster.username, foods: [req.body.selected_food_item]});
     } else {
-      console.log('its a three way trade');
       const middle_man = Object.keys(req.body.middle_man)[0];
       const middle_man_gives = req.body.middle_man[middle_man].will_give_to_poster;
       const middle_man_wants = req.body.middle_man[middle_man].wants_from_current_user;
@@ -67,7 +62,7 @@ module.exports = (knex) => {
         location_id:poster.default_location_id,
         confirmed: true,                                //for demo purposes
         availability_start: '2018-10-08',               //for demo purposes
-        availability_end: '2018-10-13'                  //for demo purposes
+        availability_end: '2018-10-18'                  //for demo purposes
       }),
       db.createTradeUser({
         trade_id: created_trade_id,
@@ -76,8 +71,6 @@ module.exports = (knex) => {
       })
     ]
 
-    console.log("---------------req.body", req.body)
-    console.log("---------------req.body,middle_man", req.body.middle_man)
     if (req.body.middle_man) {
       const middle_user = await db.getUserByName(Object.keys(req.body.middle_man)[0]);
       promises.push(
@@ -87,7 +80,7 @@ module.exports = (knex) => {
           location_id: middle_user.default_location_id,
           confirmed: true,                                //for demo purposes
           availability_start: '2018-10-10',               //for demo purposes
-          availability_end: '2018-10-15'                  //for demo purposes
+          availability_end: '2018-10-19'                  //for demo purposes
         })
       )
     }
@@ -117,7 +110,6 @@ module.exports = (knex) => {
     const trade_id = req.params.trade_id;
     const user_id = req.params.user_id;
     const changes = req.body;
-    console.log("-----------------",trade_id,user_id, changes);
     await db.updateTradeUser(trade_id, user_id, changes);
     res.status(200).end();
   })
